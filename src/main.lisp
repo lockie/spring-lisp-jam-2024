@@ -14,6 +14,7 @@
 
 (defun init ()
   ;; TODO : put your initialization logic here
+  (ecs:bind-storage)
   )
 
 (declaim (type fixnum *fps*))
@@ -24,6 +25,7 @@
     (setf *fps* (round 1 dt)))
 
   ;; TODO : put your game logic here
+  (ecs:run-systems)
   )
 
 (defvar *font*)

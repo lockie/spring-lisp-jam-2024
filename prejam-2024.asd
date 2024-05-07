@@ -3,15 +3,18 @@
   :author "Andrew Kravchuk"
   :license "MIT"
   :depends-on (#:alexandria
-               
+               #:cl-fast-ecs
                #:cl-liballegro
                #:cl-liballegro-nuklear
-               
+               #:cl-tiled
+               #:let-plus
                #:livesupport)
   :serial t
   :components ((:module "src"
                 :components
                 ((:file "package")
+                 (:file "common")
+                 (:file "map")
                  (:file "main"))))
   :description "A simple game."
   :defsystem-depends-on (#:deploy)
