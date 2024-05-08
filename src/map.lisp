@@ -53,8 +53,7 @@
     (dolist (tileset (tiled:map-tilesets map))
       (let ((bitmap (load-bitmap
                      (resource-path
-                      (file-namestring
-                       (tiled:image-source (tiled:tileset-image tileset)))))))
+                       (tiled:image-source (tiled:tileset-image tileset))))))
         (dolist (tile (tiled:tileset-tiles tileset))
           (let* ((external-tile-spec
                    (when (typep tile 'tiled:tiled-tileset-tile)
