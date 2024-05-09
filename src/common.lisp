@@ -10,8 +10,9 @@
                  (ecs:delete-entity child))))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (declaim (type single-float +tile-size+))
-  (defconstant +tile-size+ 32.0))
+  (declaim (type single-float +tile-size+ +scale-factor+))
+  (defconstant +scale-factor+ 0.5)
+  (defconstant +tile-size+ 64.0))
 
 ;; NOTE: negative map coords are not supported
 (deftype pos () '(single-float 0f0 #.(/ +tile-size+ single-float-epsilon)))
@@ -52,7 +53,7 @@
         :documentation "Tile index, for fast map tile lookups."))
 
 (ecs:defcomponent size
-  "The object size in pixels."
+  "Unscaled object size in pixels."
   (width  0.0 :type pos)
   (height 0.0 :type pos))
 

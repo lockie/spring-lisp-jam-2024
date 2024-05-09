@@ -5,10 +5,16 @@
   (movement-cost 0 :type fixnum))
 
 (ecs:defsystem render-map-tiles
-  (:components-ro (position image map-tile)
+  (:components-ro (position size image map-tile)
    :initially (al:hold-bitmap-drawing t)
    :finally (al:hold-bitmap-drawing nil))
-  (al:draw-bitmap image-bitmap position-x position-y 0))
+  (al:draw-scaled-bitmap image-bitmap
+                         0.0 0.0
+                         size-width size-height
+                         position-x position-y
+                         (* +scale-factor+ size-width)
+                         (* +scale-factor+ size-height)
+                         0))
 
 (defun read-file-into-string (pathname &key (buffer-size 4096))
   (with-open-stream (stream (al:make-character-stream pathname))
@@ -50,10 +56,11 @@
          (tile-height (tiled:map-tile-height map))
          (tilemap (make-hash-table))
          (map-entity (ecs:make-entity)))
+    (assert (and (= tile-width +tile-size+) (= tile-height +tile-size+)))
     (dolist (tileset (tiled:map-tilesets map))
       (let ((bitmap (load-bitmap
                      (resource-path
-                       (tiled:image-source (tiled:tileset-image tileset))))))
+                      (tiled:image-source (tiled:tileset-image tileset))))))
         (dolist (tile (tiled:tileset-tiles tileset))
           (let* ((external-tile-spec
                    (when (typep tile 'tiled:tiled-tileset-tile)
@@ -69,13 +76,15 @@
              (dolist (cell (tiled:layer-cells layer))
                (let* ((tile-spec (gethash (tiled:cell-tile cell) tilemap))
                       (tile-instance (ecs:make-object tile-spec)))
-                 (make-position tile-instance :x (float (tiled:cell-x cell))
-                                              :y (float (tiled:cell-y cell))))))
+                 (make-position tile-instance
+                                :x (* +scale-factor+ (tiled:cell-x cell))
+                                :y (* +scale-factor+ (tiled:cell-y cell))))))
             ((typep layer 'tiled:object-layer)
              (dolist (object (tiled:object-group-objects layer))
                (let ((entity (ecs:make-object
                               (properties->spec (tiled:properties object)))))
                  (make-parent entity :entity map-entity)
-                 (make-position entity :x (float (tiled:object-x object))
-                                       :y (float (tiled:object-y object))))))))
+                 (make-position
+                  entity :x (* +scale-factor+ (tiled:object-x object))
+                         :y (* +scale-factor+ (tiled:object-y object))))))))
     (values map-entity (tiled:map-width map) (tiled:map-height map))))
