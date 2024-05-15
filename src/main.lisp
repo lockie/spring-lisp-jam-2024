@@ -25,7 +25,7 @@
     (setf *fps* (round 1 dt)))
 
   ;; TODO : put your game logic here
-  (ecs:run-systems)
+  (ecs:run-systems :dt (float dt 0.0))
   )
 
 (defvar *font*)

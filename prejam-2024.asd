@@ -3,6 +3,7 @@
   :author "Andrew Kravchuk"
   :license "MIT"
   :depends-on (#:alexandria
+               #:cl-aseprite
                #:cl-fast-ecs
                #:cl-liballegro
                #:cl-liballegro-nuklear
@@ -15,6 +16,7 @@
                 ((:file "package")
                  (:file "common")
                  (:file "map")
+                 (:file "sprite")
                  (:file "main"))))
   :description "A simple game."
   :defsystem-depends-on (#:deploy)
