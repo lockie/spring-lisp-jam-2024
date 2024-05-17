@@ -11,8 +11,12 @@
   :test #'string=)
 
 (defun init ()
-  ;; TODO : put your initialization logic here
   (ecs:bind-storage)
+  (let+ (((&values map width height) (load-map "/test2.tmx")))
+    (setf *world-width* width
+          *world-height* height))
+  (load-sprite "Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.aseprite")
+  (load-sprite "Factions/Knights/Troops/Archer/Blue/Archer_Blue.aseprite")
   )
 
 (declaim (type fixnum *fps*))

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="40" height="25" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="9">
+ <tileset firstgid="1" source="water.tsx"/>
+ <tileset firstgid="2" source="foam.tsx"/>
+ <tileset firstgid="74" source="ground-flat.tsx"/>
+ <tileset firstgid="114" source="props.tsx"/>
+ <tileset firstgid="142" source="bridge.tsx"/>
+ <tileset firstgid="154" source="house.tsx"/>
+ <tileset firstgid="160" source="castle.tsx"/>
+ <tileset firstgid="180" source="tower.tsx"/>
+ <tileset firstgid="188" source="archer.tsx"/>
+ <tileset firstgid="692" source="warrior.tsx"/>
+ <layer id="1" name="water" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6Grf9OTsQ8krJqqqqr6+gCdsgPp
+  </data>
+ </layer>
+ <layer id="2" name="ground" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlUEKgzAQAPcdhYJQEAqC/7AeFKpgBPXQ/v8LbiDSZVExUrM57MCcXMwYogL4cUML9MWs0NrzXmfga5fs+h19ow3ROPsATc2KtDMR6OPrbWkbH2zeQDx9LZq6ebNiDH1PtIu4L4u8LxfoGzz6Mgh//gCO7eFy/iT69vZwdE7we3/5t+XqvqVxZE5sJhHsO4L9v9Hn+BC/gl2KoiiKovyPGQbHROA=
+  </data>
+ </layer>
+ <layer id="3" name="props" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1MsKgCAUBND709GmnRbR00/uRrqRsiBqSubAgKCL2Tgi/9Ul7qymeavIjv7CG6MZny5yk0EXOFCgC5yo0AUik2b2ceAusQFdIGH9n8gdCUpNK9uuhd2o/dkCe+Xq67tMRERE+VoAB9YNKw==
+  </data>
+ </layer>
+ <layer id="4" name="buildings" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt0zkOwjAQQNG5/xFYAgkEEsKasOdy/BRILqaYynYxX3py42KksUVE1ihRYYOt5FWNHfZo0Cp37njEHCrogA5HnHBW7jzxijlU0AVX3NBjUO688Yk5VJBld1+MEWbRSrk7Syl3Z8myu5T/11IOb2CGuXJO5fAGFlgq51TK//uvwEo5Pc/zPM/zcuoHZlkpdA==
+  </data>
+ </layer>
+ <objectgroup id="5" name="objects">
+  <object id="4" name="archer1" gid="213" x="192" y="127" width="64" height="64">
+   <properties>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="6" name="archer2" gid="213" x="673" y="556" width="64" height="64">
+   <properties>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":shoot-diagonal-up"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="7" name="warrior1" gid="711" x="511" y="449" width="64" height="64">
+   <properties>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="movement-speed" type="float" value="2"/>
+      <property name="vision-range" type="float" value="10"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="8" name="enemy" gid="711" x="1152" y="769.333" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":simple"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="movement-speed" type="float" value="20"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
