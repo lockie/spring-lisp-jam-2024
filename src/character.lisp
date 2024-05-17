@@ -18,6 +18,7 @@
 (ecs:defcomponent character
   (team 0 :type bit :index team :documentation "0 = defender, 1 = attacker")
   (vision-range 0.0 :type single-float)
+  (attack-range 0.0 :type single-float)
   (movement-speed 0.0 :type single-float))
 
 (declaim (inline distance))

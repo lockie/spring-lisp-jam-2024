@@ -92,8 +92,7 @@
       (block finished
         (setf position-x movement-target-x
               position-y movement-target-y
-              position-tile (tile-hash position-x position-y)
-              sprite-sequence-name :idle)
+              position-tile (tile-hash position-x position-y))
         (delete-movement entity)
         (complete-node t))
       (let+ (((&flet sqr (x) (* x x)))
@@ -119,13 +118,45 @@
                   sprite-sequence-name :run
                   animation-state-flip (if (minusp dx) 1 0))))))
 
+(define-behavior-tree-node (check-attack-range
+                            :components-ro (position character target))
+    ()
+  "Succeeds if entity's target is within attack range."
+  (flet ((sqr (x) (* x x)))
+    (with-position (target-x target-y) target-entity
+      (complete-node
+       (<= (distance* position-x position-y target-x target-y)
+           (sqr character-attack-range))))))
+
+(define-behavior-tree-node (melee-attack
+                            :components-ro (animation-state animation-sequence)
+                            :components-rw (sprite))
+    ()
+  ;; TODO different animaions?..
+  (if (not (eq sprite-sequence-name :attack-1))
+      (setf sprite-sequence-name :attack-1)
+      (when (= animation-state-frame (1- animation-sequence-frames))
+        (setf sprite-sequence-name :idle)
+        (complete-node t))))
+
+(define-behavior-tree-node (wait
+                            :arguments ((:dt single-float)))
+    ((time 1.0 :type single-float :documentation "Wait time in seconds."))
+  (if (plusp wait-time)
+      (decf wait-time dt)
+      (complete-node t)))
+
 (define-behavior-tree simple
     ((repeat :name "root")
      ((fallback)
       ((sequence)
        ((pick-nearest-enemy))
        ((fallback)
-        ((sequence)
+        ((sequence :name "attack")
+         ((check-attack-range))
+         ((melee-attack))
+         ((wait :time 0.15)))
+        ((sequence :name "pursuit")
          ((calculate-path))
          ((repeat-until-fail)
           ((sequence)
