@@ -2,6 +2,11 @@
   (:use #:cl #:let-plus)
   (:local-nicknames (#:tiled #:cl-tiled))
   (:import-from #:alexandria
-                #:define-constant #:doplist #:make-keyword
-                #:non-negative-fixnum)
+                #:array-length #:array-index #:define-constant #:doplist
+                #:if-let #:make-keyword #:non-negative-fixnum)
+  (:import-from #:global-vars #:define-global-parameter)
+  (:import-from #:cl-fast-behavior-trees
+                #:complete-node #:define-behavior-tree
+                #:define-behavior-tree/debug #:define-behavior-tree-node
+                #:make-behavior-tree)
   (:export #:main))

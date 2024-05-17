@@ -1,6 +1,9 @@
 (in-package #:prejam-2024)
 
 
+(define-constant +window-width+ 1280)
+(define-constant +window-height+ 800)
+
 (ecs:defcomponent parent
   (entity -1 :type ecs:entity :index children))
 
@@ -10,9 +13,10 @@
                  (ecs:delete-entity child))))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
-  (declaim (type single-float +tile-size+ +scale-factor+))
+  (declaim (type single-float +scale-factor+ +tile-size+ +scaled-tile-size+))
   (defconstant +scale-factor+ 0.5)
-  (defconstant +tile-size+ 64.0))
+  (defconstant +tile-size+ 64.0)
+  (defconstant +scaled-tile-size+ (* +tile-size+ +scale-factor+)))
 
 ;; NOTE: negative map coords are not supported
 (deftype pos () '(single-float 0f0 #.(/ +tile-size+ single-float-epsilon)))
@@ -22,8 +26,8 @@
            (ftype (function (pos pos) (values pos pos)) tile-start))
   (defun tile-start (x y)
     (values
-     (* +tile-size+ (the fixnum (floor x +tile-size+)))
-     (* +tile-size+ (the fixnum (floor y +tile-size+)))))
+     (* +scaled-tile-size+ (the fixnum (floor x +scaled-tile-size+)))
+     (* +scaled-tile-size+ (the fixnum (floor y +scaled-tile-size+)))))
 
   (declaim
    (inline tile-hash)
@@ -68,3 +72,7 @@
 
 (defun resource-path (filename)
   (merge-pathnames (ensure-relative filename) #P"../Resources/"))
+
+(declaim (type array-length *world-width* *world-height*))
+(define-global-parameter *world-width* 0 "World width in tiles")
+(define-global-parameter *world-height* 0 "World height in tiles")

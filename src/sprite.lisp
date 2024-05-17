@@ -9,6 +9,11 @@
   (sprite-name :|| :type keyword :documentation "Sprite name")
   (sequence-name :|| :type keyword :documentation "Animation sequence name"))
 
+(ecs:defcomponent sprite
+  "Animated sprite."
+  (name :|| :type keyword :documentation "Sprite name")
+  (sequence-name :idle :type keyword :documentation "Animation sequence name"))
+
 (ecs:defcomponent animation-sequence
   "Animated sprite sequence."
   (name :|| :type keyword :documentation "Animation sequence name")
@@ -29,6 +34,24 @@
   (flip 0 :type bit
           :documentation "Flip sprite horizontally so character looks left"))
 
+(ecs:defsystem setup-sprites
+  (:components-ro (sprite))
+  (unless (has-animation-sequence-p entity)
+    (assign-animation-sequence entity)))
+
+(ecs:defsystem change-sprites-animation
+  (:components-ro (sprite)
+   :components-rw (animation-sequence))
+  (when (not (and (eq animation-sequence-sprite-name sprite-name)
+                  (eq animation-sequence-name sprite-sequence-name)))
+    (let ((prefab (animation-prefab :sprite-name sprite-name
+                                    :sequence-name sprite-sequence-name)))
+      ;; TODO : for prefab=nil case, restart with list of loaded sprites
+      (replace-animation-sequence entity prefab)
+      (replace-image entity prefab)
+      (replace-size entity prefab)
+      (assign-animation-state entity))))
+
 (ecs:defsystem render-sprites
   (:components-ro (position size image animation-sequence animation-state)
    :initially (al:hold-bitmap-drawing t)
@@ -36,14 +59,27 @@
   (loop :for layer :of-type fixnum :from 0 :below animation-sequence-layers
         :with x-offset := (* animation-state-frame size-width)
         :for y-offset := (* layer size-height)
+        :for scaled-width := (* +scale-factor+ size-width)
+        :for scaled-height := (* +scale-factor+ size-height)
         :do (al:draw-scaled-bitmap image-bitmap
-                                  x-offset y-offset
-                                  size-width size-height
-                                  position-x position-y
-                                  (* +scale-factor+ size-width)
-                                  (* +scale-factor+ size-height)
-                                  (if (zerop animation-state-flip)
-                                      0 :flip-horizontal))))
+                                   x-offset y-offset
+                                   size-width size-height
+                                   (- position-x (* 0.5 scaled-width))
+                                   (- position-y (* 0.5 scaled-height))
+                                   scaled-width scaled-height
+                                   (if (zerop animation-state-flip)
+                                       0 :flip-horizontal)))
+  ;; (al:draw-circle position-x position-y 2 (al:map-rgb 0 255 255) 2)
+  ;; (al:draw-rectangle
+  ;;  (- position-x (* 0.5 (* +scale-factor+ size-width)))
+  ;;  (- position-y (* 0.5 (* +scale-factor+ size-height)))
+  ;;  (+ (- position-x (* 0.5 (* +scale-factor+ size-width)))
+  ;;     (* +scale-factor+ size-width))
+  ;;  (+ (- position-y (* 0.5 (* +scale-factor+ size-height)))
+  ;;     (* +scale-factor+ size-height))
+  ;;  (al:map-rgb 255 0 0)
+  ;;  1)
+  )
 
 (ecs:defsystem update-sprites
   (:components-ro (animation-sequence)
@@ -64,25 +100,6 @@
                                        (1- animation-sequence-frames))
                                       (t
                                        frame)))))))
-
-(defun change-animation (entity sequence &optional sprite)
-  (let* ((has-animation-sequence-p (has-animation-sequence-p entity))
-         (current-sprite (when has-animation-sequence-p
-                           (animation-sequence-sprite-name entity)))
-         (current-sequence (when has-animation-sequence-p
-                             (animation-sequence-name entity)))
-         (sprite (or sprite current-sprite))
-         (_ (unless sprite ;; TODO restart with list of loaded sprites
-              (error "Unknown sprite")))
-         (prefab (animation-prefab :sprite-name sprite
-                                   :sequence-name sequence)))
-    (declare (ignore _))
-    (when (not (and (eq sprite current-sprite)
-                    (eq sequence current-sequence)))
-      (replace-animation-sequence entity prefab)
-      (replace-image entity prefab)
-      (replace-size entity prefab)
-      (assign-animation-state entity))))
 
 (cffi:defcfun memcpy :pointer
   (dst :pointer)
@@ -142,11 +159,10 @@
                                         al::data
                                         (+ (* 4 start-x) (* y al::pitch)))
                            :do (cffi:with-pointer-to-vector-data (src cel-data)
-                                 (memcpy
-                                  dst
-                                  (cffi:inc-pointer
-                                   src (* (- y start-y) cel-width-bytes))
-                                  cel-width-bytes))))
+                                 (memcpy dst
+                                         (cffi:inc-pointer
+                                          src (* (- y start-y) cel-width-bytes))
+                                         cel-width-bytes))))
                        (setf duration (ase::cel-duration cel))
                    :finally (incf row)))
         (al:unlock-bitmap bitmap)

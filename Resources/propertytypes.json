@@ -1,0 +1,65 @@
+[
+    {
+        "id": 5,
+        "members": [
+            {
+                "name": "type",
+                "type": "string",
+                "value": ""
+            }
+        ],
+        "name": "behavior",
+        "type": "class"
+    },
+    {
+        "id": 3,
+        "members": [
+            {
+                "name": "movement-speed",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "team",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "vision-range",
+                "type": "float",
+                "value": 0
+            }
+        ],
+        "name": "character",
+        "type": "class"
+    },
+    {
+        "id": 1,
+        "members": [
+            {
+                "name": "movement-cost",
+                "type": "float",
+                "value": 0
+            }
+        ],
+        "name": "map-tile",
+        "type": "class"
+    },
+    {
+        "id": 2,
+        "members": [
+            {
+                "name": "name",
+                "type": "string",
+                "value": ""
+            },
+            {
+                "name": "sequence-name",
+                "type": "string",
+                "value": ":idle"
+            }
+        ],
+        "name": "sprite",
+        "type": "class"
+    }
+]

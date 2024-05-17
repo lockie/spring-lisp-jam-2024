@@ -2,7 +2,7 @@
 
 
 (ecs:defcomponent map-tile
-  (movement-cost 0 :type fixnum))
+  (movement-cost 0.0 :type single-float))
 
 (ecs:defsystem render-map-tiles
   (:components-ro (position size image map-tile)
@@ -14,7 +14,29 @@
                          position-x position-y
                          (* +scale-factor+ size-width)
                          (* +scale-factor+ size-height)
-                         0))
+                         0)
+  ;; (al:draw-rectangle position-x position-y
+  ;;                    (+ position-x (* +scale-factor+ size-width))
+  ;;                    (+ position-y (* +scale-factor+ size-height))
+  ;;                    (al:map-rgb 0 0 0) 1)
+  )
+
+(declaim (ftype (function (fixnum) single-float) total-map-tile-movement-cost))
+(defun total-map-tile-movement-cost (tile-hash)
+  (let ((sum 0.0))
+    (declare (type single-float sum))
+    (with-tiles tile-hash tile
+      (when (has-map-tile-p tile)
+        (incf sum (map-tile-movement-cost tile))))
+    (max sum 0.0)))
+
+(defconstant +max-movement-cost+ 1.0)
+
+(declaim (ftype (function (pos pos) boolean) obstaclep))
+(defun obstaclep (x y)
+  "Takes tile position and returns T if there are obstacles in there."
+  (>= (total-map-tile-movement-cost (tile-hash x y))
+      +max-movement-cost+))
 
 (defun read-file-into-string (pathname &key (buffer-size 4096))
   (with-open-stream (stream (al:make-character-stream pathname))
@@ -23,6 +45,13 @@
 
 (defun load-bitmap (filename)
   (al:ensure-loaded #'al:load-bitmap (namestring filename)))
+
+(defun maybe-keyword (value)
+  (if (and (stringp value)
+           (> (length value) 1)
+           (string= ":" value :end2 1))
+      (make-keyword (string-upcase (subseq value 1)))
+      value))
 
 (defun properties->spec (properties)
   (loop :for component :being :the :hash-key
@@ -33,7 +62,7 @@
                               :using (hash-value value) :of slots
                               :nconcing (list
                                          (make-keyword (string-upcase name))
-                                         value)))))
+                                         (maybe-keyword value))))))
 
 (defun tile->spec (tile tile-width tile-height bitmap map-entity)
   (copy-list
@@ -85,6 +114,10 @@
                               (properties->spec (tiled:properties object)))))
                  (make-parent entity :entity map-entity)
                  (make-position
-                  entity :x (* +scale-factor+ (tiled:object-x object))
-                         :y (* +scale-factor+ (tiled:object-y object))))))))
+                  entity :x (* +scale-factor+
+                               (+ (tiled:object-x object)
+                                  (* 0.5 (tiled:object-width object))))
+                         :y (* +scale-factor+
+                               (- (tiled:object-y object)
+                                  (* 0.5 (tiled:object-height object))))))))))
     (values map-entity (tiled:map-width map) (tiled:map-height map))))

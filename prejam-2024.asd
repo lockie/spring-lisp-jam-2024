@@ -4,10 +4,12 @@
   :license "MIT"
   :depends-on (#:alexandria
                #:cl-aseprite
+               #:cl-fast-behavior-trees
                #:cl-fast-ecs
                #:cl-liballegro
                #:cl-liballegro-nuklear
                #:cl-tiled
+               #:global-vars
                #:let-plus
                #:livesupport)
   :serial t
@@ -15,8 +17,11 @@
                 :components
                 ((:file "package")
                  (:file "common")
-                 (:file "map")
                  (:file "sprite")
+                 (:file "map")
+                 (:file "priority-queue")
+                 (:file "character")
+                 (:file "behavior")
                  (:file "main"))))
   :description "A simple game."
   :defsystem-depends-on (#:deploy)
