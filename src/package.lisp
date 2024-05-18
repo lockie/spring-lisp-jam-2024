@@ -3,7 +3,7 @@
   (:local-nicknames (#:tiled #:cl-tiled))
   (:import-from #:alexandria
                 #:array-length #:array-index #:define-constant #:doplist
-                #:if-let #:make-keyword #:non-negative-fixnum
+                #:format-symbol #:if-let #:make-keyword #:non-negative-fixnum
                 #:positive-fixnum)
   (:import-from #:global-vars #:define-global-parameter)
   (:import-from #:cl-fast-behavior-trees

@@ -128,14 +128,37 @@
        (<= (distance* position-x position-y target-x target-y)
            (sqr character-attack-range))))))
 
+
+(declaim (ftype (function (keyword keyword) boolean) keyword-prefix-p)
+         (inline keyword-prefix-p))
+(defun keyword-prefix-p (prefix string)
+  "Does STRING begin with PREFIX? Code from UIOP:STRING-PREFIX-P"
+  (let* ((x (string prefix))
+         (y (string string))
+         (lx (length x))
+         (ly (length y)))
+    (and (<= lx ly) (string= x y :end2 lx))))
+
 (define-behavior-tree-node (melee-attack
-                            :components-ro (animation-state animation-sequence
-                                                            target)
-                            :components-rw (sprite))
+                            :components-ro (animation-sequence position target)
+                            :components-rw (animation-state sprite))
     ()
-  ;; TODO different animaions?..
-  (if (not (eq sprite-sequence-name :attack-1))
-      (setf sprite-sequence-name :attack-1)
+  (if (not (keyword-prefix-p :attack sprite-sequence-name))
+      (with-position (target-x target-y) target-entity
+        (let* ((dx (- target-x position-x))
+               (dy (- target-y position-y))
+               (abs-dx (abs dx))
+               (abs-dy (abs dy))
+               (flip (minusp dx))
+               (sequence (cond ((> abs-dx abs-dy) :attack-right)
+                               ((plusp dy)        :attack-down)
+                               (t                 :attack-up))))
+          (when (eq sprite-name :warrior-blue)
+            ;; NOTE warrior has alternating attack animations
+            (setf sequence (format-symbol :keyword "~a-~a" sequence
+                                          (1+ (random 2)))))
+          (setf sprite-sequence-name sequence
+                animation-state-flip (if flip 1 0))))
       (when (= animation-state-frame (1- animation-sequence-frames))
         (make-damage target-entity (1+ (random 100)))
         (setf sprite-sequence-name :idle)

@@ -17,6 +17,7 @@
           *world-height* height))
   (load-sprite "Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.aseprite")
   (load-sprite "Factions/Knights/Troops/Archer/Blue/Archer_Blue.aseprite")
+  (load-sprite "Factions/Goblins/Troops/Torch/Red/Torch_Red.aseprite")
   (load-sprite "Factions/Knights/Troops/Dead/Dead.aseprite")
   )
 
