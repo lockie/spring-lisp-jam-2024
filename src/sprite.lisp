@@ -35,27 +35,27 @@
           :documentation "Flip sprite horizontally so character looks left"))
 
 (ecs:defsystem setup-sprites
-  (:components-ro (sprite))
-  (unless (has-animation-sequence-p entity)
-    (assign-animation-sequence entity)))
+  (:components-ro (sprite)
+   :when (not (has-animation-sequence-p entity)))
+  (assign-animation-sequence entity))
 
 (ecs:defsystem change-sprites-animation
   (:components-ro (sprite)
-   :components-rw (animation-sequence))
-  (when (not (and (eq animation-sequence-sprite-name sprite-name)
-                  (eq animation-sequence-name sprite-sequence-name)))
-    (let ((prefab (animation-prefab :sprite-name sprite-name
-                                    :sequence-name sprite-sequence-name)))
-      ;; TODO : for prefab=nil case, restart with list of loaded sprites
-      (replace-animation-sequence entity prefab)
-      (replace-image entity prefab)
-      (replace-size entity prefab)
-      (assign-animation-state entity
-                              :frame 0
-                              :time 0.0
-                              :flip (if (has-animation-state-p entity)
-                                        (animation-state-flip entity)
-                                        0)))))
+   :components-rw (animation-sequence)
+   :when (not (and (eq animation-sequence-sprite-name sprite-name)
+                   (eq animation-sequence-name sprite-sequence-name))))
+  (let ((prefab (animation-prefab :sprite-name sprite-name
+                                  :sequence-name sprite-sequence-name)))
+    ;; TODO : for prefab=nil case, restart with list of loaded sprites
+    (replace-animation-sequence entity prefab)
+    (replace-image entity prefab)
+    (replace-size entity prefab)
+    (assign-animation-state entity
+                            :frame 0
+                            :time 0.0
+                            :flip (if (has-animation-state-p entity)
+                                      (animation-state-flip entity)
+                                      0))))
 
 (ecs:defsystem render-sprites
   (:components-ro (position size image animation-sequence animation-state)
