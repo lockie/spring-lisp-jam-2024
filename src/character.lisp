@@ -21,6 +21,15 @@
   (attack-range 0.0 :type single-float)
   (movement-speed 0.0 :type single-float))
 
+(ecs:defsystem mortify-characters
+  (:components-ro (health character)
+   :components-rw (sprite)
+   :when (not (plusp health-points)))
+  "This parrot is no more. It has ceased to be."
+  (setf sprite-name :dead
+        sprite-sequence-name :dead)
+  (delete-character entity))
+
 (declaim (inline distance))
 (defun distance (x1 y1 x2 y2)
   (flet ((sqr (x) (* x x)))
