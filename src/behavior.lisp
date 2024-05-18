@@ -163,5 +163,7 @@
          ((repeat-until-fail)
           ((sequence)
            ((follow-path))
-           ((move)))))))
+           ((move))
+           ((invert)
+            ((test-attack-range))))))))
       ((idle)))))
