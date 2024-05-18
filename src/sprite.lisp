@@ -50,7 +50,12 @@
       (replace-animation-sequence entity prefab)
       (replace-image entity prefab)
       (replace-size entity prefab)
-      (assign-animation-state entity))))
+      (assign-animation-state entity
+                              :frame 0
+                              :time 0.0
+                              :flip (if (has-animation-state-p entity)
+                                        (animation-state-flip entity)
+                                        0)))))
 
 (ecs:defsystem render-sprites
   (:components-ro (position size image animation-sequence animation-state)
