@@ -129,13 +129,15 @@
            (sqr character-attack-range))))))
 
 (define-behavior-tree-node (melee-attack
-                            :components-ro (animation-state animation-sequence)
+                            :components-ro (animation-state animation-sequence
+                                                            target)
                             :components-rw (sprite))
     ()
   ;; TODO different animaions?..
   (if (not (eq sprite-sequence-name :attack-1))
       (setf sprite-sequence-name :attack-1)
       (when (= animation-state-frame (1- animation-sequence-frames))
+        (make-damage target-entity (1+ (random 100)))
         (setf sprite-sequence-name :idle)
         (complete-node t))))
 

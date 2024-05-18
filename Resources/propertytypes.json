@@ -1,6 +1,6 @@
 [
     {
-        "id": 5,
+        "id": 1,
         "members": [
             {
                 "name": "type",
@@ -12,7 +12,7 @@
         "type": "class"
     },
     {
-        "id": 3,
+        "id": 2,
         "members": [
             {
                 "name": "attack-range",
@@ -39,7 +39,19 @@
         "type": "class"
     },
     {
-        "id": 1,
+        "id": 6,
+        "members": [
+            {
+                "name": "points",
+                "type": "int",
+                "value": 0
+            }
+        ],
+        "name": "health",
+        "type": "class"
+    },
+    {
+        "id": 3,
         "members": [
             {
                 "name": "movement-cost",
@@ -51,7 +63,7 @@
         "type": "class"
     },
     {
-        "id": 2,
+        "id": 4,
         "members": [
             {
                 "name": "name",

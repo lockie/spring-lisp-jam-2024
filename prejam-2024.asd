@@ -17,6 +17,7 @@
                 :components
                 ((:file "package")
                  (:file "common")
+                 (:file "damage")
                  (:file "sprite")
                  (:file "map")
                  (:file "priority-queue")

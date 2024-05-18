@@ -30,8 +30,6 @@
   (ecs:run-systems :dt (float dt 0.0))
   )
 
-(defvar *font*)
-
 (defun render ()
 
   (al:draw-text *font* (al:map-rgba 255 255 255 0) 0 0 0

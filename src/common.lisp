@@ -4,6 +4,8 @@
 (define-constant +window-width+ 1280)
 (define-constant +window-height+ 800)
 
+(defvar *font*)
+
 (ecs:defcomponent parent
   (entity -1 :type ecs:entity :index children))
 

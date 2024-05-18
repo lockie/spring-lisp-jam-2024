@@ -51,12 +51,17 @@
     </property>
    </properties>
   </object>
-  <object id="7" name="warrior1" gid="711" x="511" y="449" width="64" height="64">
+  <object id="7" name="warrior1" gid="711" x="485.667" y="419.667" width="64" height="64">
    <properties>
     <property name="character" type="class" propertytype="character">
      <properties>
       <property name="movement-speed" type="float" value="2"/>
       <property name="vision-range" type="float" value="10"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="100"/>
      </properties>
     </property>
     <property name="sprite" type="class" propertytype="sprite">
@@ -66,7 +71,7 @@
     </property>
    </properties>
   </object>
-  <object id="8" name="enemy" gid="711" x="1152" y="769.333" width="64" height="64">
+  <object id="8" name="enemy" gid="711" x="1152" y="641.333" width="64" height="64">
    <properties>
     <property name="behavior" type="class" propertytype="behavior">
      <properties>
@@ -75,7 +80,8 @@
     </property>
     <property name="character" type="class" propertytype="character">
      <properties>
-      <property name="movement-speed" type="float" value="20"/>
+      <property name="attack-range" type="float" value="70"/>
+      <property name="movement-speed" type="float" value="60"/>
       <property name="team" type="int" value="1"/>
       <property name="vision-range" type="float" value="1000"/>
      </properties>
