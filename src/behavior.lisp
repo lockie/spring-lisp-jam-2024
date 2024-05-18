@@ -118,7 +118,7 @@
                   sprite-sequence-name :run
                   animation-state-flip (if (minusp dx) 1 0))))))
 
-(define-behavior-tree-node (check-attack-range
+(define-behavior-tree-node (test-attack-range
                             :components-ro (position character target))
     ()
   "Succeeds if entity's target is within attack range."
@@ -153,7 +153,7 @@
        ((pick-nearest-enemy))
        ((fallback)
         ((sequence :name "attack")
-         ((check-attack-range))
+         ((test-attack-range))
          ((melee-attack))
          ((wait :time 0.15)))
         ((sequence :name "pursuit")
