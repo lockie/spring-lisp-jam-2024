@@ -36,7 +36,7 @@
 
 (ecs:defsystem setup-sprites
   (:components-ro (sprite)
-   :when (not (has-animation-sequence-p entity)))
+   :components-no (animation-sequence))
   (assign-animation-sequence entity))
 
 (ecs:defsystem change-sprites-animation
