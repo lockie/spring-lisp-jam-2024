@@ -30,6 +30,10 @@
         sprite-sequence-name :dead)
   (delete-health entity)
   (delete-character entity)
+  (when (has-behavior-p entity)
+    (delete-behavior-tree
+     (behavior-type entity)
+     entity))
   (dolist (arrow (stuck-arrows entity))
     (ecs:delete-entity arrow)))
 

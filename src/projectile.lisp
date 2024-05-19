@@ -38,7 +38,7 @@ NOTE: assuming splash damage = explosion"))
            (* +scaled-tile-size+ +scaled-tile-size+))
     (with-tiles (tile-hash projectile-target-x projectile-target-y) object
       (when (has-health-p object)
-        (make-damage object (1+ (random 200)))
+        (make-damage object (1+ (random 20)))
         (when (zerop projectile-splash)
           (ecs:make-object
            `((:position :x ,projectile-target-x

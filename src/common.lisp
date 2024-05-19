@@ -14,6 +14,9 @@
                (dolist (child (children entity))
                  (ecs:delete-entity child))))
 
+(ecs:defcomponent behavior
+  (type :|| :type keyword))
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (declaim (type single-float +scale-factor+ +tile-size+ +scaled-tile-size+))
   (defconstant +scale-factor+ 0.5)

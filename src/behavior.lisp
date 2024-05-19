@@ -1,9 +1,6 @@
 (in-package #:prejam-2024)
 
 
-(ecs:defcomponent behavior
-  (type :|| :type keyword))
-
 (ecs:defsystem setup-behaviors
   (:components-ro (behavior)
    :components-no (behavior-tree-marker))
@@ -37,6 +34,22 @@
                      (t
                       (assign-target entity :entity enemy)
                       (complete-node t))))))
+
+(define-behavior-tree-node (pick-random-enemy
+                            :components-ro (position character)
+                            :with (teams := (vector (shuffle (team 0))
+                                                    (shuffle (team 1)))))
+    ()
+  "Picks an enemy at random. Fails if there are no enemies nearby."
+  (flet ((sqr (x) (* x x)))
+    (loop
+      :for enemy :of-type ecs:entity :in (aref teams (logxor character-team 1))
+      :for distance := (with-position (enemy-x enemy-y) enemy
+                         (distance* position-x position-y enemy-x enemy-y))
+      :when (<= distance (sqr character-vision-range))
+      :do (assign-target entity :entity enemy)
+          (return-from ecs::current-entity (complete-node t))
+      :finally (complete-node nil))))
 
 (define-behavior-tree-node (calculate-path
                             :components-ro (position target))
@@ -125,9 +138,9 @@
   (flet ((sqr (x) (* x x)))
     (with-position (target-x target-y) target-entity
       (complete-node
-       (<= (distance* position-x position-y target-x target-y)
-           (sqr character-attack-range))))))
-
+       (and (has-health-p target-entity)
+            (<= (distance* position-x position-y target-x target-y)
+                (sqr character-attack-range)))))))
 
 (declaim (ftype (function (keyword keyword) boolean) keyword-prefix-p)
          (inline keyword-prefix-p))
@@ -164,7 +177,7 @@
       (set-attack-animation)
       (cond ((and (= animation-state-frame (- animation-sequence-frames 3))
                   (zerop melee-attack-done))
-             (make-damage target-entity (1+ (random 100)))
+             (make-damage target-entity (1+ (random 10)))
              (setf melee-attack-done 1))
 
             ((and (= animation-state-frame (1- animation-sequence-frames))
@@ -224,12 +237,14 @@
     ((repeat :name "root")
      ((fallback)
       ((sequence)
-       ((pick-nearest-enemy))
+       ((pick-random-enemy))
        ((fallback)
-        ((sequence :name "attack")
-         ((test-attack-range))
-         ((melee-attack))
-         ((wait :time 0.15)))
+        ((invert)
+         ((repeat-until-fail)
+          ((sequence :name "attack")
+           ((test-attack-range))
+           ((melee-attack))
+           ((wait :time 0.15)))))
         ((sequence :name "pursuit")
          ((calculate-path))
          ((repeat-until-fail)
@@ -244,12 +259,14 @@
   ((repeat :name "root")
      ((fallback)
       ((sequence)
-       ((pick-nearest-enemy))
+       ((pick-random-enemy))
        ((fallback)
-        ((sequence :name "attack")
-         ((test-attack-range))
-         ((ranged-attack))
-         ((wait :time 0.3)))
+        ((invert)
+         ((repeat-until-fail)
+          ((sequence :name "attack")
+           ((test-attack-range))
+           ((ranged-attack))
+           ((wait :time 0.3)))))
         ((sequence :name "pursuit")
          ((calculate-path))
          ((repeat-until-fail)
@@ -264,7 +281,7 @@
   ((repeat :name "root")
      ((fallback)
       ((sequence)
-       ((pick-nearest-enemy))
+       ((pick-random-enemy))
        ((fallback)
         ((sequence :name "attack")
          ((test-attack-range))

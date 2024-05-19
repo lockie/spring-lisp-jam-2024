@@ -109,7 +109,8 @@
                             :time 0.0
                             :flip (if (has-animation-state-p entity)
                                       (animation-state-flip entity)
-                                      0))))
+                                      0)
+                            :finished 0)))
 
 (ecs:defsystem setup-sprites
   (:components-ro (sprite)
