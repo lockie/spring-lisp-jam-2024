@@ -32,30 +32,13 @@
   (time 0.0 :type single-float
             :documentation "Time elapsed from the beginning of frame, seconds")
   (flip 0 :type bit
-          :documentation "Flip sprite horizontally so character looks left"))
+          :documentation "Flip sprite horizontally so character looks left")
+  (rotation 0.0 :type single-float
+            :documentation "Rotation (mostly used for projectiles)")
+  (finished 0 :type bit :documentation "Only for cases with repeat=0"))
 
-(ecs:defsystem setup-sprites
-  (:components-ro (sprite)
-   :components-no (animation-sequence))
-  (assign-animation-sequence entity))
-
-(ecs:defsystem change-sprites-animation
-  (:components-ro (sprite)
-   :components-rw (animation-sequence)
-   :when (not (and (eq animation-sequence-sprite-name sprite-name)
-                   (eq animation-sequence-name sprite-sequence-name))))
-  (let ((prefab (animation-prefab :sprite-name sprite-name
-                                  :sequence-name sprite-sequence-name)))
-    ;; TODO : for prefab=nil case, restart with list of loaded sprites
-    (replace-animation-sequence entity prefab)
-    (replace-image entity prefab)
-    (replace-size entity prefab)
-    (assign-animation-state entity
-                            :frame 0
-                            :time 0.0
-                            :flip (if (has-animation-state-p entity)
-                                      (animation-state-flip entity)
-                                      0))))
+(define-constant +transparent+ (al:map-rgba 255 255 255 255)
+  :test #'equalp)
 
 (ecs:defsystem render-sprites
   (:components-ro (position size image animation-sequence animation-state)
@@ -66,14 +49,17 @@
         :for y-offset := (* layer size-height)
         :for scaled-width := (* +scale-factor+ size-width)
         :for scaled-height := (* +scale-factor+ size-height)
-        :do (al:draw-scaled-bitmap image-bitmap
-                                   x-offset y-offset
-                                   size-width size-height
-                                   (- position-x (* 0.5 scaled-width))
-                                   (- position-y (* 0.5 scaled-height))
-                                   scaled-width scaled-height
-                                   (if (zerop animation-state-flip)
-                                       0 :flip-horizontal)))
+        :do (al:draw-tinted-scaled-rotated-bitmap-region
+             image-bitmap
+             x-offset y-offset
+             size-width size-height
+             +transparent+
+             (* 0.5 size-width) (* 0.5 size-height)
+             position-x position-y
+             +scale-factor+ +scale-factor+
+             animation-state-rotation
+             (if (zerop animation-state-flip)
+                 0 :flip-horizontal)))
   ;; (al:draw-circle position-x position-y 2 (al:map-rgb 0 255 255) 2)
   ;; (al:draw-rectangle
   ;;  (- position-x (* 0.5 (* +scale-factor+ size-width)))
@@ -102,9 +88,33 @@
                                       ((zerop repeat)
                                        frame)
                                       ((zerop animation-sequence-repeat)
+                                       (setf animation-state-finished 1)
                                        (1- animation-sequence-frames))
                                       (t
                                        frame)))))))
+
+(ecs:defsystem change-sprites-animation
+  (:components-ro (sprite)
+   :components-rw (animation-sequence)
+   :when (not (and (eq animation-sequence-sprite-name sprite-name)
+                   (eq animation-sequence-name sprite-sequence-name))))
+  (let ((prefab (animation-prefab :sprite-name sprite-name
+                                  :sequence-name sprite-sequence-name)))
+    ;; TODO : for prefab=nil case, restart with list of loaded sprites
+    (replace-animation-sequence entity prefab)
+    (replace-image entity prefab)
+    (replace-size entity prefab)
+    (assign-animation-state entity
+                            :frame 0
+                            :time 0.0
+                            :flip (if (has-animation-state-p entity)
+                                      (animation-state-flip entity)
+                                      0))))
+
+(ecs:defsystem setup-sprites
+  (:components-ro (sprite)
+   :components-no (animation-sequence))
+  (assign-animation-sequence entity))
 
 (cffi:defcfun memcpy :pointer
   (dst :pointer)

@@ -18,8 +18,10 @@
   (load-sprite "Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.aseprite")
   (load-sprite "Factions/Knights/Troops/Archer/Blue/Archer_Blue.aseprite")
   (load-sprite "Factions/Goblins/Troops/Torch/Red/Torch_Red.aseprite")
+  (load-sprite "Factions/Goblins/Troops/TNT/Red/TNT_Red.aseprite")
   (load-sprite "Factions/Knights/Troops/Dead/Dead.aseprite")
-  )
+  (load-sprite "Effects/Explosion/Explosions.aseprite")
+  (trivial-garbage:gc :full t))
 
 (declaim (type fixnum *fps*))
 (defvar *fps* 0)

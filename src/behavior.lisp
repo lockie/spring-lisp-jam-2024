@@ -139,30 +139,79 @@
          (ly (length y)))
     (and (<= lx ly) (string= x y :end2 lx))))
 
+(defmacro set-attack-animation ()
+  `(with-position (target-x target-y) target-entity
+     (let* ((dx (- target-x position-x))
+            (dy (- target-y position-y))
+            (abs-dx (abs dx))
+            (abs-dy (abs dy))
+            (flip (minusp dx))
+            (sequence (cond ((> abs-dx abs-dy) :attack-right)
+                            ((plusp dy)        :attack-down)
+                            (t                 :attack-up))))
+       (when (eq sprite-name :warrior-blue)
+         ;; NOTE warrior has alternating attack animations
+         (setf sequence (format-symbol :keyword "~a-~a" sequence
+                                       (1+ (random 2)))))
+       (setf sprite-sequence-name sequence
+             animation-state-flip (if flip 1 0)))))
+
 (define-behavior-tree-node (melee-attack
                             :components-ro (animation-sequence position target)
                             :components-rw (animation-state sprite))
-    ()
+    ((done 0 :type bit))
   (if (not (keyword-prefix-p :attack sprite-sequence-name))
-      (with-position (target-x target-y) target-entity
-        (let* ((dx (- target-x position-x))
-               (dy (- target-y position-y))
-               (abs-dx (abs dx))
-               (abs-dy (abs dy))
-               (flip (minusp dx))
-               (sequence (cond ((> abs-dx abs-dy) :attack-right)
-                               ((plusp dy)        :attack-down)
-                               (t                 :attack-up))))
-          (when (eq sprite-name :warrior-blue)
-            ;; NOTE warrior has alternating attack animations
-            (setf sequence (format-symbol :keyword "~a-~a" sequence
-                                          (1+ (random 2)))))
-          (setf sprite-sequence-name sequence
-                animation-state-flip (if flip 1 0))))
-      (when (= animation-state-frame (1- animation-sequence-frames))
-        (make-damage target-entity (1+ (random 100)))
-        (setf sprite-sequence-name :idle)
-        (complete-node t))))
+      (set-attack-animation)
+      (cond ((and (= animation-state-frame (- animation-sequence-frames 3))
+                  (zerop melee-attack-done))
+             (make-damage target-entity (1+ (random 100)))
+             (setf melee-attack-done 1))
+
+            ((and (= animation-state-frame (1- animation-sequence-frames))
+                  (plusp animation-state-finished))
+             (setf sprite-sequence-name :idle)
+             (complete-node t)))))
+
+(define-behavior-tree-node (ranged-attack
+                            :components-ro (animation-sequence position target)
+                            :components-rw (animation-state sprite))
+    ((done 0 :type bit)
+     (splash 0 :type bit))
+  (if (not (keyword-prefix-p :attack sprite-sequence-name))
+      (set-attack-animation)
+      (cond ((and (= animation-state-frame
+                     ;; NOTE this abomination stems from different animation
+                     ;;  lengths for different characters in tileset
+                     (- animation-sequence-frames
+                        (+ 2 (* 3 ranged-attack-splash))))
+                  (zerop ranged-attack-done))
+             (with-position (target-x target-y) target-entity
+               (let ((angle (atan (- target-y position-y)
+                                  (- target-x position-x))))
+                 (ecs:make-object
+                  `((:position :x ,position-x
+                               :y ,position-y)
+                    (:sprite :name ,sprite-name
+                             :sequence-name :projectile)
+                    (:projectile :target-x ,target-x
+                                 :target-y ,target-y
+                                 :angle ,angle
+                                 :speed 100.0
+                                 :splash ,ranged-attack-splash)
+                    (:animation-state :rotation
+                                      ,(if (plusp ranged-attack-splash)
+                                           0.0
+                                           angle)
+                                      :flip
+                                      ,(if (plusp ranged-attack-splash)
+                                           (logxor animation-state-flip 1)
+                                           0))))))
+             (setf ranged-attack-done 1))
+
+            ((and (= animation-state-frame (1- animation-sequence-frames))
+                  (plusp animation-state-finished))
+             (setf sprite-sequence-name :idle)
+             (complete-node t)))))
 
 (define-behavior-tree-node (wait
                             :arguments ((:dt single-float)))
@@ -171,7 +220,7 @@
       (decf wait-time dt)
       (complete-node t)))
 
-(define-behavior-tree simple
+(define-behavior-tree simple-melee
     ((repeat :name "root")
      ((fallback)
       ((sequence)
@@ -181,6 +230,46 @@
          ((test-attack-range))
          ((melee-attack))
          ((wait :time 0.15)))
+        ((sequence :name "pursuit")
+         ((calculate-path))
+         ((repeat-until-fail)
+          ((sequence)
+           ((follow-path))
+           ((move))
+           ((invert)
+            ((test-attack-range))))))))
+      ((idle)))))
+
+(define-behavior-tree simple-ranged
+  ((repeat :name "root")
+     ((fallback)
+      ((sequence)
+       ((pick-nearest-enemy))
+       ((fallback)
+        ((sequence :name "attack")
+         ((test-attack-range))
+         ((ranged-attack))
+         ((wait :time 0.3)))
+        ((sequence :name "pursuit")
+         ((calculate-path))
+         ((repeat-until-fail)
+          ((sequence)
+           ((follow-path))
+           ((move))
+           ((invert)
+            ((test-attack-range))))))))
+      ((idle)))))
+
+(define-behavior-tree simple-thrower
+  ((repeat :name "root")
+     ((fallback)
+      ((sequence)
+       ((pick-nearest-enemy))
+       ((fallback)
+        ((sequence :name "attack")
+         ((test-attack-range))
+         ((ranged-attack :splash 1))
+         ((wait :time 0.3)))
         ((sequence :name "pursuit")
          ((calculate-path))
          ((repeat-until-fail)

@@ -28,7 +28,10 @@
   "This parrot is no more. It has ceased to be."
   (setf sprite-name :dead
         sprite-sequence-name :dead)
-  (delete-character entity))
+  (delete-health entity)
+  (delete-character entity)
+  (dolist (arrow (stuck-arrows entity))
+    (ecs:delete-entity arrow)))
 
 (declaim (inline distance))
 (defun distance (x1 y1 x2 y2)
