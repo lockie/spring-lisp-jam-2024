@@ -84,6 +84,7 @@
       (al:install-mouse)
       (al:register-event-source event-queue
                                 (al:get-mouse-event-source))
+      (al:set-new-bitmap-flags '(:min-linear))
       (unwind-protect
            (cffi:with-foreign-object (event '(:union al:event))
              (init)
