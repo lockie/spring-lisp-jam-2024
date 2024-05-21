@@ -8,7 +8,10 @@
   (target-x 0.0 :type single-float)
   (target-y 0.0 :type single-float))
 
-(ecs:defcomponent follows-path)
+(ecs:defcomponent path
+  "A path previously calculated by A* algorithm."
+  (target-x 0.0 :type single-float)
+  (target-y 0.0 :type single-float))
 
 (ecs:defcomponent path-point
   (x 0.0 :type pos)
@@ -19,7 +22,12 @@
   (team 0 :type bit :index team :documentation "0 = defender, 1 = attacker")
   (vision-range 0.0 :type single-float)
   (attack-range 0.0 :type single-float)
-  (movement-speed 0.0 :type single-float))
+  (movement-speed 0.0 :type single-float)
+  (melee-attack 0 :type bit)
+  (splash-attack 0 :type bit)
+  (projectile-speed 0.0 :type single-float)
+  (damage-min 0 :type fixnum)
+  (damage-max 0 :type fixnum))
 
 (ecs:defsystem mortify-characters
   (:components-ro (health character)
@@ -193,5 +201,7 @@
     (loop :for i :from length :downto 0
           :do (let+ (((&values x y) (marshal-tile (aref path i))))
                 ;; TODO compact by comparing x and y being same with next point
+                (when (zerop i)
+                  (assign-path entity :target-x x :target-y y))
                 (ecs:make-object
                  `((:path-point :x ,x :y ,y :traveller ,entity)))))))

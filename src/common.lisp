@@ -51,6 +51,14 @@
    (float (ash hash -31))
    (float (logand hash 2147483647))))
 
+(declaim (inline same-tile-p)
+         (ftype (function (pos pos pos pos) boolean) same-tile-p))
+(defun same-tile-p (x1 y1 x2 y2)
+  (and (= (floor x1 +scaled-tile-size+)
+          (floor x2 +scaled-tile-size+))
+       (= (floor y1 +scaled-tile-size+)
+          (floor y2 +scaled-tile-size+))))
+
 (ecs:defcomponent position
   "The object position in pixels."
   (x 0.0 :type pos
@@ -81,3 +89,8 @@
 (declaim (type array-length *world-width* *world-height*))
 (define-global-parameter *world-width* 0 "World width in tiles")
 (define-global-parameter *world-height* 0 "World height in tiles")
+
+(declaim (inline randint)
+         (ftype (function (fixnum fixnum) fixnum) randint))
+(defun randint (start end)
+  (+ start (random (+ 1 (- end start)))))

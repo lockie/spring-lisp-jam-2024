@@ -6,6 +6,7 @@
   (target-y 0.0 :type pos)
   (angle 0.0 :type single-float)
   (speed 0.0 :type single-float)
+  (damage 0 :type fixnum)
   (splash 0 :type bit :documentation "Whether projectile deals splash damage.
 NOTE: assuming splash damage = explosion"))
 
@@ -68,3 +69,30 @@ NOTE: assuming splash damage = explosion"))
   (:components-ro (explosion animation-sequence animation-state))
   (when (= animation-state-frame animation-sequence-frames)
     (ecs:delete-entity entity)))
+
+(declaim (ftype
+          (function
+           (pos pos pos pos keyword positive-fixnum single-float bit bit)
+           (values ecs:entity &optional))
+          make-projectile-object))
+(defun make-projectile-object (x y target-x target-y sprite
+                               damage speed splash flip)
+  (let ((angle (atan (- target-y y)
+                     (- target-x x))))
+    (ecs:make-object
+     `((:position :x ,x
+                  :y ,y)
+       (:sprite :name ,sprite
+                :sequence-name :projectile)
+       (:projectile :target-x ,target-x
+                    :target-y ,target-y
+                    :angle ,angle
+                    :speed  ,speed
+                    :damage ,damage
+                    :splash ,splash)
+       (:animation-state :rotation ,(if (plusp splash)
+                                        0.0
+                                        angle)
+                         :flip ,(if (plusp splash)
+                                    (logxor flip 1)
+                                    0))))))

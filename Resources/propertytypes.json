@@ -20,9 +20,34 @@
                 "value": 0
             },
             {
+                "name": "damage-max",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "damage-min",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "melee-attack",
+                "type": "bool",
+                "value": false
+            },
+            {
                 "name": "movement-speed",
                 "type": "float",
                 "value": 0
+            },
+            {
+                "name": "projectile-speed",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "splash-attack",
+                "type": "bool",
+                "value": false
             },
             {
                 "name": "team",
@@ -39,7 +64,7 @@
         "type": "class"
     },
     {
-        "id": 6,
+        "id": 3,
         "members": [
             {
                 "name": "points",
@@ -51,7 +76,7 @@
         "type": "class"
     },
     {
-        "id": 3,
+        "id": 4,
         "members": [
             {
                 "name": "movement-cost",
@@ -63,7 +88,7 @@
         "type": "class"
     },
     {
-        "id": 4,
+        "id": 5,
         "members": [
             {
                 "name": "name",

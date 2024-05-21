@@ -46,12 +46,21 @@
 (defun load-bitmap (filename)
   (al:ensure-loaded #'al:load-bitmap (namestring filename)))
 
+(declaim (inline maybe-keyword))
 (defun maybe-keyword (value)
   (if (and (stringp value)
            (> (length value) 1)
            (string= ":" value :end2 1))
       (make-keyword (string-upcase (subseq value 1)))
       value))
+
+(declaim (inline maybe-boolean))
+(defun maybe-boolean (value)
+  "We use bit instead of boolean in components to save space."
+  (cond
+    ((eq value t)   1)
+    ((eq value nil) 0)
+    (t value)))
 
 (defun properties->spec (properties)
   (loop :for component :being :the :hash-key
@@ -62,7 +71,8 @@
                               :using (hash-value value) :of slots
                               :nconcing (list
                                          (make-keyword (string-upcase name))
-                                         (maybe-keyword value))))))
+                                         (maybe-keyword
+                                          (maybe-boolean value)))))))
 
 (defun tile->spec (tile tile-width tile-height bitmap map-entity)
   (copy-list
