@@ -207,7 +207,6 @@
       (decf wait-time dt)
       (complete-node t)))
 
-;; TODO : cooldown time - from character component!
 (define-behavior-tree offensive
     ((repeat :name "root")
      ((fallback)
@@ -235,7 +234,7 @@
             ((test-target-alive))
             ((test-target-in-range))
             ((attack))
-            ((wait))))
+            ((wait :time (character-attack-cooldown entity)))))
           ((invert)
            ((test-target-in-range)))))))
       ((idle)))))

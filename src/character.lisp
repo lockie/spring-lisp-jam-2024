@@ -27,7 +27,8 @@
   (splash-attack 0 :type bit)
   (projectile-speed 0.0 :type single-float)
   (damage-min 0 :type fixnum)
-  (damage-max 0 :type fixnum))
+  (damage-max 0 :type fixnum)
+  (attack-cooldown 0.0 :type single-float))
 
 (ecs:defsystem mortify-characters
   (:components-ro (health character)
