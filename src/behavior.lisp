@@ -182,9 +182,11 @@
                        (- animation-sequence-frames
                           ;; NOTE this abomination stems from different
                           ;; animation lengths of characters in tileset
-                          (cond ((plusp character-melee-attack)  3)
-                                ((plusp character-splash-attack) 5)
-                                (t                               2)))))
+                          (cond ((and (plusp character-melee-attack)
+                                      (plusp character-splash-attack)) 1)
+                                ((plusp character-melee-attack)        3)
+                                ((plusp character-splash-attack)       5)
+                                (t                                     2)))))
                (if (zerop character-melee-attack)
                    (make-projectile-object
                     position-x position-y target-x target-y sprite-name
@@ -192,12 +194,17 @@
                              character-damage-max)
                     character-projectile-speed character-splash-attack
                     animation-state-flip)
-                   (block melee
-                     (make-damage target-entity (randint character-damage-min
-                                                         character-damage-max))
-                     (unless (zerop character-fire-damage)
-                       (make-on-fire target-entity
-                                     :dps character-fire-damage))))
+                   (cond
+                     ((plusp character-fire-damage)
+                      (make-on-fire target-entity :dps character-fire-damage))
+                     ((plusp character-splash-attack)
+                      (make-explosion-effects position-x position-y
+                                              (randint character-damage-min
+                                                       character-damage-max)))
+                     (t
+                      (make-damage target-entity
+                                   (randint character-damage-min
+                                            character-damage-max)))))
                (setf attack-done 1))
               ((and (plusp animation-state-finished)
                     (= animation-state-frame (1- animation-sequence-frames)))

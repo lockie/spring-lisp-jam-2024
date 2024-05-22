@@ -37,30 +37,35 @@ NOTE: assuming splash damage = explosion"))
   (when (< (distance* projectile-target-x projectile-target-y
                       position-x position-y)
            (* +scaled-tile-size+ +scaled-tile-size+))
-    (with-tiles (tile-hash projectile-target-x projectile-target-y) object
-      (when (has-health-p object)
-        (make-damage object (1+ (random 20)))
-        (if (zerop projectile-splash)
-            (block stick-arrow
-              (ecs:make-object
-               `((:position :x ,projectile-target-x
-                            :y ,projectile-target-y)
-                 (:sprite :name ,sprite-name
-                          :sequence-name :projectile-stuck)
-                 (:animation-state :rotation ,animation-state-rotation)
-                 (:stuck-arrow :adventurer ,object)))
-              (loop-finish))
-            (block explosion-extinguishes-fire
-              (when (has-fire-p object)
-                (setf (fire-duration object) 0.0))))))
-    (when (plusp projectile-splash)
-      (ecs:make-object
-       `((:position :x ,projectile-target-x
-                    :y ,projectile-target-y)
-         (:sprite :name :explosions
-                  :sequence-name :explosion)
-         (:explosion))))
+    (if (zerop projectile-splash)
+        (with-tiles (tile-hash projectile-target-x projectile-target-y) object
+          (when (has-health-p object)
+            (make-damage object projectile-damage)
+            (ecs:make-object
+             `((:position :x ,projectile-target-x
+                          :y ,projectile-target-y)
+               (:sprite :name ,sprite-name
+                        :sequence-name :projectile-stuck)
+               (:animation-state :rotation ,animation-state-rotation)
+               (:stuck-arrow :adventurer ,object)))
+            (loop-finish)))
+        (make-explosion-effects
+         projectile-target-x projectile-target-y projectile-damage))
     (ecs:delete-entity entity)))
+
+(declaim (ftype (function (pos pos positive-fixnum)
+                          (values ecs:entity &optional))
+                make-explosion-effects))
+(defun make-explosion-effects (x y damage)
+  (with-tiles (tile-hash x y) object
+    (when (has-health-p object)
+      (make-damage object damage))
+    (when (has-fire-p object)
+      (setf (fire-duration object) 0.0)))
+  (ecs:make-object
+   `((:position :x ,x :y ,y)
+     (:sprite :name :explosions :sequence-name :explosion)
+     (:explosion))))
 
 (ecs:defsystem move-stuck-arrows
   (:components-ro (stuck-arrow)
