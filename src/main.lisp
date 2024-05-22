@@ -35,13 +35,10 @@
   (ecs:run-systems :dt (float dt 0.0))
   )
 
+(define-constant +white+ (al:map-rgba 255 255 255 0) :test #'equalp)
+
 (defun render ()
-
-  (al:draw-text *font* (al:map-rgba 255 255 255 0) 0 0 0
-                (format nil "~d FPS" *fps*))
-
-  ;; TODO : put your drawing code here
-  )
+  (al:draw-text *font* +white+ 0 0 0 (format nil "~d FPS" *fps*)))
 
 (cffi:defcallback %main :int ((argc :int) (argv :pointer))
   (declare (ignore argc argv))
