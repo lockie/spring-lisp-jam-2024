@@ -8,19 +8,6 @@
 (ecs:defcomponent fire-effect
   (character -1 :type ecs:entity :index flames :unique t))
 
-(ecs:defsystem burn
-  (:components-rw (fire)
-   :arguments ((:dt single-float)))
-  (let ((previous-duration fire-duration))
-    (decf fire-duration dt)
-    (unless (plusp fire-duration)
-      (ecs:delete-entity (flames entity))
-      (return-from ecs::current-entity (delete-fire entity)))
-    (unless (= (the fixnum (truncate previous-duration))
-               (the fixnum (truncate fire-duration)))
-      (when (has-health-p entity)
-        (make-damage entity fire-dps)))))
-
 (ecs:defsystem spread-fire
   (:components-ro (fire position))
   (with-tiles (tile-hash position-x position-y) object
@@ -36,6 +23,19 @@
   (with-position (character-x character-y) fire-effect-character
     (setf position-x character-x
           position-y character-y)))
+
+(ecs:defsystem burn
+  (:components-rw (fire)
+   :arguments ((:dt single-float)))
+  (let ((previous-duration fire-duration))
+    (decf fire-duration dt)
+    (unless (plusp fire-duration)
+      (ecs:delete-entity (flames entity))
+      (return-from ecs::current-entity (delete-fire entity)))
+    (unless (= (the fixnum (truncate previous-duration))
+               (the fixnum (truncate fire-duration)))
+      (when (has-health-p entity)
+        (make-damage entity fire-dps)))))
 
 (defun make-on-fire (entity &key (dps 1) (duration 3.9))
   (assign-fire entity :duration duration :dps dps)
