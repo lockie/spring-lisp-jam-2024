@@ -35,7 +35,8 @@
           :documentation "Flip sprite horizontally so character looks left")
   (rotation 0.0 :type single-float
             :documentation "Rotation (mostly used for projectiles)")
-  (finished 0 :type bit :documentation "Only for cases with repeat=0"))
+  (finished 0 :type bit :documentation "Only for cases with repeat=0")
+  (tint 0 :type fixnum :documentation "RGBA value for tint, 0 for no tint"))
 
 (define-constant +transparent+ (al:map-rgba 255 255 255 255)
   :test #'equalp)
@@ -46,6 +47,13 @@
    :finally (al:hold-bitmap-drawing nil))
   (loop :for layer :of-type fixnum :from 0 :below animation-sequence-layers
         :with x-offset := (* animation-state-frame size-width)
+        :with tint :=
+           (if (zerop animation-state-tint)
+               +transparent+
+               `(al::r ,(float (ldb (byte 8 24) animation-state-tint))
+                 al::g ,(float (ldb (byte 8 16) animation-state-tint))
+                 al::b ,(float (ldb (byte 8  8) animation-state-tint))
+                 al::a ,(float (ldb (byte 8  0) animation-state-tint))))
         :for y-offset := (* layer size-height)
         :for scaled-width := (* +scale-factor+ size-width)
         :for scaled-height := (* +scale-factor+ size-height)
@@ -53,7 +61,9 @@
              image-bitmap
              x-offset y-offset
              size-width size-height
-             +transparent+
+             (if (zerop layer) ;; no tint on shadow, which is usually layer 0
+                 +transparent+
+                 tint)
              (* 0.5 size-width) (* 0.5 size-height)
              position-x position-y
              +scale-factor+ +scale-factor+
