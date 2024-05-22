@@ -4,7 +4,7 @@
 (ecs:defcomponent health
   (points 0 :type fixnum))
 
-(defconstant +damage-numbers-display-time+ 1.3)
+(defconstant +damage-numbers-display-time+ 2.0)
 
 (ecs:defcomponent damage-number
   (damage 0 :type fixnum)
@@ -17,11 +17,13 @@
   (when (minusp damage-number-display-time)
     (ecs:delete-entity entity)))
 
+(defvar *damage-numbers-font*)
+
 (ecs:defsystem render-damange-numbers
   (:components-ro (position damage-number))
   (let ((dissipation (/ damage-number-display-time
                         +damage-numbers-display-time+)))
-    (al:draw-text *font*
+    (al:draw-text *damage-numbers-font*
                   (al:map-rgba-f 1.0 0.0 0.0 dissipation)
                   position-x
                   (+ position-y (* (- dissipation 1.5) +scaled-tile-size+))

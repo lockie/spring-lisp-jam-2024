@@ -6,11 +6,18 @@
 (define-constant +font-path+ "../Resources/inconsolata.ttf"
   :test #'string=)
 (define-constant +font-size+ 24)
+(define-constant +damage-numbers-font-path+ "../Resources/acme.ttf"
+  :test #'string=)
+(define-constant +damage-numbers-font-size+ 26)
 
 (define-constant +config-path+ "../config.cfg"
   :test #'string=)
 
 (defun init ()
+  (setf *damage-numbers-font*
+        (al:ensure-loaded #'al:load-ttf-font
+                          +damage-numbers-font-path+
+                          (- +damage-numbers-font-size+) 0))
   (ecs:bind-storage)
   (let+ (((&values map width height) (load-map "/test2.tmx")))
     (setf *world-width* width
