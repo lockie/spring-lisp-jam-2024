@@ -45,7 +45,8 @@
   (when (has-behavior-p entity)
     (delete-behavior-tree
      (behavior-type entity)
-     entity))
+     entity)
+    (delete-behavior entity))
   (dolist (arrow (stuck-arrows entity))
     (ecs:delete-entity arrow)))
 
