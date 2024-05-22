@@ -73,7 +73,7 @@
     </property>
     <property name="character" type="class" propertytype="character">
      <properties>
-      <property name="attack-cooldown" type="float" value="0.5"/>
+      <property name="attack-cooldown" type="float" value="0.6"/>
       <property name="attack-range" type="float" value="50"/>
       <property name="damage-max" type="int" value="30"/>
       <property name="damage-min" type="int" value="10"/>
@@ -138,8 +138,9 @@
      <properties>
       <property name="attack-cooldown" type="float" value="0.4"/>
       <property name="attack-range" type="float" value="50"/>
-      <property name="damage-max" type="int" value="30"/>
+      <property name="damage-max" type="int" value="20"/>
       <property name="damage-min" type="int" value="5"/>
+      <property name="fire-damage" type="int" value="10"/>
       <property name="melee-attack" type="bool" value="true"/>
       <property name="movement-speed" type="float" value="50"/>
       <property name="team" type="int" value="1"/>
@@ -169,8 +170,9 @@
      <properties>
       <property name="attack-cooldown" type="float" value="0.4"/>
       <property name="attack-range" type="float" value="50"/>
-      <property name="damage-max" type="int" value="30"/>
+      <property name="damage-max" type="int" value="20"/>
       <property name="damage-min" type="int" value="5"/>
+      <property name="fire-damage" type="int" value="10"/>
       <property name="melee-attack" type="bool" value="true"/>
       <property name="movement-speed" type="float" value="50"/>
       <property name="team" type="int" value="1"/>
@@ -200,8 +202,9 @@
      <properties>
       <property name="attack-cooldown" type="float" value="0.4"/>
       <property name="attack-range" type="float" value="50"/>
-      <property name="damage-max" type="int" value="30"/>
+      <property name="damage-max" type="int" value="20"/>
       <property name="damage-min" type="int" value="5"/>
+      <property name="fire-damage" type="int" value="10"/>
       <property name="melee-attack" type="bool" value="true"/>
       <property name="movement-speed" type="float" value="50"/>
       <property name="team" type="int" value="1"/>
@@ -386,7 +389,7 @@
     </property>
     <property name="character" type="class" propertytype="character">
      <properties>
-      <property name="attack-cooldown" type="float" value="0.5"/>
+      <property name="attack-cooldown" type="float" value="0.6"/>
       <property name="attack-range" type="float" value="50"/>
       <property name="damage-max" type="int" value="30"/>
       <property name="damage-min" type="int" value="10"/>
@@ -417,7 +420,7 @@
     </property>
     <property name="character" type="class" propertytype="character">
      <properties>
-      <property name="attack-cooldown" type="float" value="0.5"/>
+      <property name="attack-cooldown" type="float" value="0.6"/>
       <property name="attack-range" type="float" value="50"/>
       <property name="damage-max" type="int" value="30"/>
       <property name="damage-min" type="int" value="10"/>

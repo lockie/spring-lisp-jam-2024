@@ -28,6 +28,9 @@
   (projectile-speed 0.0 :type single-float)
   (damage-min 0 :type fixnum)
   (damage-max 0 :type fixnum)
+  (fire-damage
+   0 :type fixnum
+     :documentation "If non-zero, character's attacks ignite with this DPS")
   (attack-cooldown 0.0 :type single-float))
 
 (ecs:defsystem mortify-characters

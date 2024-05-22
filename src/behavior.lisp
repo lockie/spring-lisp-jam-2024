@@ -192,8 +192,12 @@
                              character-damage-max)
                     character-projectile-speed character-splash-attack
                     animation-state-flip)
-                   (make-damage target-entity (randint character-damage-min
-                                                       character-damage-max)))
+                   (block melee
+                     (make-damage target-entity (randint character-damage-min
+                                                         character-damage-max))
+                     (unless (zerop character-fire-damage)
+                       (make-on-fire target-entity
+                                     :dps character-fire-damage))))
                (setf attack-done 1))
               ((and (plusp animation-state-finished)
                     (= animation-state-frame (1- animation-sequence-frames)))

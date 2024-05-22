@@ -20,6 +20,7 @@
                  (:file "damage")
                  (:file "sprite")
                  (:file "map")
+                 (:file "fire")
                  (:file "projectile")
                  (:file "priority-queue")
                  (:file "character")

@@ -35,6 +35,11 @@
                 "value": 0
             },
             {
+                "name": "fire-damage",
+                "type": "int",
+                "value": 0
+            },
+            {
                 "name": "melee-attack",
                 "type": "bool",
                 "value": false

@@ -40,15 +40,19 @@ NOTE: assuming splash damage = explosion"))
     (with-tiles (tile-hash projectile-target-x projectile-target-y) object
       (when (has-health-p object)
         (make-damage object (1+ (random 20)))
-        (when (zerop projectile-splash)
-          (ecs:make-object
-           `((:position :x ,projectile-target-x
-                        :y ,projectile-target-y)
-             (:sprite :name ,sprite-name
-                      :sequence-name :projectile-stuck)
-             (:animation-state :rotation ,animation-state-rotation)
-             (:stuck-arrow :adventurer ,object)))
-          (loop-finish))))
+        (if (zerop projectile-splash)
+            (block stick-arrow
+              (ecs:make-object
+               `((:position :x ,projectile-target-x
+                            :y ,projectile-target-y)
+                 (:sprite :name ,sprite-name
+                          :sequence-name :projectile-stuck)
+                 (:animation-state :rotation ,animation-state-rotation)
+                 (:stuck-arrow :adventurer ,object)))
+              (loop-finish))
+            (block explosion-extinguishes-fire
+              (when (has-fire-p object)
+                (setf (fire-duration object) 0.0))))))
     (when (plusp projectile-splash)
       (ecs:make-object
        `((:position :x ,projectile-target-x

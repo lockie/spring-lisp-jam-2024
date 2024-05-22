@@ -20,6 +20,7 @@
   (load-sprite "Factions/Goblins/Troops/Torch/Red/Torch_Red.aseprite")
   (load-sprite "Factions/Goblins/Troops/TNT/Red/TNT_Red.aseprite")
   (load-sprite "Factions/Knights/Troops/Dead/Dead.aseprite")
+  (load-sprite "Effects/Fire/Fire.aseprite")
   (load-sprite "Effects/Explosion/Explosions.aseprite")
   (trivial-garbage:gc :full t))
 
