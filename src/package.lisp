@@ -2,7 +2,7 @@
   (:use #:cl #:let-plus)
   (:local-nicknames (#:tiled #:cl-tiled))
   (:import-from #:alexandria
-                #:array-length #:array-index #:define-constant #:doplist
+                #:array-length #:array-index #:clamp #:define-constant #:doplist
                 #:format-symbol #:if-let #:make-keyword #:non-negative-fixnum
                 #:positive-fixnum #:shuffle)
   (:import-from #:global-vars #:define-global-parameter)

@@ -28,6 +28,42 @@
    </property>
   </properties>
  </tile>
+ <tile id="17">
+  <properties>
+   <property name="map-tile" type="class" propertytype="map-tile">
+    <properties>
+     <property name="grass" type="bool" value="true"/>
+    </properties>
+   </property>
+  </properties>
+ </tile>
+ <tile id="18">
+  <properties>
+   <property name="map-tile" type="class" propertytype="map-tile">
+    <properties>
+     <property name="grass" type="bool" value="true"/>
+    </properties>
+   </property>
+  </properties>
+ </tile>
+ <tile id="19">
+  <properties>
+   <property name="map-tile" type="class" propertytype="map-tile">
+    <properties>
+     <property name="grass" type="bool" value="true"/>
+    </properties>
+   </property>
+  </properties>
+ </tile>
+ <tile id="20">
+  <properties>
+   <property name="map-tile" type="class" propertytype="map-tile">
+    <properties>
+     <property name="grass" type="bool" value="true"/>
+    </properties>
+   </property>
+  </properties>
+ </tile>
  <tile id="25">
   <properties>
    <property name="map-tile" type="class" propertytype="map-tile">
@@ -42,6 +78,15 @@
    <property name="map-tile" type="class" propertytype="map-tile">
     <properties>
      <property name="movement-cost" type="float" value="2"/>
+    </properties>
+   </property>
+  </properties>
+ </tile>
+ <tile id="27">
+  <properties>
+   <property name="map-tile" type="class" propertytype="map-tile">
+    <properties>
+     <property name="grass" type="bool" value="true"/>
     </properties>
    </property>
   </properties>

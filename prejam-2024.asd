@@ -26,6 +26,7 @@
                  (:file "priority-queue")
                  (:file "character")
                  (:file "offensive")
+                 (:file "sheep")
                  (:file "main"))))
   :description "A simple game."
   :defsystem-depends-on (#:deploy)

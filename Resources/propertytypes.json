@@ -89,6 +89,11 @@
         "id": 4,
         "members": [
             {
+                "name": "grass",
+                "type": "bool",
+                "value": false
+            },
+            {
                 "name": "movement-cost",
                 "type": "float",
                 "value": 0
@@ -112,6 +117,43 @@
             }
         ],
         "name": "sprite",
+        "type": "class"
+    },
+    {
+        "id": 6,
+        "members": [
+            {
+                "name": "breed-probability",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "feed-probability",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "meat-points",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "movement-speed",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "sex",
+                "type": "bool",
+                "value": false
+            },
+            {
+                "name": "vision-range",
+                "type": "float",
+                "value": 0
+            }
+        ],
+        "name": "sheep",
         "type": "class"
     }
 ]

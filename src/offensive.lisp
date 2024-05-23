@@ -101,10 +101,10 @@
       (complete-node nil))))
 
 (define-behavior-tree-node (move
-                            :components-ro (character movement)
+                            :components-ro (movement)
                             :components-rw (position sprite animation-state)
                             :arguments ((:dt single-float)))
-    ()
+    ((speed 0.0 :type single-float))
   "Moves towards the target."
   (if (approx-equal 0 (distance* position-x position-y
                                  movement-target-x movement-target-y))
@@ -118,7 +118,7 @@
              (diffx (- movement-target-x position-x))
              (diffy (- movement-target-y position-y))
              (max-delta (sqrt (+ (sqr diffx) (sqr diffy))))
-             (delta (min (* dt character-movement-speed) max-delta))
+             (delta (min (* dt move-speed) max-delta))
              (angle (atan diffy diffx))
              (dx (* delta (cos angle)))
              (dy (* delta (sin angle)))
@@ -137,15 +137,15 @@
                   sprite-sequence-name :run
                   animation-state-flip (if (minusp dx) 1 0))))))
 
-(define-behavior-tree-node (test-target-in-range
-                            :components-ro (position character target))
-    ()
-  "Succeeds if entity's target is within attack range."
+(define-behavior-tree-node (test-target-in
+                            :components-ro (position target))
+    ((range 0.0 :type single-float))
+  "Succeeds if entity's target is within given range."
   (flet ((sqr (x) (* x x)))
     (with-position (target-x target-y) target-entity
       (complete-node
        (and (<= (distance* position-x position-y target-x target-y)
-                (sqr character-attack-range)))))))
+                (sqr test-target-in-range)))))))
 
 (define-behavior-tree-node (test-target-alive
                             :components-ro (target))
@@ -231,18 +231,18 @@
             ((sequence :name "pursuit")
              ((test-target-alive))
              ((invert)
-              ((test-target-in-range)))
+              ((test-target-in :range (character-attack-range entity))))
              ((calculate-path))
              ((follow-path))
-             ((move))))
+             ((move :speed (character-movement-speed entity)))))
            ((test-target-alive))
-           ((test-target-in-range)))
+           ((test-target-in :range (character-attack-range entity))))
           ((repeat-until-fail)
            ((sequence :name "attacks")
             ((test-target-alive))
-            ((test-target-in-range))
+            ((test-target-in :range (character-attack-range entity)))
             ((attack))
             ((wait :time (character-attack-cooldown entity)))))
           ((invert)
-           ((test-target-in-range)))))))
+           ((test-target-in :range (character-attack-range entity))))))))
       ((idle)))))

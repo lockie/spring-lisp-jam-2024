@@ -2,7 +2,8 @@
 
 
 (ecs:defcomponent map-tile
-  (movement-cost 0.0 :type single-float))
+  (movement-cost 0.0 :type single-float)
+  (grass 0 :type bit :index grass))
 
 (ecs:defsystem render-map-tiles
   (:components-ro (position size image map-tile)
