@@ -31,9 +31,6 @@
                   0
                   (princ-to-string damage-number-damage))))
 
-(define-constant +black+ (al:map-rgb 0 0 0)
-  :test #'equalp)
-
 (ecs:defsystem render-health-bars
   (:components-ro (position health)
    :with (half-tile :of-type single-float := (/ +scaled-tile-size+ 2)))

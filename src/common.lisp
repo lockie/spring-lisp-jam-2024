@@ -4,6 +4,9 @@
 (define-constant +window-width+ 1280)
 (define-constant +window-height+ 800)
 
+(define-constant +black+ (al:map-rgb 0 0 0)
+  :test #'equalp)
+
 (defvar *font*)
 
 (ecs:defcomponent parent

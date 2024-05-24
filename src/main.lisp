@@ -117,7 +117,7 @@
                             +repl-update-interval+)
                      (livesupport:update-repl-link)
                      (setf last-repl-update ticks))
-                   (al:clear-to-color (al:map-rgb 0 0 0))
+                   (al:clear-to-color +black+)
                    (livesupport:continuable
                      (update dt)
                      (render))
