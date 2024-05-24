@@ -74,10 +74,31 @@
                :repeat ,(if repeat 1 0)
                :time ,time)))))
 
-(defun load-sound (filename)
-  (let ((sample (al:ensure-loaded #'al:load-sample
-                                  (namestring (resource-path filename))))
+(defun load-sound-file (full-filename)
+  (let ((sample (al:ensure-loaded #'al:load-sample full-filename))
         (name (make-keyword (string-upcase (kebabize
-                                            (pathname-name filename))))))
+                                            (pathname-name full-filename))))))
     (ecs:make-object
      `((:sound-prefab :name ,name :sample ,sample)))))
+
+(defun load-sound (filename)
+  (load-sound-file (namestring (resource-path filename))))
+
+(cffi:defcallback process-sound-file :int
+    ((file (:pointer (:struct al::fs-entry))) (data :pointer))
+  (declare (ignore data))
+  (if (zerop (logand (al::get-fs-entry-mode file)
+                     (cffi:foreign-bitfield-value 'al::file-mode '(:isdir))))
+      (progn
+        (load-sound-file (al::get-fs-entry-name file))
+        (cffi:foreign-enum-value 'al::for-each-fs-entry-result :ok))
+      (cffi:foreign-enum-value 'al::for-each-fs-entry-result :skip)))
+
+(defun load-sounds ()
+  (let ((sounds-dir (al:create-fs-entry (namestring (resource-path "sounds")))))
+    (unwind-protect
+         (= (cffi:foreign-enum-value 'al::for-each-fs-entry-result :ok)
+            (al::for-each-fs-entry sounds-dir
+                                   (cffi:callback process-sound-file)
+                                   (cffi:null-pointer)))
+      (al:destroy-fs-entry sounds-dir))))

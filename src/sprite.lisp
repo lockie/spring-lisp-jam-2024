@@ -132,12 +132,11 @@
   (src :pointer)
   (size :unsigned-long))
 
-(defun load-sprite (filename)
+(defun load-sprite-file (full-filename)
   (loop
     :with name := (make-keyword (string-upcase (kebabize
-                                                (pathname-name filename))))
-    :with sprite := (ase:load-sprite (al:make-binary-stream
-                                      (resource-path filename)))
+                                                (pathname-name full-filename))))
+    :with sprite := (ase:load-sprite (al:make-binary-stream full-filename))
     :with sprite-width := (ase::sprite-width sprite)
     :with sprite-height := (ase::sprite-height sprite)
     :with layers := (ase::sprite-layers sprite)
@@ -198,3 +197,26 @@
                                 :layers ,nlayers
                                 :frame-duration ,(/ duration 1000.0)
                                 :repeat ,(if (zerop tag-repeat) 1 0))))))
+
+(defun load-sprite (filename)
+  (load-sprite-file (resource-path filename)))
+
+(cffi:defcallback process-sprite-file :int
+    ((file (:pointer (:struct al::fs-entry))) (data :pointer))
+  (declare (ignore data))
+  (if (zerop (logand (al::get-fs-entry-mode file)
+                     (cffi:foreign-bitfield-value 'al::file-mode '(:isdir))))
+      (progn
+        (load-sprite-file (al::get-fs-entry-name file))
+        (cffi:foreign-enum-value 'al::for-each-fs-entry-result :ok))
+      (cffi:foreign-enum-value 'al::for-each-fs-entry-result :skip)))
+
+(defun load-sprites ()
+  (let ((sprites-dir (al:create-fs-entry
+                      (namestring (resource-path "sprites")))))
+    (unwind-protect
+         (= (cffi:foreign-enum-value 'al::for-each-fs-entry-result :ok)
+            (al::for-each-fs-entry sprites-dir
+                                   (cffi:callback process-sprite-file)
+                                   (cffi:null-pointer)))
+      (al:destroy-fs-entry sprites-dir))))
