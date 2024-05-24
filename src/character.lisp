@@ -49,7 +49,8 @@
                        (1 :monster-death))
                      position-x position-y)
   (setf sprite-name :dead
-        sprite-sequence-name :dead)
+        sprite-sequence-name :dead
+        animation-state-tint 0)
   (delete-health entity)
   (delete-character entity)
   (when (has-behavior-p entity)
@@ -58,8 +59,7 @@
      entity)
     (delete-behavior entity))
   (dolist (arrow (stuck-arrows entity))
-    (ecs:delete-entity arrow))
-  (setf animation-state-tint 0))
+    (ecs:delete-entity arrow)))
 
 (defconstant +sqrt2+ (sqrt 2))
 
