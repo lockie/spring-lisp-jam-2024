@@ -22,7 +22,8 @@
    :components-rw (position))
   (with-position (character-x character-y) fire-effect-character
     (setf position-x character-x
-          position-y character-y)))
+          position-y character-y
+          position-tile (tile-hash position-x position-y))))
 
 (ecs:defsystem burn
   (:components-rw (fire)

@@ -55,7 +55,8 @@
               (/= position-y parent-y))
       (position-sound sound-sample-instance
                       (setf position-x parent-x)
-                      (setf position-y parent-y)))))
+                      (setf position-y parent-y))
+      (setf position-tile (tile-hash position-x position-y)))))
 
 (defun make-sound-effect (parent name x y &key repeat (variations 4))
   (let* ((name (format-symbol :keyword "~a~a" name (random variations)))

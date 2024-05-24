@@ -30,7 +30,8 @@ NOTE: assuming splash damage = explosion"))
          (newx (+ position-x dx))
          (newy (+ position-y dy)))
     (setf position-x newx
-          position-y newy)))
+          position-y newy
+          position-tile (tile-hash newx newy))))
 
 (ecs:defsystem impact-projectiles
   (:components-ro (projectile position sprite animation-state))
@@ -74,7 +75,8 @@ NOTE: assuming splash damage = explosion"))
    :components-rw (position))
   (with-position (adventurer-x adventurer-y) stuck-arrow-adventurer
     (setf position-x adventurer-x
-          position-y adventurer-y)))
+          position-y adventurer-y
+          position-tile (tile-hash position-x position-y))))
 
 (ecs:defsystem stop-explosions
   (:components-ro (explosion animation-sequence animation-state))
