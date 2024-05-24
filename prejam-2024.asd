@@ -20,6 +20,7 @@
                  (:file "sound")
                  (:file "damage")
                  (:file "sprite")
+                 (:file "tint")
                  (:file "map")
                  (:file "poison")
                  (:file "fire")

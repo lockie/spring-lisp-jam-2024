@@ -87,6 +87,13 @@
      (:size :width ,(float tile-width)
             :height ,(float tile-height)))))
 
+(defun tiled-color->allegro (color)
+  (when color
+    (al:map-rgba (tiled:tiled-color-r color)
+                 (tiled:tiled-color-g color)
+                 (tiled:tiled-color-b color)
+                 (tiled:tiled-color-a color))))
+
 (defun load-map (filename)
   (let* ((map (tiled:load-map
                filename
@@ -95,7 +102,10 @@
          (tile-width (tiled:map-tile-width map))
          (tile-height (tiled:map-tile-height map))
          (tilemap (make-hash-table))
-         (map-entity (ecs:make-entity)))
+         (map-entity (ecs:make-object
+                      `((:map :tint
+                              (tiled-color->allegro
+                               (gethash "tint" (tiled:properties map))))))))
     (assert (and (= tile-width +tile-size+) (= tile-height +tile-size+)))
     (dolist (tileset (tiled:map-tilesets map))
       (let ((bitmap (load-bitmap

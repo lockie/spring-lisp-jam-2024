@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="40" height="25" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="154">
+ <properties>
+  <property name="tint" type="color" value="#4d130d53"/>
+ </properties>
  <tileset firstgid="1" source="water.tsx"/>
  <tileset firstgid="2" source="foam.tsx"/>
  <tileset firstgid="74" source="ground-flat.tsx"/>
