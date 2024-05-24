@@ -174,6 +174,9 @@
             ;; NOTE warrior has alternating attack animations
             (setf sequence (format-symbol :keyword "~a-~a" sequence
                                           (1+ (random 2)))))
+          (when (eq sprite-name :barrel-red)
+            (make-sound-effect entity :fuse position-x position-y
+                               :variations 1))
           (setf sprite-sequence-name sequence
                 animation-state-flip (if flip 1 0)
                 attack-started 1))
@@ -188,15 +191,21 @@
                                 ((plusp character-splash-attack)       5)
                                 (t                                     2)))))
                (if (zerop character-melee-attack)
-                   (make-projectile-object
-                    position-x position-y target-x target-y sprite-name
-                    (randint character-damage-min
-                             character-damage-max)
-                    character-projectile-speed character-splash-attack
-                    animation-state-flip)
+                   (make-sound-effect
+                    (make-projectile-object position-x position-y
+                                            target-x target-y sprite-name
+                                            (randint character-damage-min
+                                                     character-damage-max)
+                                            character-projectile-speed
+                                            character-splash-attack
+                                            animation-state-flip)
+                    (if (eq sprite-name :archer-blue)
+                        :shoot :throw)
+                    position-x position-y)
                    (cond
                      ((plusp character-fire-damage)
-                      (make-on-fire target-entity :dps character-fire-damage))
+                      (make-on-fire target-entity :dps character-fire-damage)
+                      (make-sound-effect entity :wood position-x position-y))
                      ((plusp character-splash-attack)
                       (make-explosion-effects position-x position-y
                                               (randint character-damage-min
@@ -204,7 +213,8 @@
                      (t
                       (make-damage target-entity
                                    (randint character-damage-min
-                                            character-damage-max)))))
+                                            character-damage-max))
+                      (make-sound-effect entity :sword position-x position-y))))
                (setf attack-done 1))
               ((and (plusp animation-state-finished)
                     (= animation-state-frame (1- animation-sequence-frames)))

@@ -19,6 +19,16 @@
 + [[https://fonts.google.com/specimen/Inconsolata/about][Inconsolata font]]
 + [[http://tango.freedesktop.org][Tango icons]]
 
++ https://opengameart.org/content/fleshy-fight-sounds
++ https://opengameart.org/content/medieval-sound-effects-weapon-textures
++ https://opengameart.org/content/swishes-sound-pack
++ https://opengameart.org/content/100-cc0-metal-and-wood-sfx
++ https://opengameart.org/content/3-background-crash-explosion-bang-sounds
++ https://freesound.org/people/maximumplay3r/sounds/713344/
++ https://freesound.org/people/forfie/sounds/364992/
++ https://opengameart.org/content/11-male-human-paindeath-sounds
++ https://opengameart.org/content/monster-sound-effects-pack
+
 ** Copyright
 
 Copyright (c) 2024 Andrew Kravchuk (awkravchuk@gmail.com)

@@ -34,10 +34,15 @@
   (attack-cooldown 0.0 :type single-float))
 
 (ecs:defsystem mortify-characters
-  (:components-ro (health character)
+  (:components-ro (health character position)
    :components-rw (sprite animation-state)
    :when (not (plusp health-points)))
   "This parrot is no more. It has ceased to be."
+  (make-sound-effect entity
+                     (case character-team
+                       (0 :death)
+                       (1 :monster-death))
+                     position-x position-y)
   (setf sprite-name :dead
         sprite-sequence-name :dead)
   (delete-health entity)
@@ -50,19 +55,6 @@
   (dolist (arrow (stuck-arrows entity))
     (ecs:delete-entity arrow))
   (setf animation-state-tint 0))
-
-(declaim (inline distance))
-(defun distance (x1 y1 x2 y2)
-  (flet ((sqr (x) (* x x)))
-    (declare (inline sqr))
-    (sqrt (+ (sqr (- x1 x2)) (sqr (- y1 y2))))))
-
-(declaim (inline distance*)
-         (ftype (function (pos pos pos pos) single-float) distance*))
-(defun distance* (x1 y1 x2 y2)
-  (flet ((sqr (x) (* x x)))
-    (declare (inline sqr))
-    (+ (sqr (- x1 x2)) (sqr (- y1 y2)))))
 
 (defconstant +sqrt2+ (sqrt 2))
 

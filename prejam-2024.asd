@@ -17,6 +17,7 @@
                 :components
                 ((:file "package")
                  (:file "common")
+                 (:file "sound")
                  (:file "damage")
                  (:file "sprite")
                  (:file "map")

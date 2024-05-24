@@ -48,6 +48,7 @@ NOTE: assuming splash damage = explosion"))
                         :sequence-name :projectile-stuck)
                (:animation-state :rotation ,animation-state-rotation)
                (:stuck-arrow :adventurer ,object)))
+            (make-sound-effect object :arrow position-x position-y)
             (loop-finish)))
         (make-explosion-effects
          projectile-target-x projectile-target-y projectile-damage))
@@ -62,6 +63,7 @@ NOTE: assuming splash damage = explosion"))
       (make-damage object damage))
     (when (has-fire-p object)
       (setf (fire-duration object) 0.0)))
+  (make-sound-effect -1 :explosion x y :variations 1)
   (ecs:make-object
    `((:position :x ,x :y ,y)
      (:sprite :name :explosions :sequence-name :explosion)
@@ -86,22 +88,26 @@ NOTE: assuming splash damage = explosion"))
           make-projectile-object))
 (defun make-projectile-object (x y target-x target-y sprite
                                damage speed splash flip)
-  (let ((angle (atan (- target-y y)
-                     (- target-x x))))
-    (ecs:make-object
-     `((:position :x ,x
-                  :y ,y)
-       (:sprite :name ,sprite
-                :sequence-name :projectile)
-       (:projectile :target-x ,target-x
-                    :target-y ,target-y
-                    :angle ,angle
-                    :speed  ,speed
-                    :damage ,damage
-                    :splash ,splash)
-       (:animation-state :rotation ,(if (plusp splash)
-                                        0.0
-                                        angle)
-                         :flip ,(if (plusp splash)
-                                    (logxor flip 1)
-                                    0))))))
+  (let* ((angle (atan (- target-y y)
+                      (- target-x x)))
+         (splashp (plusp splash))
+         (object (ecs:make-object
+                  `((:position :x ,x
+                               :y ,y)
+                    (:sprite :name ,sprite
+                             :sequence-name :projectile)
+                    (:projectile :target-x ,target-x
+                                 :target-y ,target-y
+                                 :angle ,angle
+                                 :speed  ,speed
+                                 :damage ,damage
+                                 :splash ,splash)
+                    (:animation-state :rotation ,(if splashp
+                                                     0.0
+                                                     angle)
+                                      :flip ,(if splashp
+                                                 (logxor flip 1)
+                                                 0))))))
+    (when splashp
+      (make-sound-effect object :fuse x y :repeat t :variations 1))
+    object))

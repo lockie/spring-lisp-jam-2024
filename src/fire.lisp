@@ -42,7 +42,9 @@
   (let ((already-burning (flames entity :missing-error-p nil)))
     (unless (ecs:entity-valid-p already-burning)
       (with-position () entity
-        (ecs:make-object
-         `((:position :x ,x :y ,y)
-           (:fire-effect :character ,entity)
-           (:sprite :name :fire :sequence-name :fire)))))))
+        (make-sound-effect
+         (ecs:make-object
+          `((:position :x ,x :y ,y)
+            (:fire-effect :character ,entity)
+            (:sprite :name :fire :sequence-name :fire)))
+         :fire x y :repeat t :variations 1)))))

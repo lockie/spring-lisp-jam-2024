@@ -29,6 +29,19 @@
 ;; NOTE: negative map coords are not supported
 (deftype pos () '(single-float 0f0 #.(/ +tile-size+ single-float-epsilon)))
 
+(declaim (inline distance))
+(defun distance (x1 y1 x2 y2)
+  (flet ((sqr (x) (* x x)))
+    (declare (inline sqr))
+    (sqrt (+ (sqr (- x1 x2)) (sqr (- y1 y2))))))
+
+(declaim (inline distance*)
+         (ftype (function (pos pos pos pos) single-float) distance*))
+(defun distance* (x1 y1 x2 y2)
+  (flet ((sqr (x) (* x x)))
+    (declare (inline sqr))
+    (+ (sqr (- x1 x2)) (sqr (- y1 y2)))))
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (declaim (inline tile-start)
            (ftype (function (pos pos) (values pos pos)) tile-start))
@@ -88,6 +101,12 @@
 
 (defun resource-path (filename)
   (merge-pathnames (ensure-relative filename) #P"../Resources/"))
+
+(declaim (ftype (function (string) string) kebabize)
+         (inline kebabize))
+(defun kebabize (name)
+  (substitute #\- #\Space
+              (substitute #\- #\_ name)))
 
 (declaim (type array-length *world-width* *world-height*))
 (define-global-parameter *world-width* 0 "World width in tiles")

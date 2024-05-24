@@ -53,11 +53,15 @@
       (complete-node nil)))
 
 (define-behavior-tree-node (hump
+                            :components-ro (position)
                             :components-rw (target sprite animation-state)
                             :arguments ((:dt single-float)))
     ((time 2.0 :type single-float :documentation "Hump time in seconds."))
   "A little bit of Netflix & chill."
   (cond ((plusp hump-time)
+         (when (= hump-time 2.0)
+           (make-sound-effect entity :sheep position-x position-y
+                              :variations 1))
          (setf sprite-sequence-name :hump
                animation-state-flip (animation-state-flip target-entity))
          (decf hump-time dt))

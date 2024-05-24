@@ -132,12 +132,6 @@
   (src :pointer)
   (size :unsigned-long))
 
-(declaim (ftype (function (string) string) kebabize)
-         (inline kebabize))
-(defun kebabize (name)
-  (substitute #\- #\Space
-              (substitute #\- #\_ name)))
-
 (defun load-sprite (filename)
   (loop
     :with name := (make-keyword (string-upcase (kebabize
