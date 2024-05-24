@@ -28,6 +28,9 @@
   (projectile-speed 0.0 :type single-float)
   (damage-min 0 :type fixnum)
   (damage-max 0 :type fixnum)
+  (defense-multiplier
+      1.0 :type single-float
+          :documentation "Incoming damage is multiplied by this value")
   (fire-damage
    0 :type fixnum
      :documentation "If non-zero, character's attacks ignite with this DPS")

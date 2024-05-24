@@ -50,7 +50,9 @@
 
 (declaim (ftype (function (ecs:entity positive-fixnum)) make-damage))
 (defun make-damage (entity damage)
-  (decf (health-points entity) damage)
-  (with-position () entity
-    (ecs:make-object `((:position :x ,x :y ,y)
-                       (:damage-number :damage ,damage)))))
+  (let ((damage-taken (round (* damage (character-defense-multiplier entity)))))
+    (declare (type fixnum damage-taken))
+    (decf (health-points entity) damage-taken)
+    (with-position () entity
+      (ecs:make-object `((:position :x ,x :y ,y)
+                         (:damage-number :damage ,damage-taken))))))

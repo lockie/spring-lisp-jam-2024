@@ -35,6 +35,11 @@
                 "value": 0
             },
             {
+                "name": "defense-multiplier",
+                "type": "float",
+                "value": 1
+            },
+            {
                 "name": "fire-damage",
                 "type": "int",
                 "value": 0

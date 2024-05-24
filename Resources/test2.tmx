@@ -490,6 +490,7 @@
       <property name="attack-range" type="float" value="250"/>
       <property name="damage-max" type="int" value="50"/>
       <property name="damage-min" type="int" value="5"/>
+      <property name="defense-multiplier" type="float" value="0.1"/>
       <property name="movement-speed" type="float" value="30"/>
       <property name="projectile-speed" type="float" value="100"/>
       <property name="splash-attack" type="bool" value="true"/>
