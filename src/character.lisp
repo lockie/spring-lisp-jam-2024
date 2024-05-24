@@ -38,6 +38,11 @@
    :components-rw (sprite animation-state)
    :when (not (plusp health-points)))
   "This parrot is no more. It has ceased to be."
+  (when (eq sprite-name :barrel-red)
+    ;; delete fuse sound effect
+    (dolist (child (children entity))
+      (when (has-sound-p child)
+        (ecs:delete-entity child))))
   (make-sound-effect entity
                      (case character-team
                        (0 :death)
