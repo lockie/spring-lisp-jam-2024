@@ -2,7 +2,8 @@
 
 
 (ecs:defcomponent health
-  (points 0 :type fixnum))
+  (points 0 :type fixnum)
+  (max-points points :type fixnum))
 
 (defconstant +damage-numbers-display-time+ 2.0)
 
@@ -25,10 +26,30 @@
                         +damage-numbers-display-time+)))
     (al:draw-text *damage-numbers-font*
                   (al:map-rgba-f 1.0 0.0 0.0 dissipation)
-                  position-x
+                  (- position-x (/ +scaled-tile-size+ 4))
                   (+ position-y (* (- dissipation 1.5) +scaled-tile-size+))
                   0
                   (princ-to-string damage-number-damage))))
+
+(define-constant +black+ (al:map-rgb 0 0 0)
+  :test #'equalp)
+
+(ecs:defsystem render-health-bars
+  (:components-ro (position health)
+   :with (half-tile :of-type single-float := (/ +scaled-tile-size+ 2)))
+  (let ((health (/ (float health-points) health-max-points)))
+    (al:draw-rectangle
+     (- (ftruncate position-x) half-tile -2)
+     (- (ftruncate position-y) half-tile 10)
+     (+ (ftruncate position-x) half-tile -2)
+     (- (ftruncate position-y) half-tile 18)
+     +black+ 1)
+    (al:draw-filled-rectangle
+     (- (ftruncate position-x) half-tile -2)
+     (- (ftruncate position-y) half-tile 10)
+     (+ (ftruncate position-x) (* health half-tile) -3)
+     (- (ftruncate position-y) half-tile 17)
+     `(al::r ,(- 1.0 health) al::g ,health al::b 0.0 al::a 1.0))))
 
 (declaim (ftype (function (ecs:entity positive-fixnum)) make-damage))
 (defun make-damage (entity damage)
