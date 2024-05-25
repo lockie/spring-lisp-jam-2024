@@ -137,18 +137,18 @@
     :with name := (make-keyword (string-upcase (kebabize
                                                 (pathname-name full-filename))))
     :with sprite := (ase:load-sprite (al:make-binary-stream full-filename))
-    :with sprite-width := (ase::sprite-width sprite)
-    :with sprite-height := (ase::sprite-height sprite)
-    :with layers := (ase::sprite-layers sprite)
+    :with sprite-width := (ase:sprite-width sprite)
+    :with sprite-height := (ase:sprite-height sprite)
+    :with layers := (ase:sprite-layers sprite)
     :with nlayers := (floor (length layers) 2)
     :with duration :of-type fixnum := 0
-    :for tag :across (ase::sprite-tags sprite)
-    :for first-frame := (ase::tag-first-frame tag)
-    :for last-frame := (ase::tag-last-frame tag)
+    :for tag :across (ase:sprite-tags sprite)
+    :for first-frame := (ase:tag-first-frame tag)
+    :for last-frame := (ase:tag-last-frame tag)
     :for tag-length := (- last-frame first-frame -1)
-    :for tag-name := (ase::tag-name tag)
+    :for tag-name := (ase:tag-name tag)
     :for sequence-name := (make-keyword (string-upcase (kebabize tag-name)))
-    :for tag-repeat := (ase::tag-repeat tag)
+    :for tag-repeat := (ase:tag-repeat tag)
     :for bitmap-width := (* tag-length sprite-width)
     :for bitmap-height := (* nlayers sprite-height)
     :for bitmap := (al:create-bitmap bitmap-width bitmap-height)
@@ -158,21 +158,21 @@
                  (loop
                    :for frame :from first-frame :upto last-frame
                    :for col :of-type fixnum :from 0
-                   :for cel := (aref (ase::layer-cels layer) frame)
+                   :for cel := (aref (ase:layer-cels layer) frame)
                    :when cel
                    :do (cffi:with-foreign-slots
                            ((al::data al::pitch al::pixel-size)
                             bitmap-lock
                             (:struct al::locked-region))
                          (loop
-                           :with cel-data := (ase::cel-data cel)
-                           :with cel-width := (ase::cel-width cel)
+                           :with cel-data := (ase:cel-data cel)
+                           :with cel-width := (ase:cel-width cel)
                            :with cel-width-bytes := (* 4 cel-width)
                            :with start-x := (+ (* sprite-width col)
-                                               (ase::cel-x cel))
+                                               (ase:cel-x cel))
                            :with start-y := (+ (* sprite-height row)
-                                               (ase::cel-y cel))
-                           :with end-y := (+ start-y (ase::cel-height cel))
+                                               (ase:cel-y cel))
+                           :with end-y := (+ start-y (ase:cel-height cel))
                            :for y :from start-y :below end-y
                            :for dst := (cffi:inc-pointer
                                         al::data
@@ -182,7 +182,7 @@
                                          (cffi:inc-pointer
                                           src (* (- y start-y) cel-width-bytes))
                                          cel-width-bytes))))
-                       (setf duration (ase::cel-duration cel))
+                       (setf duration (ase:cel-duration cel))
                    :finally (incf row)))
         (al:unlock-bitmap bitmap)
         (ecs:make-object
