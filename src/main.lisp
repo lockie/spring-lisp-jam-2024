@@ -22,7 +22,8 @@
   (load-sprites)
   (load-sounds)
   (let+ (((&values map width height) (load-map "/test2.tmx")))
-    (setf *world-width* width
+    (setf *current-map* map
+          *world-width* width
           *world-height* height))
   (trivial-garbage:gc :full t))
 

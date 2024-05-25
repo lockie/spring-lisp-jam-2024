@@ -80,7 +80,8 @@
             `(random (+ 1 ,feature (,feature mom))))))
     (with-position (mom-x mom-y) mom
       (ecs:make-object
-       `((:position :x ,(average position-x mom-x)
+       `((:parent :entity ,entity)
+         (:position :x ,(average position-x mom-x)
                     :y ,(average position-y mom-y))
          (:health :points ,(inherit health-points))
          (:sheep

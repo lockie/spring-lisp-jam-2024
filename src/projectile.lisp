@@ -43,7 +43,8 @@ NOTE: assuming splash damage = explosion"))
           (when (has-health-p object)
             (make-damage object projectile-damage)
             (ecs:make-object
-             `((:position :x ,projectile-target-x
+             `((:parent :entity ,object)
+               (:position :x ,projectile-target-x
                           :y ,projectile-target-y)
                (:sprite :name ,sprite-name
                         :sequence-name :projectile-stuck)
@@ -64,9 +65,10 @@ NOTE: assuming splash damage = explosion"))
       (make-damage object damage))
     (when (has-fire-p object)
       (setf (fire-duration object) 0.0)))
-  (make-sound-effect -1 :explosion x y :variations 1)
+  (make-sound-effect *current-map* :explosion x y :variations 1)
   (ecs:make-object
-   `((:position :x ,x :y ,y)
+   `((:parent :entity ,*current-map*)
+     (:position :x ,x :y ,y)
      (:sprite :name :explosions :sequence-name :explosion)
      (:explosion))))
 
@@ -94,7 +96,8 @@ NOTE: assuming splash damage = explosion"))
                       (- target-x x)))
          (splashp (plusp splash))
          (object (ecs:make-object
-                  `((:position :x ,x
+                  `((:parent :entity ,*current-map*)
+                    (:position :x ,x
                                :y ,y)
                     (:sprite :name ,sprite
                              :sequence-name :projectile)

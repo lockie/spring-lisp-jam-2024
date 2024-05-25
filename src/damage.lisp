@@ -54,5 +54,6 @@
     (declare (type fixnum damage-taken))
     (decf (health-points entity) damage-taken)
     (with-position () entity
-      (ecs:make-object `((:position :x ,x :y ,y)
+      (ecs:make-object `((:parent :entity ,entity)
+                         (:position :x ,x :y ,y)
                          (:damage-number :damage ,damage-taken))))))

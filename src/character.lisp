@@ -203,11 +203,13 @@
           :until (minusp c)
           :do (setf (aref path (incf length)) c))
     (ecs:make-object
-     `((:path-point :x ,start-x :y ,start-y :traveller ,entity)))
+     `((:path-point :x ,start-x :y ,start-y :traveller ,entity)
+       (:parent :entity ,entity)))
     (loop :for i :from length :downto 0
           :do (let+ (((&values x y) (marshal-tile (aref path i))))
                 ;; TODO compact by comparing x and y being same with next point
                 (when (zerop i)
                   (assign-path entity :target-x x :target-y y))
                 (ecs:make-object
-                 `((:path-point :x ,x :y ,y :traveller ,entity)))))))
+                 `((:path-point :x ,x :y ,y :traveller ,entity)
+                   (:parent :entity ,entity)))))))

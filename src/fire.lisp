@@ -45,7 +45,8 @@
       (with-position () entity
         (make-sound-effect
          (ecs:make-object
-          `((:position :x ,x :y ,y)
+          `((:parent :entity ,entity)
+            (:position :x ,x :y ,y)
             (:fire-effect :character ,entity)
             (:sprite :name :fire :sequence-name :fire)))
          :fire x y :repeat t :variations 1)))))

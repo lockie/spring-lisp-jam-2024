@@ -22,6 +22,9 @@
   ;;                    (al:map-rgb 0 0 0) 1)
   )
 
+(declaim (type ecs:entity *current-map*))
+(defparameter *current-map* -1)
+
 (declaim (ftype (function (fixnum) single-float) total-map-tile-movement-cost))
 (defun total-map-tile-movement-cost (tile-hash)
   (let ((sum 0.0))
