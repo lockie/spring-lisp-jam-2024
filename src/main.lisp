@@ -39,7 +39,8 @@
 
 (defun render (fps-font)
   (nk:allegro-render)
-  (al:draw-text fps-font +white+ 0 0 0 (format nil "~d FPS" *fps*)))
+  (when (al:get-config-value (al:get-system-config) "trace" "fps")
+    (al:draw-text fps-font +white+ 0 0 0 (format nil "~d FPS" *fps*))))
 
 (declaim (inline pressed-key))
 (defun pressed-key (event)
