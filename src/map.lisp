@@ -89,10 +89,10 @@
 
 (defun tiled-color->allegro (color)
   (when color
-    (al:map-rgba (tiled:tiled-color-r color)
-                 (tiled:tiled-color-g color)
-                 (tiled:tiled-color-b color)
-                 (tiled:tiled-color-a color))))
+    `(al::r ,(/ (tiled:tiled-color-r color) 255.0)
+      al::g ,(/ (tiled:tiled-color-g color) 255.0)
+      al::b ,(/ (tiled:tiled-color-b color) 255.0)
+      al::a ,(/ (tiled:tiled-color-a color) 255.0))))
 
 (defun load-map (filename)
   (let* ((map (tiled:load-map
