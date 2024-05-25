@@ -1,10 +1,11 @@
 (defpackage #:prejam-2024
   (:use #:cl #:let-plus)
-  (:local-nicknames (#:tiled #:cl-tiled))
+  (:local-nicknames (#:tiled #:cl-tiled)
+                    (#:ui #:cl-liballegro-nuklear/declarative))
   (:import-from #:alexandria
                 #:array-length #:array-index #:clamp #:define-constant #:doplist
                 #:format-symbol #:if-let #:make-keyword #:non-negative-fixnum
-                #:positive-fixnum #:shuffle)
+                #:positive-fixnum #:shuffle #:with-gensyms)
   (:import-from #:global-vars #:define-global-parameter)
   (:import-from #:cl-fast-behavior-trees
                 #:complete-node #:define-behavior-tree

@@ -7,8 +7,6 @@
 (define-constant +black+ (al:map-rgb 0 0 0)
   :test #'equalp)
 
-(defvar *font*)
-
 (ecs:defcomponent parent
   (entity -1 :type ecs:entity :index children))
 

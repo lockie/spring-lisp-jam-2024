@@ -8,6 +8,7 @@
                #:cl-fast-ecs
                #:cl-liballegro
                #:cl-liballegro-nuklear
+               #:cl-liballegro-nuklear/declarative
                #:cl-tiled
                #:global-vars
                #:let-plus
@@ -29,6 +30,7 @@
                  (:file "character")
                  (:file "offensive")
                  (:file "sheep")
+                 (:file "ui")
                  (:file "main"))))
   :description "A simple game."
   :defsystem-depends-on (#:deploy)

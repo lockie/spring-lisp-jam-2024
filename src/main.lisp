@@ -3,22 +3,22 @@
 
 (define-constant +repl-update-interval+ 0.3d0)
 
-(define-constant +font-path+ "../Resources/fonts/inconsolata.ttf"
+(define-constant +fps-font-path+ "../Resources/fonts/inconsolata.ttf"
   :test #'string=)
-(define-constant +font-size+ 24)
+(define-constant +fps-font-size+ 24)
 (define-constant +damage-numbers-font-path+ "../Resources/fonts/acme.ttf"
   :test #'string=)
 (define-constant +damage-numbers-font-size+ 26)
+(define-constant +ui-font-path+ "../Resources/fonts/acme.ttf"
+  :test #'string=)
+(define-constant +ui-font-size+ 28)
 
 (define-constant +config-path+ "../config.cfg"
   :test #'string=)
 
 (defun init ()
-  (setf *damage-numbers-font*
-        (al:ensure-loaded #'al:load-ttf-font
-                          +damage-numbers-font-path+
-                          (- +damage-numbers-font-size+) 0))
   (ecs:bind-storage)
+  (load-ui)
   (load-sprites)
   (load-sounds)
   (let+ (((&values map width height) (load-map "/test2.tmx")))
@@ -30,15 +30,21 @@
 (declaim (type fixnum *fps*))
 (defvar *fps* 0)
 
-(defun update (dt)
+(defun update (dt ui-context)
   (unless (zerop dt)
     (setf *fps* (round 1 dt)))
-  (ecs:run-systems :dt (float dt 0.0)))
+  (ecs:run-systems :dt (float dt 0.0) :ui-context ui-context))
 
 (define-constant +white+ (al:map-rgba 255 255 255 0) :test #'equalp)
 
-(defun render ()
-  (al:draw-text *font* +white+ 0 0 0 (format nil "~d FPS" *fps*)))
+(defun render (fps-font)
+  (nk:allegro-render)
+  (al:draw-text fps-font +white+ 0 0 0 (format nil "~d FPS" *fps*)))
+
+(declaim (inline pressed-key))
+(defun pressed-key (event)
+  (cffi:with-foreign-slots ((al::keycode) event (:struct al:keyboard-event))
+    al::keycode))
 
 (cffi:defcallback %main :int ((argc :int) (argv :pointer))
   (declare (ignore argc argv))
@@ -94,18 +100,36 @@
               #'livesupport:setup-lisp-repl)
              (loop
                :named main-game-loop
-               :with *font* := (al:ensure-loaded #'al:load-ttf-font
-                                                 +font-path+
-                                                 (- +font-size+) 0)
+               :with *should-quit* := nil
+               :with fps-font := (al:ensure-loaded #'al:load-ttf-font
+                                                   +fps-font-path+
+                                                   (- +fps-font-size+) 0)
+               :with *damage-numbers-font* := (al:ensure-loaded
+                                               #'al:load-ttf-font
+                                               +damage-numbers-font-path+
+                                               (- +damage-numbers-font-size+) 0)
+               :with ui-font := (al:ensure-loaded
+                                 #'nk:allegro-font-create-from-file
+                                 +ui-font-path+ (- +ui-font-size+) 0)
+               :with ui-context := (nk:allegro-init ui-font display
+                                                    +window-width+
+                                                    +window-height+)
                :with ticks :of-type double-float := (al:get-time)
                :with last-repl-update :of-type double-float := ticks
                :with dt :of-type double-float := 0d0
                :while (loop
                         :named event-loop
+                        :initially (nk:input-begin ui-context)
                         :while (al:get-next-event event-queue event)
                         :for type := (cffi:foreign-slot-value
                                       event '(:union al:event) 'al::type)
-                        :always (not (eq type :display-close)))
+                        :do (if (and (eq type :key-down)
+                                     (eq (pressed-key event) :escape))
+                                (toggle-ui-window :main-menu)
+                                (nk:allegro-handle-event event))
+                        :always (not (eq type :display-close))
+                        :finally (nk:input-end ui-context))
+               :never *should-quit* ;; lol
                :do (let ((new-ticks (al:get-time)))
                      (setf dt (- new-ticks ticks)
                            ticks new-ticks))
@@ -115,10 +139,13 @@
                      (setf last-repl-update ticks))
                    (al:clear-to-color +black+)
                    (livesupport:continuable
-                     (update dt)
-                     (render))
+                     (update dt ui-context)
+                     (render fps-font))
                    (al:flip-display)
-               :finally (al:destroy-font *font*)))
+               :finally (nk:allegro-shutdown)
+                        (nk:allegro-font-del ui-font)
+                        (al:destroy-font *damage-numbers-font*)
+                        (al:destroy-font fps-font)))
         (al:inhibit-screensaver nil)
         (al:destroy-event-queue event-queue)
         (al:destroy-display display)
