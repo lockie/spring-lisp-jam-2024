@@ -7,7 +7,7 @@
 - =(ql:quickload :prejam-2024)=
 - =(prejam-2024:main)=
 
-Alternatively, just grab binaries from releases section.
+Alternatively, just grab binaries from [[https://github.com/lockie/spring-lisp-jam-2024/releases][releases section]].
 
 ** Minimum system requirements
 
@@ -16,20 +16,21 @@ Alternatively, just grab binaries from releases section.
 + 60 Mb of free disk space
 
 ** Credits
-
+Used resources:
 + [[https://fonts.google.com/specimen/Inconsolata/about][Inconsolata font]]
 + [[https://fonts.google.com/specimen/Acme][Acme font]]
 + [[http://tango.freedesktop.org][Tango icons]]
 + [[https://pixelfrog-assets.itch.io/tiny-swords][Tiny Swords by Pixel Frog]]
-+ https://opengameart.org/content/fleshy-fight-sounds
-+ https://opengameart.org/content/medieval-sound-effects-weapon-textures
-+ https://opengameart.org/content/swishes-sound-pack
-+ https://opengameart.org/content/100-cc0-metal-and-wood-sfx
-+ https://opengameart.org/content/3-background-crash-explosion-bang-sounds
-+ https://freesound.org/people/maximumplay3r/sounds/713344/
-+ https://freesound.org/people/forfie/sounds/364992/
-+ https://opengameart.org/content/11-male-human-paindeath-sounds
-+ https://opengameart.org/content/monster-sound-effects-pack
++ [[https://opengameart.org/content/fleshy-fight-sounds][Fleshy Fight Sounds by Will Leamon]]
++ [[https://opengameart.org/content/medieval-sound-effects-weapon-textures][Medieval sound effects - Weapon Textures by Ben Jaszczak and Brian Nelson]]
++ [[https://opengameart.org/content/swishes-sound-pack][Swishes Sound Pack]]
++ [[https://opengameart.org/content/100-cc0-metal-and-wood-sfx][100 CC0 metal and wood SFX]]
++ [[https://opengameart.org/content/3-background-crash-explosion-bang-sounds][3 Background Crash Explosion Bang Sounds by Iwan 'qubodup' Gabovitch <http://qubodup.net>]]
++ [[https://freesound.org/people/maximumplay3r/sounds/713344][Fuse Ignition]]
++ [[https://freesound.org/people/forfie/sounds/364992][Bonfire]]
++ [[https://opengameart.org/content/11-male-human-paindeath-sounds][11 male human pain/death sounds by Michel Baradari]]
++ [[https://opengameart.org/content/monster-sound-effects-pack][Monster Sound Effects Pack]]
++ [[https://opengameart.org/content/sheep-sound-bleats-yo-frankie][Sheep Sound Bleats (Yo Frankie!) by Blender Foundation]]
 
 ** Copyright
 
