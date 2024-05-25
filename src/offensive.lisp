@@ -137,7 +137,7 @@
                   sprite-sequence-name :run
                   animation-state-flip (if (minusp dx) 1 0))))))
 
-(define-behavior-tree-node (test-target-in
+(define-behavior-tree-node (test-target-near
                             :components-ro (position target))
     ((range 0.0 :type single-float))
   "Succeeds if entity's target is within given range."
@@ -145,7 +145,7 @@
     (with-position (target-x target-y) target-entity
       (complete-node
        (and (<= (distance* position-x position-y target-x target-y)
-                (sqr test-target-in-range)))))))
+                (sqr test-target-near-range)))))))
 
 (define-behavior-tree-node (test-target-alive
                             :components-ro (target))
@@ -240,18 +240,18 @@
             ((sequence :name "pursuit")
              ((test-target-alive))
              ((invert)
-              ((test-target-in :range (character-attack-range entity))))
+              ((test-target-near :range (character-attack-range entity))))
              ((calculate-path))
              ((follow-path))
              ((move :speed (character-movement-speed entity)))))
            ((test-target-alive))
-           ((test-target-in :range (character-attack-range entity))))
+           ((test-target-near :range (character-attack-range entity))))
           ((repeat-until-fail)
            ((sequence :name "attacks")
             ((test-target-alive))
-            ((test-target-in :range (character-attack-range entity)))
+            ((test-target-near :range (character-attack-range entity)))
             ((attack))
             ((wait :time (character-attack-cooldown entity)))))
           ((invert)
-           ((test-target-in :range (character-attack-range entity))))))))
+           ((test-target-near :range (character-attack-range entity))))))))
       ((idle)))))
