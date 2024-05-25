@@ -10,7 +10,7 @@ fi
 export VERSION=${GITHUB_REF_NAME:-$(git describe --always --tags --dirty=+ --abbrev=6)}
 
 function do_build () {
-    CL_SOURCE_REGISTRY=$(pwd) sbcl --dynamic-space-size 2048 --disable-debugger --quit --load package/build.lisp
+    CL_SOURCE_REGISTRY=$(pwd) sbcl --dynamic-space-size 4096 --disable-debugger --quit --load package/build.lisp
 }
 
 case $1 in

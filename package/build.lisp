@@ -1,5 +1,6 @@
 (proclaim '(optimize (speed 3) (safety 0) (debug 0) (compilation-speed 0)))
+(ql:register-local-projects)
 (ql-util:without-prompting (ql:update-all-dists))
+(push :ecs-unsafe *features*)
 (ql:quickload '(#:prejam-2024 #:deploy))
-
 (asdf:make :prejam-2024)
