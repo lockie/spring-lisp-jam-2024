@@ -1,0 +1,3693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="40" height="25" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="324">
+ <tileset firstgid="1" source="water.tsx"/>
+ <tileset firstgid="2" source="foam.tsx"/>
+ <tileset firstgid="74" source="ground-flat.tsx"/>
+ <tileset firstgid="114" source="props.tsx"/>
+ <tileset firstgid="142" source="bridge.tsx"/>
+ <tileset firstgid="154" source="house.tsx"/>
+ <tileset firstgid="160" source="castle.tsx"/>
+ <tileset firstgid="180" source="tower.tsx"/>
+ <tileset firstgid="188" source="archer.tsx"/>
+ <tileset firstgid="692" source="warrior.tsx"/>
+ <tileset firstgid="1124" source="tnt.tsx"/>
+ <tileset firstgid="1313" source="torch.tsx"/>
+ <tileset firstgid="1628" source="barrel.tsx"/>
+ <tileset firstgid="1749" source="sheep.tsx"/>
+ <layer id="1" name="water" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1tEJADAIQ0G7/9JdoSYaU/BBf+WgCEbgHcFjc/ehxtd5E77MzKo6/kvtm259fL/6XFofl7Nvd4NrfVxuvo6bRW1T+zKuCaOzD7UpfIyt21hhQ30XxwQBFQ==
+  </data>
+ </layer>
+ <layer id="2" name="ground" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1rEKgDAMhOE8ny4KulRw8/1fwRYsONQp/0mVBG7/6NGQZGYJyGHt2XNWRwjb9mCrs4QvfEJfyZQzN2yDw0b67s5iGq94bApfcvb5hs+789Q+0qjyUT2Hr0+fd+8pfZRN5et9/4Xvvz7yb9A+2kb7yF5pn+LtSB95U32p3xMGvElT
+  </data>
+ </layer>
+ <layer id="3" name="props" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzFV11vwzAI9K/unto+tE221P3P60mgeRHgw03ak6x8gcEYDqeU9+PrAzb3xpmUWzayd32OmpA/ie2L6EaoIndxvkW4i52H3PdseXOcBvSAs9j39O+rZ2uNrJ1R3YPhBzA/x7fx/jZohwH2cx2ro1wncg42Dtl8gLxXV5pjDNg6ydQTO1cUQ+wr1sjEbzTXevByC35n4jFS5wyq40fGHvJ7XW8sXzPA3iAX2Xj9EL5E+z2apwz3s7DmuYqNyD+s9bCRDxGWku+1VXSOHZktatHi/wiIbW89jMwnkV3zO4HY7dlnFVa/bb958HLOOi9E6OUHwy1av228cG/1Ovi35rsIek59BVb9gp897puNd7fAjy173dSMHh4i1+M2xPBVjprK3xnewlz+n1eV+ye5WrWU6Vu1sd3q6f8FyyXW3u4F/SdTLtE1IB5LyeUNaga+/wIa6E/C
+  </data>
+ </layer>
+ <layer id="4" name="buildings" width="40" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20MH6AAAACAtwEPoAAB
+  </data>
+ </layer>
+ <objectgroup id="5" name="objects">
+  <object id="4" name="archer" gid="2147483861" x="2293.16" y="182.406" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="11" name="tnt" gid="1146" x="746.57" y="188.429" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="12" name="torch" gid="1335" x="571.24" y="572.792" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="16" name="torch" gid="1335" x="442.506" y="498.187" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="20" name="tnt" gid="1146" x="640.995" y="187.095" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="25" name="warrior" gid="2147484359" x="2115.65" y="230.86" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="143" name="barrel" gid="1628" x="1144.15" y="655.035" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="144" name="barrel" gid="1628" x="1146.43" y="528.315" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="146" name="tnt" gid="1146" x="750.203" y="264.732" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="155" name="archer" gid="2147483861" x="2294.97" y="250.061" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="156" name="warrior" gid="2147484359" x="2182.06" y="299.212" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="157" name="warrior" gid="2147484359" x="2181.09" y="230.788" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="159" name="tnt" gid="1146" x="643.758" y="258.909" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="160" name="tnt" gid="1146" x="640.727" y="346.788" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="161" name="tnt" gid="1146" x="752.848" y="352.848" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="162" name="torch" gid="1335" x="687.242" y="572.151" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="164" name="tnt" gid="1146" x="548.57" y="188.154" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="165" name="tnt" gid="1146" x="551.333" y="259.968" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="166" name="tnt" gid="1146" x="548.303" y="347.846" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="167" name="barrel" gid="1628" x="1040.73" y="661.939" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="168" name="barrel" gid="1628" x="1037.7" y="537.697" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="169" name="torch" gid="1335" x="562.245" y="674.999" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="170" name="torch" gid="1335" x="433.511" y="639.788" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="171" name="torch" gid="1335" x="678.247" y="674.358" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="175" name="warrior" gid="2147484359" x="2118" y="296" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="176" name="archer" gid="2147483861" x="2360" y="182" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="177" name="archer" gid="2147483861" x="2360" y="248" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="178" name="warrior" gid="2147484359" x="2122" y="170" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="179" name="warrior" gid="2147484359" x="2184" y="160" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="180" name="archer" gid="2147483861" x="2285.01" y="492.8" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="184" name="archer" gid="2147483861" x="2286.82" y="560.455" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="185" name="warrior" gid="2147484359" x="2173.91" y="609.606" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="188" name="warrior" gid="2147484359" x="2109.85" y="606.394" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="189" name="archer" gid="2147483861" x="2351.85" y="492.394" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="190" name="archer" gid="2147483861" x="2351.85" y="558.394" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="193" name="archer" gid="2147483861" x="2301.01" y="910.8" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="195" name="warrior" gid="2147484359" x="2123.5" y="959.254" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="197" name="archer" gid="2147483861" x="2302.82" y="978.455" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="198" name="warrior" gid="2147484359" x="2189.91" y="1027.61" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="199" name="warrior" gid="2147484359" x="2188.94" y="959.182" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="201" name="warrior" gid="2147484359" x="2125.85" y="1024.39" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="202" name="archer" gid="2147483861" x="2367.85" y="910.394" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="203" name="archer" gid="2147483861" x="2367.85" y="976.394" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="204" name="warrior" gid="2147484359" x="2129.85" y="898.394" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="205" name="warrior" gid="2147484359" x="2191.85" y="888.394" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="219" name="archer" gid="2147483861" x="2299.01" y="1274.8" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="221" name="warrior" gid="2147484359" x="2121.49" y="1323.25" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="223" name="archer" gid="2147483861" x="2300.82" y="1342.45" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="224" name="warrior" gid="2147484359" x="2187.9" y="1391.61" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="225" name="warrior" gid="2147484359" x="2186.93" y="1323.18" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="227" name="warrior" gid="2147484359" x="2123.84" y="1388.39" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="228" name="archer" gid="2147483861" x="2365.84" y="1274.39" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="229" name="archer" gid="2147483861" x="2365.84" y="1340.39" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="230" name="warrior" gid="2147484359" x="2127.84" y="1262.39" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="231" name="warrior" gid="2147484359" x="2189.84" y="1252.39" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="232" name="barrel" gid="1628" x="1156.45" y="952.15" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="233" name="barrel" gid="1628" x="1158.73" y="825.43" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="234" name="barrel" gid="1628" x="1053.03" y="959.054" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="235" name="barrel" gid="1628" x="1050" y="834.812" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="236" name="barrel" gid="1628" x="1141.3" y="1252.15" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="237" name="barrel" gid="1628" x="1143.58" y="1125.43" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="238" name="barrel" gid="1628" x="1037.88" y="1259.05" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="239" name="barrel" gid="1628" x="1034.85" y="1134.81" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-range" type="float" value="45"/>
+      <property name="damage-max" type="int" value="100"/>
+      <property name="damage-min" type="int" value="75"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="25"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="75"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":barrel-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="240" name="tnt" gid="1146" x="763.995" y="1386.46" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="241" name="tnt" gid="1146" x="658.419" y="1385.12" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="242" name="tnt" gid="1146" x="767.627" y="1462.76" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="243" name="tnt" gid="1146" x="661.183" y="1456.94" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="244" name="tnt" gid="1146" x="658.151" y="1544.82" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="245" name="tnt" gid="1146" x="770.272" y="1550.88" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="246" name="tnt" gid="1146" x="565.995" y="1386.18" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="247" name="tnt" gid="1146" x="568.757" y="1458" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="248" name="tnt" gid="1146" x="565.727" y="1545.87" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="249" name="torch" gid="1335" x="440.692" y="808.439" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="250" name="torch" gid="1335" x="542.941" y="782.745" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="251" name="torch" gid="1335" x="680.156" y="763.925" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="252" name="torch" gid="1335" x="801.333" y="622.545" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="276" name="torch" gid="1335" x="567.273" y="981.418" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="277" name="torch" gid="1335" x="438.539" y="906.813" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="278" name="torch" gid="1335" x="683.275" y="980.777" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="279" name="torch" gid="1335" x="558.278" y="1083.63" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="280" name="torch" gid="1335" x="429.544" y="1048.41" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="281" name="torch" gid="1335" x="674.28" y="1082.98" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="282" name="torch" gid="1335" x="436.725" y="1217.07" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="283" name="torch" gid="1335" x="538.974" y="1191.37" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="284" name="torch" gid="1335" x="676.189" y="1172.55" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="285" name="torch" gid="1335" x="797.366" y="1031.17" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="286" name="torch" gid="1335" x="307.814" y="517.649" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="287" name="torch" gid="1335" x="298.819" y="659.25" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="288" name="torch" gid="1335" x="306" y="827.901" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="289" name="torch" gid="1335" x="303.847" y="926.275" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="290" name="torch" gid="1335" x="294.852" y="1067.87" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="291" name="torch" gid="1335" x="302.033" y="1236.53" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="292" name="tnt" gid="1146" x="482.753" y="1384.15" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="293" name="tnt" gid="1146" x="485.515" y="1455.97" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="294" name="tnt" gid="1146" x="482.485" y="1543.84" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="298" name="tnt" gid="1146" x="458.753" y="176.155" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="299" name="tnt" gid="1146" x="461.515" y="247.975" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="300" name="tnt" gid="1146" x="458.485" y="335.845" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.8"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="10"/>
+      <property name="damage-min" type="int" value="10"/>
+      <property name="movement-speed" type="float" value="30"/>
+      <property name="projectile-speed" type="float" value="100"/>
+      <property name="splash-attack" type="bool" value="true"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":tnt-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="305" name="torch" gid="1335" x="929.452" y="156.113" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="306" name="torch" gid="1335" x="920.457" y="258.32" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="307" name="torch" gid="1335" x="922.366" y="347.887" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="308" name="torch" gid="1335" x="1043.54" y="206.507" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="309" name="torch" gid="1335" x="957.452" y="1350.11" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="310" name="torch" gid="1335" x="948.457" y="1452.32" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="311" name="torch" gid="1335" x="950.366" y="1541.89" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="312" name="torch" gid="1335" x="1065.54" y="1462.51" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.4"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="fire-damage" type="int" value="10"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="1"/>
+      <property name="vision-range" type="float" value="1000"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="150"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":torch-red"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="313" name="archer" gid="2147483861" x="2442" y="909" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="314" name="archer" gid="2147483861" x="2442" y="975" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="315" name="archer" gid="2147483861" x="2432" y="501" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="316" name="archer" gid="2147483861" x="2432" y="567" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="1"/>
+      <property name="attack-range" type="float" value="300"/>
+      <property name="damage-max" type="int" value="15"/>
+      <property name="damage-min" type="int" value="15"/>
+      <property name="movement-speed" type="float" value="40"/>
+      <property name="projectile-speed" type="float" value="200"/>
+      <property name="vision-range" type="float" value="500"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="50"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":archer-blue"/>
+      <property name="sequence-name" value=":idle"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="318" name="warrior" gid="2147484359" x="2304" y="310" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="319" name="warrior" gid="2147484359" x="2374" y="310" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="320" name="warrior" gid="2147484359" x="2182" y="516" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="321" name="warrior" gid="2147484359" x="2188" y="450" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="322" name="warrior" gid="2147484359" x="2062" y="450" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+  <object id="323" name="warrior" gid="2147484359" x="2060" y="516" width="64" height="64">
+   <properties>
+    <property name="behavior" type="class" propertytype="behavior">
+     <properties>
+      <property name="type" value=":offensive"/>
+     </properties>
+    </property>
+    <property name="character" type="class" propertytype="character">
+     <properties>
+      <property name="attack-cooldown" type="float" value="0.6"/>
+      <property name="attack-range" type="float" value="50"/>
+      <property name="damage-max" type="int" value="60"/>
+      <property name="damage-min" type="int" value="60"/>
+      <property name="melee-attack" type="bool" value="true"/>
+      <property name="movement-speed" type="float" value="50"/>
+      <property name="team" type="int" value="0"/>
+      <property name="vision-range" type="float" value="600"/>
+     </properties>
+    </property>
+    <property name="health" type="class" propertytype="health">
+     <properties>
+      <property name="points" type="int" value="200"/>
+     </properties>
+    </property>
+    <property name="sprite" type="class" propertytype="sprite">
+     <properties>
+      <property name="name" value=":warrior-blue"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
