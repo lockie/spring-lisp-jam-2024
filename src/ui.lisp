@@ -222,9 +222,10 @@
         (ui:layout-space (:format :dynamic
                           :height +window-height+ :widget-count 3)
           (ui:layout-space-push :x 0.06 :y 0.06 :w 0.5 :h 0.9)
-          (ui:defgroup maps
-              (:flags (:no-scrollbar)
-               :styles ((:item-color :window-fixed-background :a 190)))
+          (ui:defgroup battles
+              (:flags (:no-scrollbar :title)
+               :styles ((:item-color :window-fixed-background :a 190)
+                        (:item-color :window-header-normal :a 190)))
             (loop :for (name description) :on *map-descriptions* :by #'cddr
                   :for i :of-type fixnum :from 0
                   :do (ui:layout-row-static :height 30 :item-width 780

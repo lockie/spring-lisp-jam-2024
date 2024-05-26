@@ -12,5 +12,5 @@
  "You can't hide even in a bunker. Run to the castle - the castle will fall. Run to the mountains - we will turn them into deep seas. Run far, but no distance will save you."
 
  "Outcome"
- "We all go until the end. Just like you. And we will stay with you until the end, even if the end is ours"
+ "We all go until the end. Just like you. And we will stay with you until the end, even if the end is ours."
  )
