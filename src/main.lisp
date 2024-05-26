@@ -21,10 +21,9 @@
   (load-ui)
   (load-sprites)
   (load-sounds)
-  (let+ (((&values map width height) (load-map "/test2.tmx")))
-    (setf *current-map* map
-          *world-width* width
-          *world-height* height))
+  (setf *map-descriptions*
+        (read (al:make-character-stream (resource-path "descriptions.txt"))))
+  (toggle-ui-window :map-selector)
   (trivial-garbage:gc :full t))
 
 (declaim (type fixnum *fps*))

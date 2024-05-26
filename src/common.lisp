@@ -39,6 +39,10 @@
 (ecs:defcomponent map
   (tint nil :type list :documentation "Global map tint color."))
 
+(defvar *map-descriptions*)
+
+(defparameter *current-progress* 0)
+
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (declaim (type single-float +scale-factor+ +tile-size+ +scaled-tile-size+))
   (defconstant +scale-factor+ 0.5)

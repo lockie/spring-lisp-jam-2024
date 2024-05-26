@@ -36,6 +36,8 @@
 (declaim (type boolean *should-quit*))
 (defvar *should-quit* nil)
 
+(defvar *options* (vector "Option 1" "Option 2" "Option 3" "Option 4"))
+
 (defun load-ui ()
   (let ((button-normal
           (load-ui-image "images/ui/button_red_3slides.png"))
@@ -78,8 +80,73 @@
             (ui:button-label "Abandon castle"
               (when has-map-p
                 (ecs:delete-entity *current-map*)
-                (setf *current-map* -1)))))
+                (setf *current-map* -1)
+                (toggle-ui-window :map-selector)))))
         (ui:button-label "RAGEQUIT!"
           (setf *should-quit* t)))))
-  nil)
 
+  (let ((selected-map 0)
+        (selected-option 0)
+        (maps-background
+          (load-ui-image "images/ui/map.png"))
+        (button-normal
+          (load-ui-image "images/ui/button_blue_3slides.png"))
+        (button-pressed
+          (load-ui-image "images/ui/button_blue_3slides_pressed.png")))
+    (defwindow map-selector
+        (:x 0 :y 0 :w +window-width+ :h +window-height+
+         :flags (:no-scrollbar)
+         :styles ((:item-image :window-fixed-background maps-background)))
+      (ui:with-context context
+        (ui:layout-space (:format :dynamic
+                          :height +window-height+ :widget-count 3)
+          (ui:layout-space-push :x 0.06 :y 0.06 :w 0.6 :h 0.9)
+          (ui:defgroup maps
+              (:flags (:no-scrollbar)
+               :styles ((:item-color :window-fixed-background :a 190)))
+            (loop :for (name description) :on *map-descriptions* :by #'cddr
+                  :for i :of-type fixnum :from 0
+                  :do (ui:layout-row-static :height 30 :item-width 780
+                                            :columns 1)
+                      (when (plusp
+                             (nk:option-label context name
+                                              (if (= i selected-map) 1 0)))
+                        (setf selected-map i))
+                      (ui:layout-row-dynamic :height 120 :columns 1)
+                      (ui:label-wrap description)
+                      (when (= i *current-progress*)
+                        (nk:widget-disable-begin context))
+                  :finally (nk:widget-disable-end context)))
+          (ui:layout-space-push :x 0.68 :y 0.06 :w 0.28 :h 0.7)
+          (ui:defgroup options
+              (:flags (:no-scrollbar)
+               :styles ((:item-color :window-fixed-background :a 190)))
+            (loop :for i :of-type fixnum :from 0 :below 4
+                  :do (ui:layout-row-static :height 30 :item-width 100
+                                            :columns 1)
+                      (when (plusp
+                             (nk:option-label context (aref *options* i)
+                                              (if (= i selected-option) 1 0)))
+                        (setf selected-option i))
+                      (ui:layout-row-dynamic :height 100 :columns 1)
+                      (ui:label-wrap "Very very long description")))
+          (ui:layout-space-push :x 0.68 :y 0.80 :w 0.28 :h 0.158)
+          (ui:defgroup button
+              (:flags (:no-scrollbar)
+               :styles ((:item-color :window-fixed-background :a 190)
+                        (:item-image :button-normal button-normal)
+                        (:item-image :button-hover button-normal)
+                        (:item-image :button-active button-pressed)
+                        (:color :button-text-normal :r 86 :g 83 :b 97)
+                        (:color :button-text-hover :r 22 :g 28 :b 46)
+                        (:color :button-text-active :r 22 :g 28 :b 46)))
+            (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
+              (ui:layout-space-push :x 0.23 :y 0.5 :w 0.54 :h 0.75)
+              (ui:button-label "To arms!"
+                (let+ (((&values map width height)
+                        (load-map (format nil "/~a.tmx" (1+ selected-map)))))
+                  (toggle-ui-window :map-selector)
+                  (setf *current-map* map
+                        *world-width* width
+                        *world-height* height)))))))))
+  nil)
