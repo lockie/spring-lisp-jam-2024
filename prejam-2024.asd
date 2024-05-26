@@ -32,6 +32,7 @@
                  (:file "sheep")
                  (:file "peasant")
                  (:file "ui")
+                 (:file "progress")
                  (:file "main"))))
   :description "Spring Lisp Game Jam 2024 entry"
   :defsystem-depends-on (#:deploy)
