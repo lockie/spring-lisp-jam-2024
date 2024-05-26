@@ -1,6 +1,10 @@
 (in-package #:prejam-2024)
 
 
+(ecs:defcomponent meat
+  (points 0 :type fixnum)
+  (carry -1 :type ecs:entity :index meat-carried-by))
+
 (ecs:defsystem setup-behaviors
   (:components-ro (behavior)
    :components-no (behavior-tree-marker))
@@ -11,6 +15,56 @@
     ()
   "Sets sprite animation to idle."
   (setf sprite-sequence-name :idle)
+  (complete-node t))
+
+(define-behavior-tree-node (defender-team
+                            :components-ro (character))
+    ()
+  "Succeeds if character belongs to defender team."
+  (complete-node (zerop character-team)))
+
+(define-behavior-tree-node (full-health
+                            :components-ro (health))
+    ()
+  (complete-node (= health-points health-max-points)))
+
+(define-behavior-tree-node (pick-snack
+                            :components-ro (position character))
+    ()
+  "Picks the nearest meat as a target. Fails if there is no meat nearby."
+  (flet ((sqr (x) (* x x)))
+    (loop
+      :with snacks :of-type list := (shuffle (meat-carried-by -1))
+      :for snack :of-type ecs:entity :in snacks
+      :for distance := (with-position (snack-x snack-y) snack
+                         (distance* position-x position-y snack-x snack-y))
+      :when (<= distance (sqr character-vision-range))
+      :do (assign-target entity :entity snack)
+          (return-from ecs::current-entity (complete-node t))
+      :finally (complete-node nil))))
+
+(define-behavior-tree-node (test-snack
+                            :components-ro (target))
+  ()
+  (complete-node (and (has-meat-p target-entity)
+                      (not (ecs:entity-valid-p (meat-carry target-entity))))))
+
+(define-behavior-tree-node (eat-snack
+                            :components-rw (target health))
+    ()
+  (unless (has-meat-p target-entity)
+    ;; already eaten?
+    (return-from ecs::current-entity (complete-node nil)))
+  (if (has-poison-p target-entity)
+      (with-poison () target-entity
+        (make-poisoned entity :dps dps :duration duration))
+      (make-healing entity (meat-points target-entity)))
+  (delete-meat target-entity)
+  (delete-sprite target-entity)
+  (delete-animation-sequence target-entity)
+  (delete-animation-state target-entity)
+  (delete-image target-entity)
+  (delete-target entity)
   (complete-node t))
 
 (define-behavior-tree-node (pick-nearest-enemy
@@ -103,7 +157,8 @@
                             :components-ro (movement)
                             :components-rw (position sprite animation-state)
                             :arguments ((:dt single-float)))
-    ((speed 0.0 :type single-float))
+    ((speed 0.0 :type single-float)
+     (animation-sequence :run :type keyword))
   "Moves towards the target."
   (if (approx-equal 0 (distance* position-x position-y
                                  movement-target-x movement-target-y))
@@ -133,7 +188,7 @@
             (setf position-x newx
                   position-y newy
                   position-tile (tile-hash position-x position-y)
-                  sprite-sequence-name :run
+                  sprite-sequence-name move-animation-sequence
                   animation-state-flip (if (minusp dx) 1 0))))))
 
 (define-behavior-tree-node (test-target-near
@@ -232,6 +287,21 @@
 (define-behavior-tree offensive
     ((repeat :name "root")
      ((fallback)
+      ((sequence :name "snack")
+       ((defender-team))
+       ((invert)
+        ((full-health)))
+       ((pick-snack))
+       ((repeat-until-fail)
+        ((sequence :name "grab-snack")
+         ((test-snack))
+         ((invert)
+          ((test-target-near :range +scaled-tile-size+)))
+         ((calculate-path))
+         ((follow-path))
+         ((move :speed (character-movement-speed entity)))))
+       ((test-snack))
+       ((eat-snack)))
       ((sequence)
        ((pick-random-enemy))
        ((invert)

@@ -94,6 +94,11 @@
         "id": 4,
         "members": [
             {
+                "name": "castle",
+                "type": "bool",
+                "value": false
+            },
+            {
                 "name": "grass",
                 "type": "bool",
                 "value": false
@@ -105,6 +110,63 @@
             }
         ],
         "name": "map-tile",
+        "type": "class"
+    },
+    {
+        "id": 7,
+        "members": [
+            {
+                "name": "eagerness",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "movement-speed",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "poison-dps",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "poison-probability",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "rest-time",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "slaughter-cooldown",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "slaughter-damage",
+                "type": "int",
+                "value": 0
+            },
+            {
+                "name": "slaughter-range",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "unload-range",
+                "type": "float",
+                "value": 0
+            },
+            {
+                "name": "vision-range",
+                "type": "float",
+                "value": 0
+            }
+        ],
+        "name": "peasant",
         "type": "class"
     },
     {

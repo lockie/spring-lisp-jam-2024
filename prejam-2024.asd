@@ -30,6 +30,7 @@
                  (:file "character")
                  (:file "offensive")
                  (:file "sheep")
+                 (:file "peasant")
                  (:file "ui")
                  (:file "main"))))
   :description "A simple game."

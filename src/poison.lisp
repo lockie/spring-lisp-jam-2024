@@ -6,7 +6,7 @@
   (dps 0 :type fixnum :documentation "Damage per second"))
 
 (ecs:defsystem intoxicate
-  (:components-rw (poison animation-state)
+  (:components-rw (poison animation-state character)
    :arguments ((:dt single-float)))
   (let ((previous-duration poison-duration))
     (decf poison-duration dt)

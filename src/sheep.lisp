@@ -9,6 +9,23 @@
   (feed-probability 0.0 :type single-float)
   (breed-probability 0.0 :type single-float))
 
+(ecs:defsystem mortify-sheep
+  (:components-ro (health sheep position)
+   :components-rw (sprite)
+   :when (not (plusp health-points)))
+  "Polly Parrot, wake up. Polly."
+  (make-sound-effect entity :slaughter position-x position-y :variations 1)
+  (setf sprite-name :resources
+        sprite-sequence-name :m-spawn)
+  (delete-health entity)
+  (when (has-behavior-p entity)
+    (delete-behavior-tree
+     (behavior-type entity)
+     entity)
+    (delete-behavior entity))
+  (make-meat entity :points sheep-meat-points)
+  (delete-sheep entity))
+
 (defconstant +female+ 0)
 (defconstant +male+ 1)
 

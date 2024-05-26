@@ -113,7 +113,8 @@
   <properties>
    <property name="map-tile" type="class" propertytype="map-tile">
     <properties>
-     <property name="movement-cost" type="float" value="2"/>
+     <property name="castle" type="bool" value="false"/>
+     <property name="movement-cost" type="float" value="0"/>
     </properties>
    </property>
   </properties>
@@ -122,7 +123,8 @@
   <properties>
    <property name="map-tile" type="class" propertytype="map-tile">
     <properties>
-     <property name="movement-cost" type="float" value="2"/>
+     <property name="castle" type="bool" value="false"/>
+     <property name="movement-cost" type="float" value="0"/>
     </properties>
    </property>
   </properties>
@@ -131,7 +133,8 @@
   <properties>
    <property name="map-tile" type="class" propertytype="map-tile">
     <properties>
-     <property name="movement-cost" type="float" value="2"/>
+     <property name="castle" type="bool" value="true"/>
+     <property name="movement-cost" type="float" value="0"/>
     </properties>
    </property>
   </properties>
@@ -140,7 +143,8 @@
   <properties>
    <property name="map-tile" type="class" propertytype="map-tile">
     <properties>
-     <property name="movement-cost" type="float" value="2"/>
+     <property name="castle" type="bool" value="false"/>
+     <property name="movement-cost" type="float" value="0"/>
     </properties>
    </property>
   </properties>
@@ -149,7 +153,8 @@
   <properties>
    <property name="map-tile" type="class" propertytype="map-tile">
     <properties>
-     <property name="movement-cost" type="float" value="2"/>
+     <property name="castle" type="bool" value="false"/>
+     <property name="movement-cost" type="float" value="0"/>
     </properties>
    </property>
   </properties>

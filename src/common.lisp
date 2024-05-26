@@ -10,6 +10,24 @@
 (ecs:defcomponent parent
   (entity -1 :type ecs:entity :index children))
 
+(ecs:defcomponent character
+  (team 0 :type bit :index team :documentation "0 = defender, 1 = attacker")
+  (vision-range 0.0 :type single-float)
+  (attack-range 0.0 :type single-float)
+  (movement-speed 0.0 :type single-float)
+  (melee-attack 0 :type bit)
+  (splash-attack 0 :type bit)
+  (projectile-speed 0.0 :type single-float)
+  (damage-min 0 :type fixnum)
+  (damage-max 0 :type fixnum)
+  (defense-multiplier
+      1.0 :type single-float
+          :documentation "Incoming damage is multiplied by this value")
+  (fire-damage
+   0 :type fixnum
+     :documentation "If non-zero, character's attacks ignite with this DPS")
+  (attack-cooldown 0.0 :type single-float))
+
 (ecs:hook-up ecs:*entity-deleting-hook*
              (lambda (entity)
                (dolist (child (children entity))

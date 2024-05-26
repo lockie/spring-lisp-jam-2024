@@ -25,11 +25,13 @@
   (let ((dissipation (/ damage-number-display-time
                         +damage-numbers-display-time+)))
     (al:draw-text *damage-numbers-font*
-                  (al:map-rgba-f 1.0 0.0 0.0 dissipation)
+                  (if (plusp damage-number-damage)
+                      (al:map-rgba-f 1.0 0.0 0.0 dissipation)
+                      (al:map-rgba-f 0.0 1.0 0.0 dissipation))
                   (- position-x (/ +scaled-tile-size+ 4))
                   (+ position-y (* (- dissipation 1.5) +scaled-tile-size+))
                   0
-                  (princ-to-string damage-number-damage))))
+                  (princ-to-string (abs damage-number-damage)))))
 
 (ecs:defsystem render-health-bars
   (:components-ro (position health)
@@ -57,3 +59,13 @@
       (ecs:make-object `((:parent :entity ,entity)
                          (:position :x ,x :y ,y)
                          (:damage-number :damage ,damage-taken))))))
+
+(defun make-healing (entity healing)
+  (with-health () entity
+    (let* ((new-points (min max-points (+ points healing)))
+           (healed (- new-points points)))
+      (setf points new-points)
+      (with-position () entity
+      (ecs:make-object `((:parent :entity ,entity)
+                         (:position :x ,x :y ,y)
+                         (:damage-number :damage ,(- healed))))))))
