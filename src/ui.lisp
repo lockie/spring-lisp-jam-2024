@@ -80,7 +80,7 @@
             (ui:button-label "Continue"
               (when has-map-p
                 (toggle-ui-window :main-menu :on nil)))
-            (ui:button-label "Abandon castle"
+            (ui:button-label "Abandon battle"
               (when has-map-p
                 (ecs:delete-entity *current-map*)
                 (setf *current-map* -1)
