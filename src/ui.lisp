@@ -182,7 +182,8 @@
                         (load-map (format nil "/~a.tmx" *selected-map*))))
                   (funcall (aref *option-processors* selected-option))
                   (toggle-ui-window :map-selector :on nil)
-                  (setf *current-map* map
+                  (setf selected-option 0
+                        *current-map* map
                         *world-width* width
                         *world-height* height)))))))))
 
