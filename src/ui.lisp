@@ -39,7 +39,37 @@
 (declaim (type boolean *should-quit*))
 (defvar *should-quit* nil)
 
-(defvar *options* (vector "Option 1" "Option 2" "Option 3" "Option 4"))
+(define-modify-macro mulf (factor) *)
+
+(defparameter *option-names*
+  (vector "Purity" "Sabotage" "Shaman" "Miser"))
+(defparameter *option-descriptions*
+  (vector
+   "So it was."
+   "We burned down their forge. Their blacksmith hangs from a tree. Does anyone among them still know which side of the hammer to hold?"
+   "Oh, what blue fairies. If I wave my hands just as quickly, I will be able to fly alongside them."
+   "I know who they buy weapons from. If we sell them some of our weapons, we can be sure that the blades will have a defect."))
+(defparameter *option-processors*
+  (vector
+   (lambda ())
+   (lambda ()
+     (dolist (character (team 0))
+       (setf (character-defense-multiplier character) 2.0)))
+   (lambda ()
+     (dolist (character (team 1))
+       (mulf (character-attack-cooldown character) 0.5)
+       (mulf (character-projectile-speed character) 2.0)))
+   (lambda ()
+     (dolist (character (team 0))
+       (setf (character-damage-min character)
+             (round (* 0.5 (character-damage-min character)))
+             (character-damage-max character)
+             (round (* 0.5 (character-damage-max character)))))
+     (dolist (character (team 1))
+       (setf (character-damage-min character)
+             (round (* 0.7 (character-damage-min character)))
+             (character-damage-max character)
+             (round (* 0.7 (character-damage-max character))))))))
 
 (defun load-ui ()
   (let ((button-normal
@@ -104,7 +134,7 @@
       (ui:with-context context
         (ui:layout-space (:format :dynamic
                           :height +window-height+ :widget-count 3)
-          (ui:layout-space-push :x 0.06 :y 0.06 :w 0.6 :h 0.9)
+          (ui:layout-space-push :x 0.06 :y 0.06 :w 0.5 :h 0.9)
           (ui:defgroup maps
               (:flags (:no-scrollbar)
                :styles ((:item-color :window-fixed-background :a 190)))
@@ -121,20 +151,20 @@
                       (when (= i *current-progress*)
                         (nk:widget-disable-begin context))
                   :finally (nk:widget-disable-end context)))
-          (ui:layout-space-push :x 0.68 :y 0.06 :w 0.28 :h 0.7)
+          (ui:layout-space-push :x 0.58 :y 0.06 :w 0.38 :h 0.7)
           (ui:defgroup options
               (:flags (:no-scrollbar)
                :styles ((:item-color :window-fixed-background :a 190)))
             (loop :for i :of-type fixnum :from 0 :below 4
-                  :do (ui:layout-row-static :height 30 :item-width 100
+                  :do (ui:layout-row-static :height 30 :item-width 350
                                             :columns 1)
                       (when (plusp
-                             (nk:option-label context (aref *options* i)
+                             (nk:option-label context (aref *option-names* i)
                                               (if (= i selected-option) 1 0)))
                         (setf selected-option i))
                       (ui:layout-row-dynamic :height 100 :columns 1)
-                      (ui:label-wrap "Very very long description")))
-          (ui:layout-space-push :x 0.68 :y 0.80 :w 0.28 :h 0.158)
+                      (ui:label-wrap (aref *option-descriptions* i))))
+          (ui:layout-space-push :x 0.58 :y 0.80 :w 0.38 :h 0.158)
           (ui:defgroup button
               (:flags (:no-scrollbar)
                :styles ((:item-color :window-fixed-background :a 190)
@@ -145,10 +175,11 @@
                         (:color :button-text-hover :r 22 :g 28 :b 46)
                         (:color :button-text-active :r 22 :g 28 :b 46)))
             (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
-              (ui:layout-space-push :x 0.23 :y 0.5 :w 0.54 :h 0.75)
+              (ui:layout-space-push :x 0.31 :y 0.5 :w 0.39 :h 0.75)
               (ui:button-label "To arms!"
                 (let+ (((&values map width height)
                         (load-map (format nil "/~a.tmx" selected-map))))
+                  (funcall (aref *option-processors* selected-option))
                   (toggle-ui-window :map-selector :on nil)
                   (setf *current-map* map
                         *world-width* width
