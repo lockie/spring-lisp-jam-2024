@@ -74,6 +74,39 @@
 (defparameter *selected-map* 0)
 
 (defun load-ui ()
+  (let ((win-background (load-ui-image "images/ui/ribbon_red_3slides.png")))
+    (defwindow win-message
+        (:x 544 :y 368 :w 192 :h 64
+         :flags (:no-scrollbar)
+         :styles ((:item-color :window-fixed-background :a 0)
+                  (:item-image :button-normal win-background)
+                  (:item-image :button-hover win-background)
+                  (:item-image :button-active win-background)))
+      (toggle-ui-window :main-menu :on nil)
+      (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
+        (ui:layout-space-push :x 0 :y 0 :w 1 :h 1)
+        (ui:button-label "You won!"
+          (when (= *selected-map* *current-progress*)
+            (incf *current-progress*))
+          (setf *selected-map* *current-progress*)
+          (toggle-ui-window :win-message :on nil)
+          (toggle-ui-window :map-selector :on t)))))
+
+  (let ((loose-background (load-ui-image "images/ui/ribbon_blue_3slides.png")))
+    (defwindow loose-message
+        (:x 544 :y 368 :w 192 :h 64
+         :flags (:no-scrollbar)
+         :styles ((:item-color :window-fixed-background :a 0)
+                  (:item-image :button-normal loose-background)
+                  (:item-image :button-hover loose-background)
+                  (:item-image :button-active loose-background)))
+      (toggle-ui-window :main-menu :on nil)
+      (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
+        (ui:layout-space-push :x 0 :y 0 :w 1 :h 1)
+        (ui:button-label "You've lost!"
+          (toggle-ui-window :loose-message :on nil)
+          (toggle-ui-window :map-selector :on t)))))
+
   (let ((button-normal
           (load-ui-image "images/ui/button_red_3slides.png"))
         (button-pressed
@@ -186,35 +219,4 @@
                         *current-map* map
                         *world-width* width
                         *world-height* height)))))))))
-
-  (let ((win-background (load-ui-image "images/ui/ribbon_red_3slides.png")))
-    (defwindow win-message
-        (:x 544 :y 368 :w 192 :h 64
-         :flags (:no-scrollbar)
-         :styles ((:item-color :window-fixed-background :a 0)
-                  (:item-image :button-normal win-background)
-                  (:item-image :button-hover win-background)
-                  (:item-image :button-active win-background)))
-      (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
-        (ui:layout-space-push :x 0 :y 0 :w 1 :h 1)
-        (ui:button-label "You won!"
-          (when (= *selected-map* *current-progress*)
-            (incf *current-progress*))
-          (toggle-ui-window :win-message :on nil)
-          (toggle-ui-window :map-selector :on t)))))
-
-  (let ((loose-background (load-ui-image "images/ui/ribbon_blue_3slides.png")))
-    (defwindow loose-message
-        (:x 544 :y 368 :w 192 :h 64
-         :flags (:no-scrollbar)
-         :styles ((:item-color :window-fixed-background :a 0)
-                  (:item-image :button-normal loose-background)
-                  (:item-image :button-hover loose-background)
-                  (:item-image :button-active loose-background)))
-      (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
-        (ui:layout-space-push :x 0 :y 0 :w 1 :h 1)
-        (ui:button-label "You've lost!"
-          (toggle-ui-window :loose-message :on nil)
-          (toggle-ui-window :map-selector :on t)))))
-
   nil)

@@ -5,10 +5,12 @@
   (:components-ro (map)
    :when (length= 0 (team 0)))
   (ecs:delete-entity entity)
+  (setf *current-map* -1)
   (toggle-ui-window :win-message :on t))
 
 (ecs:defsystem test-defeat
   (:components-ro (map)
     :when (length= 0 (team 1)))
   (ecs:delete-entity entity)
+  (setf *current-map* -1)
   (toggle-ui-window :loose-message :on t))
