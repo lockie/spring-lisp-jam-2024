@@ -41,6 +41,7 @@
 
 (define-modify-macro mulf (factor) *)
 
+(defparameter *options* (make-hash-table :size 4))
 (defparameter *option-names*
   (vector "Purity" "Sabotage" "Shaman" "Miser"))
 (defparameter *option-descriptions*
@@ -72,6 +73,26 @@
              (round (* 0.7 (character-damage-max character))))))))
 
 (defparameter *selected-map* 0)
+(defparameter *selected-option* 0)
+
+(declaim (inline find-max-key))
+(defun find-max-key (hash-table)
+  (let ((max-key 0)
+        (max-val most-negative-fixnum))
+    (declare (type fixnum max-val))
+    (maphash (lambda (key val)
+               (when (> val max-val)
+                 (setf max-val val
+                       max-key key)))
+             hash-table)
+    max-key))
+
+(defparameter *outcome-descriptions*
+  (vector
+   "You're lying, it can't be true. You're a cheater."
+   "The last of the knights has fallen. We passed through fire across the world. No one escaped our righteous wrath. And only ashes remain everywhere... But we also depart, and the land yields no more fruit. This is an endless winter."
+   "The nation's color vanished in the mad haste of potions. The knights will follow suit, but what do we care for them? Only the elders watch the dying embers of the plague that followed, the world erases us."
+   "The dealers deceived us all... But at least we survived. Just like the knights. Perhaps there is a higher meaning in this? All this bloodshed wasn't worth it, but it's good that our mistake prevented the worst. We may not be able to accept the knights for a long time yet, but peace is possible, and maybe we won't destroy everything around us."))
 
 (defun load-ui ()
   (let ((win-background (load-ui-image "images/ui/ribbon_red_3slides.png")))
@@ -87,10 +108,14 @@
         (ui:layout-space-push :x 0 :y 0 :w 1 :h 1)
         (ui:button-label "You won!"
           (when (= *selected-map* *current-progress*)
-            (incf *current-progress*))
-          (setf *selected-map* *current-progress*)
+            (incf *current-progress*)
+            (incf (gethash *selected-option* *options* 0)))
+          (setf *selected-map* *current-progress*
+                *selected-option* 0)
           (toggle-ui-window :win-message :on nil)
-          (toggle-ui-window :map-selector :on t)))))
+          (if (= *current-progress* (/ (length *map-descriptions*) 2))
+              (toggle-ui-window :outcome :on t)
+              (toggle-ui-window :map-selector :on t))))))
 
   (let ((loose-background (load-ui-image "images/ui/ribbon_blue_3slides.png")))
     (defwindow loose-message
@@ -104,7 +129,35 @@
       (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
         (ui:layout-space-push :x 0 :y 0 :w 1 :h 1)
         (ui:button-label "You've lost!"
+          (setf *selected-option* 0)
           (toggle-ui-window :loose-message :on nil)
+          (toggle-ui-window :map-selector :on t)))))
+
+  (let+ ((backgrounds
+          (vector
+           (load-ui-image "images/outcomes/0.png")
+           (load-ui-image "images/outcomes/1.png")
+           (load-ui-image "images/outcomes/2.png")
+           (load-ui-image "images/outcomes/3.png")))
+         ((&flet background ()
+            (aref backgrounds (find-max-key *options*))))
+         ((&flet description ()
+            (aref *outcome-descriptions* (find-max-key *options*)))))
+    (defwindow outcome
+        (:x 0 :y 0 :w +window-width+ :h +window-height+
+         :flags (:no-scrollbar)
+         :styles ((:item-image :window-fixed-background (background))
+                  (:color :text-color :r 0 :g 0 :b 0)))
+      (toggle-ui-window :main-menu :on nil)
+      (ui:layout-space (:format :dynamic :height 110 :widget-count 1)
+        (ui:layout-space-push :x 0.15 :y 0.05 :w 0.7 :h 1.0)
+        (ui:label-wrap (description))
+        (ui:layout-space-push :x 0.64 :y 0 :w 0.20 :h 0.35)
+        (ui:button-label "Maybe there's another way"
+          (setf *options* (make-hash-table :size 4)
+                *selected-map* 0
+                *current-progress* 0)
+          (toggle-ui-window :outcome :on nil)
           (toggle-ui-window :map-selector :on t)))))
 
   (let ((button-normal
@@ -148,14 +201,14 @@
             (ui:button-label "Abandon battle"
               (when has-map-p
                 (ecs:delete-entity *current-map*)
-                (setf *current-map* -1)
+                (setf *current-map* -1
+                      *selected-option* 0)
                 (toggle-ui-window :main-menu :on nil)
                 (toggle-ui-window :map-selector :on t)))))
         (ui:button-label "RAGEQUIT!"
           (setf *should-quit* t)))))
 
-  (let ((selected-option 0)
-        (maps-background
+  (let ((maps-background
           (load-ui-image "images/ui/map.png"))
         (button-normal
           (load-ui-image "images/ui/button_blue_3slides.png"))
@@ -194,8 +247,8 @@
                                             :columns 1)
                       (when (plusp
                              (nk:option-label context (aref *option-names* i)
-                                              (if (= i selected-option) 1 0)))
-                        (setf selected-option i))
+                                              (if (= i *selected-option*) 1 0)))
+                        (setf *selected-option* i))
                       (ui:layout-row-dynamic :height 100 :columns 1)
                       (ui:label-wrap (aref *option-descriptions* i))))
           (ui:layout-space-push :x 0.58 :y 0.80 :w 0.38 :h 0.158)
@@ -213,10 +266,9 @@
               (ui:button-label "To arms!"
                 (let+ (((&values map width height)
                         (load-map (format nil "/~a.tmx" *selected-map*))))
-                  (funcall (aref *option-processors* selected-option))
+                  (funcall (aref *option-processors* *selected-option*))
                   (toggle-ui-window :map-selector :on nil)
-                  (setf selected-option 0
-                        *current-map* map
+                  (setf *current-map* map
                         *world-width* width
                         *world-height* height)))))))))
   nil)
