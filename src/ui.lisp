@@ -12,9 +12,12 @@
    :arguments ((:ui-context cffi:foreign-pointer)))
   (funcall ui-window-function ui-context))
 
-(defun toggle-ui-window (name)
+(defun toggle-ui-window (name &key (on nil value-supplied-p))
   (with-ui-window () (ui-window name)
-    (setf shown (logxor shown 1))))
+    (setf shown
+          (if value-supplied-p
+              (if on 1 0)
+              (logxor shown 1)))))
 
 (defmacro defwindow (name options &body body)
   (with-gensyms ((window-name name))
@@ -76,12 +79,13 @@
                        :b (if has-map-p 46 97)))
             (ui:button-label "Continue"
               (when has-map-p
-                (toggle-ui-window :main-menu)))
+                (toggle-ui-window :main-menu :on nil)))
             (ui:button-label "Abandon castle"
               (when has-map-p
                 (ecs:delete-entity *current-map*)
                 (setf *current-map* -1)
-                (toggle-ui-window :map-selector)))))
+                (toggle-ui-window :main-menu :on nil)
+                (toggle-ui-window :map-selector :on t)))))
         (ui:button-label "RAGEQUIT!"
           (setf *should-quit* t)))))
 
@@ -112,7 +116,7 @@
                              (nk:option-label context name
                                               (if (= i selected-map) 1 0)))
                         (setf selected-map i))
-                      (ui:layout-row-dynamic :height 120 :columns 1)
+                      (ui:layout-row-dynamic :height 100 :columns 1)
                       (ui:label-wrap description)
                       (when (= i *current-progress*)
                         (nk:widget-disable-begin context))
@@ -144,8 +148,8 @@
               (ui:layout-space-push :x 0.23 :y 0.5 :w 0.54 :h 0.75)
               (ui:button-label "To arms!"
                 (let+ (((&values map width height)
-                        (load-map (format nil "/~a.tmx" (1+ selected-map)))))
-                  (toggle-ui-window :map-selector)
+                        (load-map (format nil "/~a.tmx" selected-map))))
+                  (toggle-ui-window :map-selector :on nil)
                   (setf *current-map* map
                         *world-width* width
                         *world-height* height)))))))))

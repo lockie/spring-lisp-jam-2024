@@ -23,7 +23,7 @@
   (load-sounds)
   (setf *map-descriptions*
         (read (al:make-character-stream (resource-path "descriptions.txt"))))
-  (toggle-ui-window :map-selector)
+  (toggle-ui-window :map-selector :on t)
   (trivial-garbage:gc :full t))
 
 (declaim (type fixnum *fps*))
