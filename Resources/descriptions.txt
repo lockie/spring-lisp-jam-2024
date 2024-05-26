@@ -1,15 +1,16 @@
-("First Map Title"
- "First map description. Nulla in efficitur orci, ornare scelerisque enim. Curabitur fringilla dolor ut erat placerat, ut eleifend quam ornare. Nam porttitor vehicula neque, sit amet tristique eros lacinia quis. Ut nec sem non sem sagittis finibus sit amet sit amet odio. Aenean et tempus eros, sed pulvinar sapien. In fermentum leo vel lacus sollicitudin, ac semper dolor pellentesque. Duis volutpat tempor mauris, vel viverra quam. Sed at porttitor tortor. Etiam laoreet augue ac nunc maximus, quis fermentum lectus cursus. Sed feugiat ut est et malesuada. Ut in enim ornare, elementum purus ac, semper nisl. Praesent hendrerit mauris non vestibulum eleifend."
+(
+ "Betrayal"
+ "Long ago, a terrible act was committed. We may never know why or who betrayed first. But we know there were two betrayals."
 
- "Second Map Title"
- "Second map description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id erat tempor, suscipit erat nec, eleifend quam. In ut fermentum tellus. Cras non consequat lectus. Proin tempus dolor a magna commodo tristique. Nulla feugiat convallis turpis, eget scelerisque eros viverra sit amet. Pellentesque nec fringilla neque, non euismod leo. Fusce et justo massa. Praesent sem arcu, fermentum tincidunt mi a, sodales laoreet enim. Cras gravida dignissim enim sed ultricies. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In volutpat eros at nulla imperdiet, at interdum sem pellentesque. Nunc sed semper dui. Mauris luctus urna id porta lobortis. Sed cursus lacus diam, et imperdiet lectus sodales et. Etiam a est vitae lorem mollis sodales non et ante. Fusce egestas sollicitudin elit, at porttitor ante malesuada in."
+ "Vengeance"
+ "Oh, how sweet vengeance is. Rage, sweeping everything aside. Not even steel can halt the torrent of emotions of such power. There is no reason to stop."
 
- "Third Map Title"
- "Third map description. Suspendisse a urna nibh. Etiam porta lacus in elit maximus consectetur in non turpis. Aliquam et ultricies tellus. Cras molestie ipsum id nulla interdum, vel eleifend risus facilisis. Ut sit amet lorem lectus. Mauris suscipit at lectus et consectetur. Nullam gravida urna a lorem lacinia dapibus. Curabitur vitae elit tortor. Suspendisse sed hendrerit ligula. Praesent et tincidunt nisl, at dignissim tellus. Proin eu ultrices arcu, id condimentum magna."
+ "Village"
+ "There's no place for a peaceful life when fury is at stake. No one dare pretend everything's fine when we suffer. Let all know there will be no forgiveness. Not a soul."
 
- "Fourth Map Title"
- "Fourth map. Donec fringilla efficitur porta. Aliquam sed lectus risus. Cras et nunc quis libero vehicula rhoncus ac aliquet elit. Mauris nec malesuada ante. Sed in est eu tellus iaculis ullamcorper quis in nibh. Suspendisse tempor nunc ut urna pretium, vitae tincidunt ipsum ultrices. Vestibulum commodo maximus ex, vel tempor nulla vestibulum eget. Curabitur sed purus non augue tempus aliquam. Maecenas mollis, augue sed mollis feugiat, massa augue lobortis mi, a pharetra arcu quam at nunc. Etiam a semper lacus. Quisque rutrum efficitur dignissim. Proin vel feugiat justo, ac ultrices mi. Phasellus in interdum mauris. Duis tincidunt tempus justo. Sed accumsan in mauris non interdum. Proin commodo mauris lorem, vel blandit neque condimentum eget."
+ "Stronghold"
+ "You can't hide even in a bunker. Run to the castle - the castle will fall. Run to the mountains - we will turn them into deep seas. Run far, but no distance will save you."
 
- "Fifth Map Title"
- "Fifth map. Donec fringilla efficitur porta. Aliquam sed lectus risus. Cras et nunc quis libero vehicula rhoncus ac aliquet elit. Mauris nec malesuada ante. Sed in est eu tellus iaculis ullamcorper quis in nibh. Suspendisse tempor nunc ut urna pretium, vitae tincidunt ipsum ultrices. Vestibulum commodo maximus ex, vel tempor nulla vestibulum eget. Curabitur sed purus non augue tempus aliquam. Maecenas mollis, augue sed mollis feugiat, massa augue lobortis mi, a pharetra arcu quam at nunc. Etiam a semper lacus. Quisque rutrum efficitur dignissim. Proin vel feugiat justo, ac ultrices mi. Phasellus in interdum mauris. Duis tincidunt tempus justo. Sed accumsan in mauris non interdum. Proin commodo mauris lorem, vel blandit neque condimentum eget."
+ "Outcome"
+ "We all go until the end. Just like you. And we will stay with you until the end, even if the end is ours"
  )
