@@ -17,6 +17,30 @@
   (setf sprite-sequence-name :idle)
   (complete-node t))
 
+(define-behavior-tree-node (wander-off
+                            :components-ro (position))
+    ()
+  (let+ (((&values x y) (tile-start position-x position-y)))
+    (loop
+      :with possible-locations := nil
+      :for delta-x :of-type single-float :across +neighbours-x+
+      :for delta-y :of-type single-float :across +neighbours-y+
+      :for next-x :of-type single-float := (+ x delta-x)
+      :for next-y :of-type single-float := (+ y delta-y)
+      :when (and (plusp next-x) (plusp next-y)
+                 (< next-x (float +window-width+))
+                 (< next-y (float +window-height+)))
+      :do (let* ((next-hash (tile-hash next-x next-y))
+                 (cost (total-map-tile-movement-cost next-hash)))
+            (when (< cost +max-movement-cost+)
+              (push next-hash possible-locations)))
+      :finally
+         (when possible-locations
+           (let+ ((location (random-elt possible-locations))
+                  ((&values target-x target-y) (marshal-tile location)))
+             (assign-movement entity :target-x target-x :target-y target-y)))
+         (complete-node possible-locations))))
+
 (define-behavior-tree-node (defender-team
                             :components-ro (character))
     ()
@@ -326,4 +350,11 @@
             ((wait :time (character-attack-cooldown entity)))))
           ((invert)
            ((test-target-near :range (character-attack-range entity))))))))
-      ((idle)))))
+      ((invert)
+       ((idle)))
+      ((invert)
+       ((sequence :name "wander-off")
+        ((random :probability 0.01))
+        ((wander-off))
+        ((move :speed (character-movement-speed entity)))
+        ((idle)))))))
