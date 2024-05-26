@@ -33,7 +33,7 @@
                  (:file "peasant")
                  (:file "ui")
                  (:file "main"))))
-  :description "A simple game."
+  :description "Spring Lisp Game Jam 2024 entry"
   :defsystem-depends-on (#:deploy)
   :build-operation "deploy-op"
   :build-pathname #P"prejam-2024"
