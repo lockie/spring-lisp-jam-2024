@@ -3315,7 +3315,7 @@
     </property>
    </properties>
   </object>
-  <object id="311" name="torch" gid="1335" x="950.366" y="1541.89" width="64" height="64">
+  <object id="311" name="torch" gid="1335" x="1022.91" y="1536.45" width="64" height="64">
    <properties>
     <property name="behavior" type="class" propertytype="behavior">
      <properties>
