@@ -19,7 +19,6 @@ Alternatively, just grab binaries from [[https://github.com/lockie/spring-lisp-j
 Used resources:
 + [[https://fonts.google.com/specimen/Inconsolata/about][Inconsolata font]]
 + [[https://fonts.google.com/specimen/Acme][Acme font]]
-+ [[http://tango.freedesktop.org][Tango icons]]
 + [[https://pixelfrog-assets.itch.io/tiny-swords][Tiny Swords by Pixel Frog]]
 + [[https://opengameart.org/content/redknight-and-red-alchemist-with-background][RedKnight and Red alchemist with background]]
 + [[https://opengameart.org/content/simple-map-tiles][Simple map tiles]]
