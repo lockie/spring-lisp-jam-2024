@@ -36,14 +36,13 @@
                       (complete-node t))))))
 
 (define-behavior-tree-node (pick-random-enemy
-                            :components-ro (position character)
-                            :with (teams := (vector (shuffle (team 0))
-                                                    (shuffle (team 1)))))
+                            :components-ro (position character))
     ()
   "Picks an enemy at random. Fails if there are no enemies nearby."
   (flet ((sqr (x) (* x x)))
     (loop
-      :for enemy :of-type ecs:entity :in (aref teams (logxor character-team 1))
+      :with enemies :of-type list := (shuffle (team (logxor character-team 1)))
+      :for enemy :of-type ecs:entity :in enemies
       :for distance := (with-position (enemy-x enemy-y) enemy
                          (distance* position-x position-y enemy-x enemy-y))
       :when (<= distance (sqr character-vision-range))
