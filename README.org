@@ -32,6 +32,8 @@ Used resources:
 + [[https://opengameart.org/content/11-male-human-paindeath-sounds][11 male human pain/death sounds by Michel Baradari]]
 + [[https://opengameart.org/content/monster-sound-effects-pack][Monster Sound Effects Pack]]
 + [[https://opengameart.org/content/sheep-sound-bleats-yo-frankie][Sheep Sound Bleats (Yo Frankie!) by Blender Foundation]]
++ [[https://opengameart.org/content/win-sound-2][Win Sound #2]]
++ [[https://opengameart.org/content/bad-sound-1][Bad Sound #1]]
 
 ** Copyright
 
