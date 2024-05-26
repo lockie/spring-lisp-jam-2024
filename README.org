@@ -21,6 +21,7 @@ Used resources:
 + [[https://fonts.google.com/specimen/Acme][Acme font]]
 + [[http://tango.freedesktop.org][Tango icons]]
 + [[https://pixelfrog-assets.itch.io/tiny-swords][Tiny Swords by Pixel Frog]]
++ [[https://opengameart.org/content/redknight-and-red-alchemist-with-background][RedKnight and Red alchemist with background]]
 + [[https://opengameart.org/content/fleshy-fight-sounds][Fleshy Fight Sounds by Will Leamon]]
 + [[https://opengameart.org/content/medieval-sound-effects-weapon-textures][Medieval sound effects - Weapon Textures by Ben Jaszczak and Brian Nelson]]
 + [[https://opengameart.org/content/swishes-sound-pack][Swishes Sound Pack]]

@@ -83,6 +83,11 @@
           (event-queue (al:create-event-queue)))
       (when (cffi:null-pointer-p display)
         (error "Initializing display failed"))
+      (al:draw-bitmap
+       (al:ensure-loaded #'al:load-bitmap
+                         (namestring (resource-path "images/loading.png")))
+       0 0 0)
+      (al:flip-display)
       (al:inhibit-screensaver t)
       (al:set-window-title display "Prejam 2024")
       (al:register-event-source event-queue
