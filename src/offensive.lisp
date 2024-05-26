@@ -202,6 +202,9 @@
                        (if (eq sprite-name :archer-blue) :shoot :throw)
                        position-x position-y))
                      ((plusp character-fire-damage)
+                      (make-damage target-entity
+                                   (randint character-damage-min
+                                            character-damage-max))
                       (make-on-fire target-entity :dps character-fire-damage)
                       (make-sound-effect entity :wood position-x position-y))
                      ((plusp character-splash-attack)
