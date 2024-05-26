@@ -71,6 +71,8 @@
              (character-damage-max character)
              (round (* 0.7 (character-damage-max character))))))))
 
+(defparameter *selected-map* 0)
+
 (defun load-ui ()
   (let ((button-normal
           (load-ui-image "images/ui/button_red_3slides.png"))
@@ -119,8 +121,7 @@
         (ui:button-label "RAGEQUIT!"
           (setf *should-quit* t)))))
 
-  (let ((selected-map 0)
-        (selected-option 0)
+  (let ((selected-option 0)
         (maps-background
           (load-ui-image "images/ui/map.png"))
         (button-normal
@@ -144,8 +145,8 @@
                                             :columns 1)
                       (when (plusp
                              (nk:option-label context name
-                                              (if (= i selected-map) 1 0)))
-                        (setf selected-map i))
+                                              (if (= i *selected-map*) 1 0)))
+                        (setf *selected-map* i))
                       (ui:layout-row-dynamic :height 100 :columns 1)
                       (ui:label-wrap description)
                       (when (= i *current-progress*)
@@ -178,7 +179,7 @@
               (ui:layout-space-push :x 0.31 :y 0.5 :w 0.39 :h 0.75)
               (ui:button-label "To arms!"
                 (let+ (((&values map width height)
-                        (load-map (format nil "/~a.tmx" selected-map))))
+                        (load-map (format nil "/~a.tmx" *selected-map*))))
                   (funcall (aref *option-processors* selected-option))
                   (toggle-ui-window :map-selector :on nil)
                   (setf *current-map* map
@@ -196,7 +197,8 @@
       (ui:layout-space (:format :dynamic :height 64 :widget-count 1)
         (ui:layout-space-push :x 0 :y 0 :w 1 :h 1)
         (ui:button-label "You won!"
-          (incf *current-progress*)
+          (when (= *selected-map* *current-progress*)
+            (incf *current-progress*))
           (toggle-ui-window :win-message :on nil)
           (toggle-ui-window :map-selector :on t)))))
 
