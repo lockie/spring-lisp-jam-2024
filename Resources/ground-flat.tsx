@@ -289,4 +289,13 @@
    </property>
   </properties>
  </tile>
+ <tile id="39">
+  <properties>
+   <property name="map-tile" type="class" propertytype="map-tile">
+    <properties>
+     <property name="castle" type="bool" value="true"/>
+    </properties>
+   </property>
+  </properties>
+ </tile>
 </tileset>
