@@ -86,6 +86,12 @@
        (al:ensure-loaded #'al:load-bitmap
                          (namestring (resource-path "images/loading.png")))
        0 0 0)
+      (al:set-mouse-cursor
+       display
+       (al:create-mouse-cursor
+        (al:ensure-loaded #'al:load-bitmap
+                          (namestring (resource-path "images/ui/01.png")))
+        22 17))
       (al:flip-display)
       (al:inhibit-screensaver t)
       (al:set-window-title display "Cycle of Evil")
