@@ -4,8 +4,8 @@
 
 - Install [[http://dist.luckylambda.technology/releases/lucky-lambda/][LuckyLambda]] Quicklisp distribution.
 - Clone this repo to your [[http://blog.quicklisp.org/2018/01/the-quicklisp-local-projects-mechanism.html][Quicklisp's local-projects]] directory.
-- =(ql:quickload :prejam-2024)=
-- =(prejam-2024:main)=
+- =(ql:quickload :cycle-of-evil)=
+- =(cycle-of-evil:main)=
 
 Alternatively, just grab binaries from [[https://github.com/lockie/spring-lisp-jam-2024/releases][releases section]].
 

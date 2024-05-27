@@ -3,8 +3,8 @@
 !system 'convert icon.png -define icon:auto-resize=16,32,48,64,256 %TEMP%/icon.ico'
 !system 'convert -resize 150x57 -extent 150x57 -gravity center -background white -alpha remove -alpha off icon.png BMP2:%TEMP%/icon.bmp'
 
-!define MUI_PRODUCT "Prejam 2024"
-!define MUI_FILE "prejam-2024"
+!define MUI_PRODUCT "Cycle of Evil"
+!define MUI_FILE "cycle-of-evil"
 !define MUI_VERSION $%VERSION%
 !define MUI_ABORTWARNING
 !define MUI_ICON "$%TEMP%\icon.ico"
@@ -13,8 +13,8 @@
 !define MUI_HEADERIMAGE_RIGHT
 !define MUI_HEADERIMAGE_UNBITMAP "$%TEMP%\icon.bmp"
 
-Name "Prejam 2024"
-OutFile "../prejam-2024-${MUI_VERSION}-setup.exe"
+Name "Cycle of Evil"
+OutFile "../cycle-of-evil-${MUI_VERSION}-setup.exe"
 
 ;Default installation folder
 InstallDir "$LOCALAPPDATA\Programs\${MUI_PRODUCT}"

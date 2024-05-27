@@ -1,4 +1,4 @@
-(defpackage #:prejam-2024
+(defpackage #:cycle-of-evil
   (:use #:cl #:let-plus)
   (:local-nicknames (#:tiled #:cl-tiled)
                     (#:ui #:cl-liballegro-nuklear/declarative))

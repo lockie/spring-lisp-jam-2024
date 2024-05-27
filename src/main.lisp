@@ -1,4 +1,4 @@
-(in-package #:prejam-2024)
+(in-package #:cycle-of-evil)
 
 
 (define-constant +repl-update-interval+ 0.3d0)
@@ -56,7 +56,7 @@
                           (with-output-to-string (s)
                             (uiop:print-condition-backtrace e :stream s))
                           (cffi:null-pointer) :error)))))
-    (al:set-app-name "prejam-2024")
+    (al:set-app-name "cycle-of-evil")
     (unless (al:init)
       (error "Initializing liballegro failed"))
     (let ((config (al:load-config-file +config-path+)))
@@ -88,7 +88,7 @@
        0 0 0)
       (al:flip-display)
       (al:inhibit-screensaver t)
-      (al:set-window-title display "Prejam 2024")
+      (al:set-window-title display "Cycle of Evil")
       (al:register-event-source event-queue
                                 (al:get-display-event-source display))
       (al:install-keyboard)

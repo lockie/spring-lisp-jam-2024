@@ -1,4 +1,4 @@
-(defsystem "prejam-2024"
+(defsystem "cycle-of-evil"
   :version "0.0.1"
   :author "Andrew Kravchuk"
   :license "MIT"
@@ -37,5 +37,5 @@
   :description "Spring Lisp Game Jam 2024 entry"
   :defsystem-depends-on (#:deploy)
   :build-operation "deploy-op"
-  :build-pathname #P"prejam-2024"
-  :entry-point "prejam-2024:main")
+  :build-pathname #P"cycle-of-evil"
+  :entry-point "cycle-of-evil:main")

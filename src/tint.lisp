@@ -1,4 +1,4 @@
-(in-package #:prejam-2024)
+(in-package #:cycle-of-evil)
 
 
 (ecs:defsystem render-map-tint

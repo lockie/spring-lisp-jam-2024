@@ -2,5 +2,5 @@
 (ql:register-local-projects)
 (ql-util:without-prompting (ql:update-all-dists))
 (push :ecs-unsafe *features*)
-(ql:quickload '(#:prejam-2024 #:deploy))
-(asdf:make :prejam-2024)
+(ql:quickload '(#:cycle-of-evil #:deploy))
+(asdf:make :cycle-of-evil)

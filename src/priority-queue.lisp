@@ -4,7 +4,7 @@
 ;;;; which is in turn based on code from Peter Norvig's AIMA book
 ;;;; Copyright (c) 1998-2002 by Peter Norvig.
 
-(in-package #:prejam-2024)
+(in-package #:cycle-of-evil)
 
 
 (define-condition empty-queue-error (error)

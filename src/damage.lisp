@@ -1,8 +1,8 @@
-(in-package #:prejam-2024)
+(in-package #:cycle-of-evil)
 
 
 (ecs:defcomponent health
-  (points 0 :type fixnum)
+    (points 0 :type fixnum)
   (max-points points :type fixnum))
 
 (defconstant +damage-numbers-display-time+ 2.0)

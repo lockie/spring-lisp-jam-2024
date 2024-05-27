@@ -5,11 +5,11 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleDisplayName</key>
-    <string>Prejam 2024</string>
+    <string>Cycle of Evil</string>
     <key>CFBundleVersion</key>
     <string>0.0.1</string>
     <key>CFBundleExecutable</key>
-    <string>prejam-2024</string>
+    <string>cycle-of-evil</string>
     <key>CFBundleIconFile</key>
     <string>icon.png</string>
     <key>NSHumanReadableCopyright</key>

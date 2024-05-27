@@ -1,4 +1,4 @@
-(in-package #:prejam-2024)
+(in-package #:cycle-of-evil)
 
 
 (define-constant +window-width+ 1280)
