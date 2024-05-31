@@ -2,8 +2,13 @@
 
 ** Installation
 
-- Install [[http://dist.luckylambda.technology/releases/lucky-lambda/][LuckyLambda]] Quicklisp distribution.
-- Clone this repo to your [[http://blog.quicklisp.org/2018/01/the-quicklisp-local-projects-mechanism.html][Quicklisp's local-projects]] directory.
+- Install [[https://liballeg.org][allegro5]]
+- Install [[http://dist.luckylambda.technology/releases/lucky-lambda/][LuckyLambda]] Quicklisp distribution:
+  +#begin_src lisp
+  (ql-dist:install-dist "http://dist.luckylambda.technology/releases/lucky-lambda.txt")
+  +#end_src lisp
+- Clone this repo to your [[http://blog.quicklisp.org/2018/01/the-quicklisp-local-projects-mechanism.html][Quicklisp's local-projects]] directory, or symlink it there
+- =(uiop:chdir "Resources")=
 - =(ql:quickload :cycle-of-evil)=
 - =(cycle-of-evil:main)=
 
