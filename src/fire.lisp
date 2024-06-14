@@ -32,7 +32,7 @@
     (decf fire-duration dt)
     (unless (plusp fire-duration)
       (ecs:delete-entity (flames entity))
-      (return-from ecs::current-entity (delete-fire entity)))
+      (return-from ecs:current-entity (delete-fire entity)))
     (unless (= (the fixnum (truncate previous-duration))
                (the fixnum (truncate fire-duration)))
       (when (has-health-p entity)

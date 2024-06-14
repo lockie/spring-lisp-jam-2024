@@ -1,5 +1,5 @@
 (defsystem "cycle-of-evil"
-  :version "0.0.1"
+  :version "0.0.2"
   :author "Andrew Kravchuk"
   :license "GPLv3"
   :depends-on (#:alexandria

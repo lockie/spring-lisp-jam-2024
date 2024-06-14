@@ -142,12 +142,11 @@
     :with layers := (ase:sprite-layers sprite)
     :with nlayers := (floor (length layers) 2)
     :with duration :of-type fixnum := 0
-    :for tag :across (ase:sprite-tags sprite)
+    :for (tag-name tag) :on (ase:sprite-tags sprite) :by #'cddr
     :for first-frame := (ase:tag-first-frame tag)
     :for last-frame := (ase:tag-last-frame tag)
     :for tag-length := (- last-frame first-frame -1)
-    :for tag-name := (ase:tag-name tag)
-    :for sequence-name := (make-keyword (string-upcase (kebabize tag-name)))
+    :for sequence-name := (make-keyword (kebabize (string tag-name)))
     :for tag-repeat := (ase:tag-repeat tag)
     :for bitmap-width := (* tag-length sprite-width)
     :for bitmap-height := (* nlayers sprite-height)
