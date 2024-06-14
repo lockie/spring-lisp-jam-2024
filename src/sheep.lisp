@@ -45,7 +45,7 @@
                          (distance* position-x position-y grass-x grass-y))
       :when (<= distance (sqr sheep-vision-range))
       :do (assign-target entity :entity grass)
-          (return-from ecs::current-entity (complete-node t))
+          (return-from ecs:current-entity (complete-node t))
       :finally (complete-node nil))))
 
 (define-constant +max-sheep-population+ 10)
@@ -65,7 +65,7 @@
                              (distance* position-x position-y female-x female-y))
           :when (<= distance (sqr sheep-vision-range))
           :do (assign-target entity :entity female)
-              (return-from ecs::current-entity (complete-node t))
+              (return-from ecs:current-entity (complete-node t))
           :finally (complete-node nil)))
       (complete-node nil)))
 
