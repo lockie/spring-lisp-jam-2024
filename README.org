@@ -2,13 +2,15 @@
 
 ** Installation
 
-- Install [[https://liballeg.org][allegro5]]
+- Install [[https://sbcl.org][SBCL]] and [[https://quicklisp.org][Quicklisp]]
+- Install C compilation toolchain (C compiler, GNU Make, =pkg-config=)
+- Install [[https://liballeg.org][allegro5]] and [[https://sourceware.org/libffi][libffi]]
 - Install [[http://dist.luckylambda.technology/releases/lucky-lambda/][LuckyLambda]] Quicklisp distribution:
-  +#begin_src lisp
+  #+begin_src lisp
   (ql-dist:install-dist "http://dist.luckylambda.technology/releases/lucky-lambda.txt")
-  +#end_src lisp
+  #+end_src
 - Clone this repo to your [[http://blog.quicklisp.org/2018/01/the-quicklisp-local-projects-mechanism.html][Quicklisp's local-projects]] directory, or symlink it there
-- =(uiop:chdir "Resources")=
+- Run =sbcl --dynamic-space-size 4096= from =Resources= subdirectory of this repo
 - =(ql:quickload :cycle-of-evil)=
 - =(cycle-of-evil:main)=
 
@@ -16,7 +18,7 @@ Alternatively, just grab binaries from [[https://github.com/lockie/spring-lisp-j
 
 ** Minimum system requirements
 
-+ Windows 7 SP1, MacOS Monterey or Ubuntu 20.04
++ Windows 7 SP1, MacOS Monterey, Ubuntu 20.04 or FreeBSD 14
 + 4 GB of RAM
 + 60 Mb of free disk space
 
