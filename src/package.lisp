@@ -1,5 +1,5 @@
 (defpackage #:cycle-of-evil
-  (:use #:cl #:let-plus)
+  (:use #:cl #:let-plus #:trivial-adjust-simple-array)
   (:local-nicknames (#:tiled #:cl-tiled)
                     (#:ui #:cl-liballegro-nuklear/declarative))
   (:import-from #:alexandria

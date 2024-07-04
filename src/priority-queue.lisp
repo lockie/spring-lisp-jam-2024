@@ -122,12 +122,12 @@ function. Returns the queue. [Page 140 CL&R 2nd ed.]."
     (when (>= size (length heap))
       (let ((new-size (ecs::new-capacity size)))
         (setf heap
-              (ecs::adjust-array* heap
-                                  new-size :element-type 'fixnum)
+              (adjust-simple-array heap
+                                   new-size :element-type 'fixnum)
               (q-items q) heap
               priorities
-              (ecs::adjust-array* priorities
-                                  new-size :element-type 'single-float)
+              (adjust-simple-array priorities
+                                   new-size :element-type 'single-float)
               (q-priorities q) priorities)))
 
     (setf (aref heap size) item
