@@ -20,26 +20,23 @@
 (define-behavior-tree-node (wander-off
                             :components-ro (position))
     ()
-  (let+ (((&values x y) (tile-start position-x position-y)))
-    (loop
-      :with possible-locations := nil
-      :for delta-x :of-type single-float :across +neighbours-x+
-      :for delta-y :of-type single-float :across +neighbours-y+
-      :for next-x :of-type single-float := (+ x delta-x)
-      :for next-y :of-type single-float := (+ y delta-y)
-      :when (and (plusp next-x) (plusp next-y)
-                 (< next-x (float +window-width+))
-                 (< next-y (float +window-height+)))
-      :do (let* ((next-hash (tile-hash next-x next-y))
-                 (cost (total-map-tile-movement-cost next-hash)))
-            (when (< cost +max-movement-cost+)
-              (push next-hash possible-locations)))
-      :finally
-         (when possible-locations
-           (let+ ((location (random-elt possible-locations))
-                  ((&values target-x target-y) (marshal-tile location)))
-             (assign-movement entity :target-x target-x :target-y target-y)))
-         (complete-node possible-locations))))
+  (let+ (((&values sx sy) (tile-start position-x position-y))
+         (possible-locations nil))
+    (funcall (a*:make-8-directions-enumerator
+              :node-width +scaled-tile-size+ :node-height +scaled-tile-size+
+              :max-x +window-width+ :max-y +window-height+)
+             sx sy
+             (lambda (next-x next-y)
+               (let* ((next-hash (encode-float-coordinates next-x next-y))
+                      (cost (total-map-tile-movement-cost next-hash)))
+                 (when (< cost +max-movement-cost+)
+                   (push next-hash possible-locations)))))
+    (when possible-locations
+      (let+ ((location (random-elt possible-locations))
+             ((&values target-x target-y)
+              (decode-float-coordinates location)))
+        (assign-movement entity :target-x target-x :target-y target-y)))
+    (complete-node possible-locations)))
 
 (define-behavior-tree-node (defender-team
                             :components-ro (character))
@@ -138,13 +135,10 @@
               (not (same-tile-p (path-target-x entity)
                                 (path-target-y entity)
                                 target-x target-y)))
-          (let ((goal (a* position-x position-y target-x target-y)))
-            (when goal
-              (when has-path-p
-                (dolist (point (path-points entity))
-                  (ecs:delete-entity point)))
-              (reconstruct-path position-x position-y goal entity))
-            (complete-node goal))
+            (complete-node
+             (find-path position-x position-y target-x target-y
+                        :entity entity
+                        :has-path-p has-path-p))
           (complete-node t)))))
 
 (declaim (inline approx-equal))
@@ -162,7 +156,8 @@
             (block point-reached
               (setf position-x point-x
                     position-y point-y
-                    position-tile (tile-hash position-x position-y))
+                    position-tile
+                    (encode-float-coordinates position-x position-y))
               (ecs:delete-entity first-point)
               (if-let (next-point (second path-points))
                 (with-path-point (next-point-x next-point-y) next-point
@@ -189,7 +184,7 @@
       (block finished
         (setf position-x movement-target-x
               position-y movement-target-y
-              position-tile (tile-hash position-x position-y))
+              position-tile (encode-float-coordinates position-x position-y))
         (delete-movement entity)
         (complete-node t))
       (let+ (((&flet sqr (x) (* x x)))
@@ -211,7 +206,7 @@
               (complete-node nil))
             (setf position-x newx
                   position-y newy
-                  position-tile (tile-hash position-x position-y)
+                  position-tile (encode-float-coordinates position-x position-y)
                   sprite-sequence-name move-animation-sequence
                   animation-state-flip (if (minusp dx) 1 0))))))
 

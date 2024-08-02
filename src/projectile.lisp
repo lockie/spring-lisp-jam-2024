@@ -2,8 +2,8 @@
 
 
 (ecs:defcomponent projectile
-  (target-x 0.0 :type pos)
-  (target-y 0.0 :type pos)
+  (target-x 0.0 :type float-coordinate)
+  (target-y 0.0 :type float-coordinate)
   (angle 0.0 :type single-float)
   (speed 0.0 :type single-float)
   (damage 0 :type fixnum)
@@ -31,7 +31,7 @@ NOTE: assuming splash damage = explosion"))
          (newy (+ position-y dy)))
     (setf position-x newx
           position-y newy
-          position-tile (tile-hash newx newy))))
+          position-tile (encode-float-coordinates newx newy))))
 
 (ecs:defsystem impact-projectiles
   (:components-ro (projectile position sprite animation-state))
@@ -39,7 +39,9 @@ NOTE: assuming splash damage = explosion"))
                       position-x position-y)
            (* +scaled-tile-size+ +scaled-tile-size+))
     (if (zerop projectile-splash)
-        (with-tiles (tile-hash projectile-target-x projectile-target-y) object
+        (with-tiles (encode-float-coordinates
+                     projectile-target-x projectile-target-y)
+          object
           (when (has-health-p object)
             (make-damage object projectile-damage)
             (ecs:make-object
@@ -56,11 +58,11 @@ NOTE: assuming splash damage = explosion"))
          projectile-target-x projectile-target-y projectile-damage))
     (ecs:delete-entity entity)))
 
-(declaim (ftype (function (pos pos positive-fixnum)
+(declaim (ftype (function (float-coordinate float-coordinate positive-fixnum)
                           (values ecs:entity &optional))
                 make-explosion-effects))
 (defun make-explosion-effects (x y damage)
-  (with-tiles (tile-hash x y) object
+  (with-tiles (encode-float-coordinates x y) object
     (when (has-health-p object)
       (make-damage object damage))
     (when (has-fire-p object)
@@ -78,7 +80,7 @@ NOTE: assuming splash damage = explosion"))
   (with-position (adventurer-x adventurer-y) stuck-arrow-adventurer
     (setf position-x adventurer-x
           position-y adventurer-y
-          position-tile (tile-hash position-x position-y))))
+          position-tile (encode-float-coordinates position-x position-y))))
 
 (ecs:defsystem stop-explosions
   (:components-ro (explosion animation-sequence animation-state))
@@ -86,9 +88,12 @@ NOTE: assuming splash damage = explosion"))
     (ecs:delete-entity entity)))
 
 (declaim (ftype
-          (function
-           (pos pos pos pos keyword positive-fixnum single-float bit bit)
-           (values ecs:entity &optional))
+          (function (float-coordinate
+                     float-coordinate
+                     float-coordinate
+                     float-coordinate
+                     keyword positive-fixnum single-float bit bit)
+                    (values ecs:entity &optional))
           make-projectile-object))
 (defun make-projectile-object (x y target-x target-y sprite
                                damage speed splash flip)

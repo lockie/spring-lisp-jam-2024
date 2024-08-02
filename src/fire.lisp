@@ -10,7 +10,7 @@
 
 (ecs:defsystem spread-fire
   (:components-ro (fire position))
-  (with-tiles (tile-hash position-x position-y) object
+  (with-tiles (encode-float-coordinates position-x position-y) object
     (when (and (/= object entity)
                (not (has-fire-p object))
                (not (has-fire-effect-p object))
@@ -23,7 +23,7 @@
   (with-position (character-x character-y) fire-effect-character
     (setf position-x character-x
           position-y character-y
-          position-tile (tile-hash position-x position-y))))
+          position-tile (encode-float-coordinates position-x position-y))))
 
 (ecs:defsystem burn
   (:components-rw (fire)

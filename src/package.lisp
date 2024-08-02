@@ -12,4 +12,8 @@
                 #:complete-node #:define-behavior-tree
                 #:define-behavior-tree/debug #:define-behavior-tree-node
                 #:delete-behavior-tree #:make-behavior-tree)
+  (:import-from #:cl-astar
+                #:encode-float-coordinates
+                #:decode-float-coordinates
+                #:float-coordinate)
   (:export #:main))

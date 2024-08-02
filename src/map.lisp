@@ -37,10 +37,11 @@
 
 (defconstant +max-movement-cost+ 1.0)
 
-(declaim (ftype (function (pos pos) boolean) obstaclep))
+(declaim (ftype (function (float-coordinate float-coordinate) boolean)
+                obstaclep))
 (defun obstaclep (x y)
   "Takes tile position and returns T if there are obstacles in there."
-  (>= (total-map-tile-movement-cost (tile-hash x y))
+  (>= (total-map-tile-movement-cost (encode-float-coordinates x y))
       +max-movement-cost+))
 
 (defun read-file-into-string (pathname &key (buffer-size 4096))

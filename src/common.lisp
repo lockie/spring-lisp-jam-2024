@@ -49,9 +49,6 @@
   (defconstant +tile-size+ 64.0)
   (defconstant +scaled-tile-size+ (* +tile-size+ +scale-factor+)))
 
-;; NOTE: negative map coords are not supported
-(deftype pos () '(single-float 0f0 #.(/ +tile-size+ single-float-epsilon)))
-
 (declaim (inline distance))
 (defun distance (x1 y1 x2 y2)
   (flet ((sqr (x) (* x x)))
@@ -59,39 +56,42 @@
     (sqrt (+ (sqr (- x1 x2)) (sqr (- y1 y2))))))
 
 (declaim (inline distance*)
-         (ftype (function (pos pos pos pos) single-float) distance*))
+         (ftype (function (float-coordinate
+                           float-coordinate
+                           float-coordinate
+                           float-coordinate)
+                          single-float)
+                distance*))
 (defun distance* (x1 y1 x2 y2)
   (flet ((sqr (x) (* x x)))
     (declare (inline sqr))
     (+ (sqr (- x1 x2)) (sqr (- y1 y2)))))
 
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (declaim (inline tile-start)
-           (ftype (function (pos pos) (values pos pos)) tile-start))
-  (defun tile-start (x y)
-    (values
-     (* +scaled-tile-size+ (the fixnum (floor x +scaled-tile-size+)))
-     (* +scaled-tile-size+ (the fixnum (floor y +scaled-tile-size+)))))
-
-  (declaim
-   (inline tile-hash)
-   (ftype (function (pos pos) fixnum) tile-hash))
-  (defun tile-hash (x y)
-    (let+ (((&values tile-x tile-y) (tile-start x y))
-           (x* (truncate tile-x))
-           (y* (truncate tile-y)))
-      (declare (type (integer 0 2147483647) x* y*))
-      (logior (ash x* 31) y*))))
-
-(declaim (inline marshal-tile)
-         (ftype (function (fixnum) (values pos pos)) marshal-tile))
-(defun marshal-tile (hash)
+(declaim (inline tile-start)
+         (ftype (function (float-coordinate float-coordinate)
+                          (values float-coordinate float-coordinate))
+                tile-start))
+(defun tile-start (x y)
   (values
-   (float (ash hash -31))
-   (float (logand hash 2147483647))))
+   (* +scaled-tile-size+ (the fixnum (floor x +scaled-tile-size+)))
+   (* +scaled-tile-size+ (the fixnum (floor y +scaled-tile-size+)))))
+
+(declaim (inline tile-center)
+         (ftype (function (float-coordinate float-coordinate)
+                          (values float-coordinate float-coordinate))
+                tile-center))
+(defun tile-center (x y)
+  (values
+   (* +scaled-tile-size+ (+ 0.5 (the fixnum (floor x +scaled-tile-size+))))
+   (* +scaled-tile-size+ (+ 0.5 (the fixnum (floor y +scaled-tile-size+))))))
 
 (declaim (inline same-tile-p)
-         (ftype (function (pos pos pos pos) boolean) same-tile-p))
+         (ftype (function (float-coordinate
+                           float-coordinate
+                           float-coordinate
+                           float-coordinate)
+                          boolean)
+                same-tile-p))
 (defun same-tile-p (x1 y1 x2 y2)
   (and (= (floor x1 +scaled-tile-size+)
           (floor x2 +scaled-tile-size+))
@@ -100,18 +100,18 @@
 
 (ecs:defcomponent position
   "The object position in pixels."
-  (x 0.0 :type pos
+  (x 0.0 :type float-coordinate
          :documentation "x position aka screen pixel coordinate")
-  (y 0.0 :type pos
+  (y 0.0 :type float-coordinate
          :documentation "y position aka screen pixel coordinate")
-  (tile (tile-hash x y)
+  (tile (encode-float-coordinates x y)
         :type fixnum :index tiles
         :documentation "Tile index, for fast map tile lookups."))
 
 (ecs:defcomponent size
   "Unscaled object size in pixels."
-  (width  0.0 :type pos)
-  (height 0.0 :type pos))
+  (width  0.0 :type float-coordinate)
+  (height 0.0 :type float-coordinate))
 
 (ecs:defcomponent image
   (bitmap (cffi:null-pointer) :type cffi:foreign-pointer))

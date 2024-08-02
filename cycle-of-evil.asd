@@ -1,9 +1,10 @@
 (defsystem "cycle-of-evil"
-  :version "0.0.2"
+  :version "0.0.3"
   :author "Andrew Kravchuk"
   :license "GPLv3"
   :depends-on (#:alexandria
                #:cl-aseprite
+               #:cl-astar
                #:cl-fast-behavior-trees
                #:cl-fast-ecs
                #:cl-liballegro
