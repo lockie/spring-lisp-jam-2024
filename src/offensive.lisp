@@ -24,6 +24,7 @@
          (possible-locations nil))
     (funcall (a*:make-8-directions-enumerator
               :node-width +scaled-tile-size+ :node-height +scaled-tile-size+
+              :min-x +scaled-tile-size+ :min-y +scaled-tile-size+
               :max-x +window-width+ :max-y +window-height+)
              sx sy
              (lambda (next-x next-y)
