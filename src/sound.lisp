@@ -82,9 +82,6 @@
     (ecs:make-object
      `((:sound-prefab :name ,name :sample ,sample)))))
 
-(defun load-sound (filename)
-  (load-sound-file (namestring (resource-path filename))))
-
 (cffi:defcallback process-sound-file :int
     ((file (:pointer (:struct al::fs-entry))) (data :pointer))
   (declare (ignore data))
@@ -96,7 +93,7 @@
       (cffi:foreign-enum-value 'al::for-each-fs-entry-result :skip)))
 
 (defun load-sounds ()
-  (let ((sounds-dir (al:create-fs-entry (namestring (resource-path "sounds")))))
+  (let ((sounds-dir (al:create-fs-entry "sounds")))
     (unwind-protect
          (= (cffi:foreign-enum-value 'al::for-each-fs-entry-result :ok)
             (al::for-each-fs-entry sounds-dir

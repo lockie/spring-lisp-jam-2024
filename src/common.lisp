@@ -116,15 +116,6 @@
 (ecs:defcomponent image
   (bitmap (cffi:null-pointer) :type cffi:foreign-pointer))
 
-(defun ensure-relative (pathname)
-  (let ((dirs (rest (pathname-directory pathname))))
-    (make-pathname :directory (when dirs
-                                (list* :relative dirs))
-                   :defaults pathname)))
-
-(defun resource-path (filename)
-  (merge-pathnames (ensure-relative filename) #P"../Resources/"))
-
 (declaim (ftype (function (string) string) kebabize)
          (inline kebabize))
 (defun kebabize (name)

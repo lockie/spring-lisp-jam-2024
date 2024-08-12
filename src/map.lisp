@@ -99,11 +99,17 @@
       al::b ,(/ (tiled:tiled-color-b color) 255.0)
       al::a ,(/ (tiled:tiled-color-a color) 255.0))))
 
+(defun ensure-relative (pathname)
+  (let ((dirs (rest (pathname-directory pathname))))
+    (make-pathname :directory (when dirs
+                                (list* :relative dirs))
+                   :defaults pathname)))
+
 (defun load-map (filename)
   (let* ((map (tiled:load-map
                filename
                (lambda (path &rest rest)
-                 (apply #'read-file-into-string (resource-path path) rest))))
+                 (apply #'read-file-into-string (ensure-relative path) rest))))
          (tile-width (tiled:map-tile-width map))
          (tile-height (tiled:map-tile-height map))
          (tilemap (make-hash-table))
@@ -114,7 +120,7 @@
     (assert (and (= tile-width +tile-size+) (= tile-height +tile-size+)))
     (dolist (tileset (tiled:map-tilesets map))
       (let ((bitmap (load-bitmap
-                     (resource-path
+                     (ensure-relative
                       (tiled:image-source (tiled:tileset-image tileset))))))
         (dolist (tile (tiled:tileset-tiles tileset))
           (let* ((external-tile-spec

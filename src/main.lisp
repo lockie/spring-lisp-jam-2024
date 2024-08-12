@@ -1,20 +1,25 @@
 (in-package #:cycle-of-evil)
 
 
+(defvar *resources-path*
+  (asdf:system-relative-pathname :cycle-of-evil #P"Resources/"))
+
+(deploy:define-hook (:boot set-resources-path) ()
+  (setf *resources-path*
+        (merge-pathnames #P"Resources/"
+                         (uiop:pathname-parent-directory-pathname
+                          (deploy:runtime-directory)))))
+
 (define-constant +repl-update-interval+ 0.3d0)
 
-(define-constant +fps-font-path+ "../Resources/fonts/inconsolata.ttf"
-  :test #'string=)
+(define-constant +fps-font-path+ "fonts/inconsolata.ttf" :test #'string=)
 (define-constant +fps-font-size+ 24)
-(define-constant +damage-numbers-font-path+ "../Resources/fonts/acme.ttf"
-  :test #'string=)
+(define-constant +damage-numbers-font-path+ "fonts/acme.ttf" :test #'string=)
 (define-constant +damage-numbers-font-size+ 26)
-(define-constant +ui-font-path+ "../Resources/fonts/acme.ttf"
-  :test #'string=)
+(define-constant +ui-font-path+ "fonts/acme.ttf" :test #'string=)
 (define-constant +ui-font-size+ 28)
 
-(define-constant +config-path+ "../config.cfg"
-  :test #'string=)
+(define-constant +config-path+ "../config.cfg" :test #'string=)
 
 (defun init ()
   (ecs:bind-storage)
@@ -22,7 +27,7 @@
   (load-sprites)
   (load-sounds)
   (setf *map-descriptions*
-        (read (al:make-character-stream (resource-path "descriptions.txt"))))
+        (read (al:make-character-stream "descriptions.txt")))
   (toggle-ui-window :map-selector :on t)
   (trivial-garbage:gc :full t))
 
@@ -56,6 +61,7 @@
                           (with-output-to-string (s)
                             (uiop:print-condition-backtrace e :stream s))
                           (cffi:null-pointer) :error)))))
+    (uiop:chdir *resources-path*)
     (al:set-app-name "cycle-of-evil")
     (unless (al:init)
       (error "Initializing liballegro failed"))
@@ -83,14 +89,12 @@
       (when (cffi:null-pointer-p display)
         (error "Initializing display failed"))
       (al:draw-bitmap
-       (al:ensure-loaded #'al:load-bitmap
-                         (namestring (resource-path "images/loading.png")))
+       (al:ensure-loaded #'al:load-bitmap "images/loading.png")
        0 0 0)
       (al:set-mouse-cursor
        display
        (al:create-mouse-cursor
-        (al:ensure-loaded #'al:load-bitmap
-                          (namestring (resource-path "images/ui/01.png")))
+        (al:ensure-loaded #'al:load-bitmap "images/ui/01.png")
         22 17))
       (al:flip-display)
       (al:inhibit-screensaver t)

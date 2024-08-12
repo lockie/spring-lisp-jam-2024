@@ -33,8 +33,7 @@
              :function ,(ui:defwindow ,name () ,options ,@body))))))))
 
 (defun load-ui-image (name)
-  (al:ensure-loaded #'nk:allegro-create-image (namestring
-                                               (resource-path name))))
+  (al:ensure-loaded #'nk:allegro-create-image name))
 
 (declaim (type boolean *should-quit*))
 (defvar *should-quit* nil)

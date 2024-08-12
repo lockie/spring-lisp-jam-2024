@@ -197,9 +197,6 @@
                                 :frame-duration ,(/ duration 1000.0)
                                 :repeat ,(if (zerop tag-repeat) 1 0))))))
 
-(defun load-sprite (filename)
-  (load-sprite-file (resource-path filename)))
-
 (cffi:defcallback process-sprite-file :int
     ((file (:pointer (:struct al::fs-entry))) (data :pointer))
   (declare (ignore data))
@@ -211,8 +208,7 @@
       (cffi:foreign-enum-value 'al::for-each-fs-entry-result :skip)))
 
 (defun load-sprites ()
-  (let ((sprites-dir (al:create-fs-entry
-                      (namestring (resource-path "sprites")))))
+  (let ((sprites-dir (al:create-fs-entry "sprites")))
     (unwind-protect
          (= (cffi:foreign-enum-value 'al::for-each-fs-entry-result :ok)
             (al::for-each-fs-entry sprites-dir
