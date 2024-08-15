@@ -7,11 +7,7 @@
 (define-constant +black+ (al:map-rgb 0 0 0)
   :test #'equalp)
 
-(ecs:defcomponent (parent
-                   :finalize #'(lambda (entity &rest rest)
-                                 (declare (ignore rest))
-                                 (dolist (child (children entity))
-                                   (ecs:delete-entity child))))
+(ecs:defcomponent parent
   (entity -1 :type ecs:entity :index children))
 
 (ecs:defcomponent character
@@ -31,6 +27,11 @@
    0 :type fixnum
      :documentation "If non-zero, character's attacks ignite with this DPS")
   (attack-cooldown 0.0 :type single-float))
+
+(ecs:hook-up ecs:*entity-deleting-hook*
+             (lambda (entity)
+               (dolist (child (children entity))
+                 (ecs:delete-entity child))))
 
 (ecs:defcomponent behavior
   (type :|| :type keyword))
