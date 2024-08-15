@@ -128,28 +128,28 @@
                      (properties->spec (tiled:properties tile))))
                  (internal-tile-spec
                    (tile->spec tile tile-width tile-height bitmap map-entity))
-                 (tile-spec (append internal-tile-spec external-tile-spec)))
-            (unless (assoc :map-tile external-tile-spec)
-              (setf tile-spec (nconc tile-spec '((:map-tile)))))
-            (setf (gethash tile tilemap) tile-spec)))))
+                 (tile-spec (nconc internal-tile-spec external-tile-spec)))
+            (setf (gethash tile tilemap)
+                  (adjoin '(:map-tile) tile-spec :test #'eq :key #'first))))))
     (dolist (layer (tiled:map-layers map))
       (cond ((typep layer 'tiled:tile-layer)
              (dolist (cell (tiled:layer-cells layer))
-               (let* ((tile-spec (gethash (tiled:cell-tile cell) tilemap))
-                      (tile-instance (ecs:make-object tile-spec)))
-                 (make-position tile-instance
-                                :x (* +scale-factor+ (tiled:cell-x cell))
-                                :y (* +scale-factor+ (tiled:cell-y cell))))))
+               (ecs:make-object
+                (append
+                 (gethash (tiled:cell-tile cell) tilemap)
+                 `((:position :x ,(* +scale-factor+ (tiled:cell-x cell))
+                              :y ,(* +scale-factor+ (tiled:cell-y cell))))))))
             ((typep layer 'tiled:object-layer)
              (dolist (object (tiled:object-group-objects layer))
-               (let ((entity (ecs:make-object
-                              (properties->spec (tiled:properties object)))))
-                 (make-parent entity :entity map-entity)
-                 (make-position
-                  entity :x (* +scale-factor+
-                               (+ (tiled:object-x object)
-                                  (* 0.5 (tiled:object-width object))))
-                         :y (* +scale-factor+
-                               (- (tiled:object-y object)
-                                  (* 0.5 (tiled:object-height object))))))))))
+               (ecs:make-object
+                (nconc
+                 (properties->spec (tiled:properties object))
+                 `((:parent :entity ,map-entity)
+                   (:position
+                    :x ,(* +scale-factor+
+                           (+ (tiled:object-x object)
+                              (* 0.5 (tiled:object-width object))))
+                    :y ,(* +scale-factor+
+                           (- (tiled:object-y object)
+                              (* 0.5 (tiled:object-height object))))))))))))
     (values map-entity (tiled:map-width map) (tiled:map-height map))))
