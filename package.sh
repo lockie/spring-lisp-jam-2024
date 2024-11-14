@@ -28,8 +28,8 @@ case $1 in
 
     windows)
         do_build
-        
-        ntldd -R bin/* | grep ucrt64 | awk -F '=> ' '{ print $2 }' | awk '{ print $1 }' | xargs -I deps cp deps bin
+
+        ntldd -R bin/* | grep ucrt64 | awk -F '=> ' '{ print $2 }' | awk '{ print $1 }' | sed 's/\\/\\\\/g' | xargs -I deps cp deps bin
 
         convert package/icon.png -define icon:auto-resize=16,32,48,64,256 "$TEMP/icon.ico"
         convert -resize 150x57 -extent 150x57 -gravity center -background white -alpha remove -alpha off package/icon.png "BMP2:$TEMP/icon.bmp"
