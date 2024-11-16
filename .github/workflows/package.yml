@@ -49,7 +49,7 @@ jobs:
   build-windows:
     runs-on: ubuntu-latest
     container:
-      image: lockie/docker-lisp-gamedev:windows-experimental
+      image: lockie/docker-lisp-gamedev:windows
       options: --user root
     steps:
       - name: Checkout repository
