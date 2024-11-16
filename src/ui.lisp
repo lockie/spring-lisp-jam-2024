@@ -3,7 +3,7 @@
 
 (ecs:defcomponent ui-window
   (name :|| :type keyword :index ui-window :unique t)
-  (function #'identity :type function)
+  (function 'identity :type symbol)
   (shown 0 :type bit))
 
 (ecs:defsystem render-ui-windows
